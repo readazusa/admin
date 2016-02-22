@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="RolePO">
+    <insert id="save" parameterType="RolePO">
+        insert into t_sys_role(id,code,name,createtime,updatetime) values (#{id},#{code},#{name},#{createTime},#{updateTime})
+    </insert>
+
+    <delete id="delete" parameterType="java.lang.String">
+        delete from t_sys_role where id = #{id}
+    </delete>
+    <delete id="deleteRoleResource" parameterType="java.lang.String">
+        delete from t_sys_role_vs_resource where roleid = #{roleId}
+    </delete>
+
+    <update id="update" parameterType="RolePO">
+        update t_sys_role set  code = #{code},name = #{name},updateTime = #{updateTime} where id = #{id}
+    </update>
+
+    <select id="select" parameterType="java.lang.String" resultType="RolePO">
+        select * from t_sys_role where id = #{id}
+    </select>
+
+    <select id="queryList" resultType="RolePO">
+        select * from t_sys_role
+    </select>
+
+
+    <select id="queryTotalCount" parameterType="RolePO" resultType="java.lang.Integer">
+      select count(1) from t_sys_role where 1=1
+      <if test="search">
+         AND  name like '${search}%'
+      </if>
+    </select>
+
+    <select id="queryPage" parameterType="BaseSearchPO" resultType="RolePO">
+        select * from  t_sys_role where 1=1
+        <if test="obj.search != null and obj.search != ''">
+            and name like '${obj.search}%'
+        </if>
+        <if test="orderName != null and orderName != ''">
+            order by ${orderName} ${orderValue}
+        </if>
+        limit #{pageIndex},#{pageSize}
+    </select>
+
+    <insert id="saveRoleResource" parameterType="RoleResourcePO">
+        insert into t_sys_role_vs_resource(id,roleid,resid,createtime) values (#{id},#{roleId},#{resourceId} ,#{createTime})
+    </insert>
+
+    <select id="selectResIdsByRoleId" resultType="java.lang.String" parameterType="java.lang.String">
+        select resid from t_sys_role_vs_resource where roleid = #{roleId}
+    </select>
+
+
+</mapper>

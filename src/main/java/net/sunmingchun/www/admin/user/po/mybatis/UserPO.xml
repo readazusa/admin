@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="UserPO">
+
+    <sql id="param">
+       id,name,city,birthday,idcard,createtime,username
+    </sql>
+	<insert id="save" parameterType="UserPO">
+        insert into t_sys_user(id,username,usercode,name,sex,birthday,province,city,area,
+        address,idcard,mobile,email,createtime,updatetime) values (#{id},#{username},#{userCode},#{name},#{sex},#{birthday},
+        #{province},#{city},#{area},#{address},#{idCard},#{mobile},#{email},#{createTime},#{updateTime})
+	</insert>
+
+    <delete id="delete" parameterType="java.lang.String">
+        delete  from t_sys_user where id = #{id}
+    </delete>
+
+
+
+    <update id="update"  parameterType="UserPO">
+        UPDATE t_sys_user set name = #{name},birthday=#{birthday},province=#{province},city=#{city},username=#{username},sex=#{sex},
+        area=#{area},address=#{address},idcard=#{idCard},mobile=#{mobile},email=#{email},updatetime = #{updateTime} where id = #{id}
+    </update>
+
+    <select id="select" parameterType="java.lang.String" resultType="UserPO">
+        select * from t_sys_user where id = #{id}
+    </select>
+
+    <select id="queryPage" resultType="UserPO" parameterType="BaseSearchPO">
+        select <include refid="param"></include> from  t_sys_user where 1=1
+
+        <if test="obj.username !=null and obj.username != ''">
+            and  username like '${obj.username}%'
+        </if>
+        <if test="obj.name != null and obj.name != ''">
+           and  name like '${obj.name}%'
+        </if>
+        <if test="obj.province != null and obj.province != ''">
+           and province like '${obj.province}%'
+        </if>
+        <if test="obj.area != null and obj.area !=''">
+           and area like '${obj.area}%'
+        </if>
+        <if test="obj.address != null and obj.address != ''">
+          and address like '${obj.address}%'
+        </if>
+        <if test="obj.city != null and obj.city != ''">
+           and city like '${obj.city}%'
+        </if>
+        <if test="obj.search != null and obj.search !='' ">
+            and (username like '${obj.search}%' or name like '${obj.search}%'  or city like '${obj.search}%' )
+
+        </if>
+        <if test="orderName != null and orderName != ''">
+            order by ${orderName} ${orderValue}
+        </if>
+
+        limit #{pageIndex},#{pageSize}
+    </select>
+
+    <select id="queryTotalCount" resultType="java.lang.Integer" parameterType="UserPO">
+        select count(1) from t_sys_user where 1 =1
+        <if test="username !=null and username != ''">
+            and  username like '${username}%'
+        </if>
+        <if test="name != null and name != ''">
+            and name like '${name}%'
+        </if>
+        <if test="province != null and province != ''">
+            and province like '${province}%'
+        </if>
+        <if test="area != null and area !=''">
+            and area like '${area}%'
+        </if>
+        <if test="address != null and address != ''">
+            and address like '${address}%'
+        </if>
+        <if test="city != null and city != ''">
+            and city like '${city}%'
+        </if>
+        <if test="search != null and search !=''">
+            and (username like '${search}%' or name like '${search}%' or city like '${search}%')
+        </if>
+    </select>
+
+
+    <insert id="saveUserRole" parameterType="UserRolePO">
+        insert into t_sys_user_vs_role(id,userid,roleId,createTime) values(#{id},#{userId},#{roleId},#{createTime})
+    </insert>
+
+    <delete id="deleteUserRole" parameterType="java.lang.String">
+        delete from t_sys_user_vs_role where userid= #{userId}
+    </delete>
+
+    <select id="selectRoleIdsByUserId" parameterType="java.lang.String" resultType="java.lang.String">
+        select roleid from t_sys_user_vs_role where userid = #{userId}
+    </select>
+
+
+</mapper>

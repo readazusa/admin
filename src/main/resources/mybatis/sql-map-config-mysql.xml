@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<setting name="cacheEnabled" value="true" />
+        <setting name="lazyLoadingEnabled" value="true"/>  
+        <setting name="aggressiveLazyLoading" value="false"/>
+	</settings>
+    <typeAliases>
+        <typeAlias type="net.sunmingchun.base.po.BaseSearchPO" alias="BaseSearchPO"></typeAlias>
+        <typeAlias type="net.sunmingchun.admin.user.po.UserPO" alias="UserPO"></typeAlias>
+        <typeAlias type="net.sunmingchun.admin.user.po.UserRolePO" alias="UserRolePO"></typeAlias>
+        <typeAlias type="net.sunmingchun.admin.role.po.RolePO" alias="RolePO"></typeAlias>
+        <typeAlias type="net.sunmingchun.admin.role.po.RoleResourcePO" alias="RoleResourcePO"></typeAlias>
+        <typeAlias type="net.sunmingchun.admin.resource.po.ResourcePO" alias="ResourcePO"></typeAlias>
+        <typeAlias type="net.sunmingchun.admin.area.po.AreaPO" alias="AreaPO"></typeAlias>
+    </typeAliases>
+    <mappers>
+        <mapper resource="net/sunmingchun/admin/user/po/mybatis/UserPO.xml"></mapper>
+        <mapper resource="net/sunmingchun/admin/area/po/mybatis/AreaPO.xml"></mapper>
+        <mapper resource="net/sunmingchun/admin/role/po/mybatis/RolePO.xml"></mapper>
+        <mapper resource="net/sunmingchun/admin/resource/po/mybatis/ResourcePO.xml"></mapper>
+    </mappers>
+
+</configuration>
+ 
