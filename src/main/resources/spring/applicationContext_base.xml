@@ -15,8 +15,8 @@
 		<property name="ignoreResourceNotFound" value="true" />
 		<property name="locations">
 			<list>
-				<value>classpath:resources/prop/mysql.properties</value>
-				<value>classpath:resources/prop/pro.properties</value>
+				<value>classpath:prop/mysql.properties</value>
+				<value>classpath:prop/pro.properties</value>
 			</list>
 		</property>
 	</bean>

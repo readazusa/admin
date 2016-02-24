@@ -11,7 +11,6 @@
         <jdk.version>1.8</jdk.version>
         <spring.version>4.2.4.RELEASE</spring.version>
     </properties>
-
     <repositories>
         <repository>
             <id>osc</id>
@@ -167,11 +166,21 @@
             <artifactId>json</artifactId>
             <version>20141113</version>
         </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.38</version>
+        </dependency>
         <!-- 图片压缩-->
         <dependency>
             <groupId>net.coobird</groupId>
             <artifactId>thumbnailator</artifactId>
             <version>0.4.7</version>
+        </dependency>
+        <dependency>
+            <groupId>c3p0</groupId>
+            <artifactId>c3p0</artifactId>
+            <version>0.9.1.2</version>
         </dependency>
     </dependencies>
     <build>
