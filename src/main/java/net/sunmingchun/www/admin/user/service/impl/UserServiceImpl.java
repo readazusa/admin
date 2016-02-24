@@ -1,16 +1,15 @@
 package net.sunmingchun.www.admin.user.service.impl;
 
-import net.sunmingchun.admin.role.dao.IRoleDao;
-import net.sunmingchun.admin.role.po.RolePO;
-import net.sunmingchun.admin.user.dao.IUserDao;
-import net.sunmingchun.admin.user.po.UserPO;
-import net.sunmingchun.admin.user.po.UserRolePO;
-import net.sunmingchun.admin.user.service.IUserService;
-import net.sunmingchun.base.po.BasePagePO;
-import net.sunmingchun.base.po.BaseSearchPO;
-import net.sunmingchun.util.UuidUtils;
+import net.sunmingchun.www.admin.role.dao.IRoleDao;
+import net.sunmingchun.www.admin.role.po.RolePO;
+import net.sunmingchun.www.admin.user.dao.IUserDao;
+import net.sunmingchun.www.admin.user.po.UserPO;
+import net.sunmingchun.www.admin.user.po.UserRolePO;
+import net.sunmingchun.www.admin.user.service.IUserService;
+import net.sunmingchun.www.base.po.BasePagePO;
+import net.sunmingchun.www.base.po.BaseSearchPO;
+import net.sunmingchun.www.util.UuidUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.bouncycastle.jce.provider.symmetric.Grain128;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

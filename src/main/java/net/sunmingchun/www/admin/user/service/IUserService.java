@@ -1,10 +1,11 @@
 package net.sunmingchun.www.admin.user.service;
 
-import net.sunmingchun.admin.role.po.RolePO;
-import net.sunmingchun.admin.user.po.UserPO;
-import net.sunmingchun.base.po.BasePagePO;
-import net.sunmingchun.base.po.BaseSearchPO;
-import net.sunmingchun.base.service.IService;
+
+
+import net.sunmingchun.www.admin.role.po.RolePO;
+import net.sunmingchun.www.admin.user.po.UserPO;
+import net.sunmingchun.www.base.po.BasePagePO;
+import net.sunmingchun.www.base.service.IService;
 
 import java.util.List;
 

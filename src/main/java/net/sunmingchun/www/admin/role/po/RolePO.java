@@ -1,11 +1,12 @@
 package net.sunmingchun.www.admin.role.po;
 
-import net.sunmingchun.base.po.BasePO;
+
+import net.sunmingchun.www.base.po.BasePO;
 
 /**
  * Created by smc on 2015/11/22.
  */
-public class RolePO extends BasePO{
+public class RolePO extends BasePO {
 
     private String code;
 

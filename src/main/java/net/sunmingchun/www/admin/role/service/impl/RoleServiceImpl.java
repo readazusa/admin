@@ -1,14 +1,15 @@
 package net.sunmingchun.www.admin.role.service.impl;
 
-import net.sunmingchun.admin.resource.dao.IResourceDao;
-import net.sunmingchun.admin.resource.po.ResourcePO;
-import net.sunmingchun.admin.role.dao.IRoleDao;
-import net.sunmingchun.admin.role.po.RolePO;
-import net.sunmingchun.admin.role.po.RoleResourcePO;
-import net.sunmingchun.admin.role.service.IRoleService;
-import net.sunmingchun.base.po.BasePagePO;
-import net.sunmingchun.base.po.BaseSearchPO;
-import net.sunmingchun.util.UuidUtils;
+
+import net.sunmingchun.www.admin.resource.dao.IResourceDao;
+import net.sunmingchun.www.admin.resource.po.ResourcePO;
+import net.sunmingchun.www.admin.role.dao.IRoleDao;
+import net.sunmingchun.www.admin.role.po.RolePO;
+import net.sunmingchun.www.admin.role.po.RoleResourcePO;
+import net.sunmingchun.www.admin.role.service.IRoleService;
+import net.sunmingchun.www.base.po.BasePagePO;
+import net.sunmingchun.www.base.po.BaseSearchPO;
+import net.sunmingchun.www.util.UuidUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

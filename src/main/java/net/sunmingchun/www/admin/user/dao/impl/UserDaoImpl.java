@@ -1,10 +1,10 @@
 package net.sunmingchun.www.admin.user.dao.impl;
 
-import net.sunmingchun.admin.user.dao.IUserDao;
-import net.sunmingchun.admin.user.po.UserPO;
-import net.sunmingchun.admin.user.po.UserRolePO;
-import net.sunmingchun.base.po.BasePagePO;
-import net.sunmingchun.base.po.BaseSearchPO;
+
+import net.sunmingchun.www.admin.user.dao.IUserDao;
+import net.sunmingchun.www.admin.user.po.UserPO;
+import net.sunmingchun.www.admin.user.po.UserRolePO;
+import net.sunmingchun.www.base.po.BaseSearchPO;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.beans.factory.annotation.Autowired;

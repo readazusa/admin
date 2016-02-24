@@ -2,8 +2,8 @@ package net.sunmingchun.www.admin.user.po;
 
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import net.sunmingchun.base.po.BasePO;
-import net.sunmingchun.util.BaseDateSerializer;
+import net.sunmingchun.www.base.po.BasePO;
+import net.sunmingchun.www.util.BaseDateSerializer;
 import org.springframework.format.annotation.DateTimeFormat;
 
 
@@ -13,7 +13,7 @@ import java.util.Date;
  * Created by smc on 2015/11/19.
  * 实体类
  */
-public class UserPO extends BasePO{
+public class UserPO extends BasePO {
 
     private String userCode;  //人员编号
     private String username;  //登陆名称

@@ -1,10 +1,10 @@
 package net.sunmingchun.www.admin.user.dao;
 
-import net.sunmingchun.admin.user.po.UserPO;
-import net.sunmingchun.admin.user.po.UserRolePO;
-import net.sunmingchun.base.dao.IDao;
-import net.sunmingchun.base.po.BasePagePO;
-import net.sunmingchun.base.po.BaseSearchPO;
+
+
+import net.sunmingchun.www.admin.user.po.UserPO;
+import net.sunmingchun.www.admin.user.po.UserRolePO;
+import net.sunmingchun.www.base.dao.IDao;
 
 import java.util.List;
 

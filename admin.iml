@@ -11,8 +11,17 @@
         </webroots>
       </configuration>
     </facet>
+    <facet type="Spring" name="Spring">
+      <configuration>
+        <fileset id="fileset" name="Spring Application Context" removed="false">
+          <file>file://$MODULE_DIR$/src/main/resources/spring/mysql/applicationContext_database.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/spring/applicationContext_base.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/spring/applicationContext_mvc.xml</file>
+        </fileset>
+      </configuration>
+    </facet>
   </component>
-  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_5" inherit-compiler-output="false">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8" inherit-compiler-output="false">
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
     <content url="file://$MODULE_DIR$">
@@ -63,5 +72,6 @@
     <orderEntry type="library" name="Maven: commons-io:commons-io:2.4" level="project" />
     <orderEntry type="library" name="Maven: org.json:json:20141113" level="project" />
     <orderEntry type="library" name="Maven: net.coobird:thumbnailator:0.4.7" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Tomcat8.0.32_admin_9000" level="application_server_libraries" />
   </component>
 </module>
