@@ -19,4 +19,9 @@ public class IndexController {
     public  String login(){
         return  "login";
     }
+
+    @RequestMapping("auth")
+    public String auth(){
+        return null;
+    }
 }

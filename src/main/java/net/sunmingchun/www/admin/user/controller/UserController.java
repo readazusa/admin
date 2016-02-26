@@ -1,23 +1,20 @@
 package net.sunmingchun.www.admin.user.controller;
 
-import net.sunmingchun.admin.role.po.RolePO;
-import net.sunmingchun.admin.role.service.IRoleService;
-import net.sunmingchun.admin.user.po.UserPO;
-import net.sunmingchun.admin.user.service.IUserService;
-import net.sunmingchun.base.controller.BaseController;
-import net.sunmingchun.base.log.LogFactory;
-import net.sunmingchun.base.po.BasePagePO;
-import net.sunmingchun.common.Result;
-import org.apache.commons.lang3.StringUtils;
+
+import net.sunmingchun.www.admin.role.po.RolePO;
+import net.sunmingchun.www.admin.user.po.UserPO;
+import net.sunmingchun.www.admin.user.service.IUserService;
+import net.sunmingchun.www.base.controller.BaseController;
+import net.sunmingchun.www.base.log.LogFactory;
+import net.sunmingchun.www.base.po.BasePagePO;
+import net.sunmingchun.www.common.Result;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import sun.net.httpserver.HttpServerImpl;
 
 import javax.annotation.Resource;
-import javax.print.DocFlavor;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
@@ -26,14 +23,12 @@ import java.util.List;
  */
 @RequestMapping("user")
 @Controller
-public class UserController extends BaseController{
+public class UserController extends BaseController {
 
     private  static final Logger log = LogFactory.getLogger("UserController");
 
     @Resource
     private IUserService userService;
-
-
 
     @RequestMapping("index")
     public String index(){

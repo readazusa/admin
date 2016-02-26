@@ -1,7 +1,7 @@
 package net.sunmingchun.www.base.po;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import net.sunmingchun.util.BaseDateSerializer;
+import net.sunmingchun.www.util.BaseDateSerializer;
 
 import java.util.Date;
 

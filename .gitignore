@@ -6,4 +6,4 @@ rebel.xml
 *.war
 *.ear
 target
-admin_project.iml
+admin.iml
