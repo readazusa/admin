@@ -10,35 +10,30 @@
            http://www.springframework.org/schema/tx  http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
            http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd
            http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
-
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
         <property name="loginUrl" value="/login.htm"/>
         <property name="successUrl" value="/index.htm"/>
         <property name="unauthorizedUrl" value="/login.htm"/>
-        <property name="filters">
-            <util:map>
-                <entry key="anAlias" value-ref="myFilter"/>
-            </util:map>
-        </property>
+        <!--<property name="filters">-->
+            <!--<util:map>-->
+                <!--<entry key="anAlias" value-ref="myFilter"/>-->
+            <!--</util:map>-->
+        <!--</property>-->
         <property name="filterChainDefinitions">
             <value>
-                 /**=authc
+                /login.htm=authc
+                /**=user
             </value>
         </property>
     </bean>
 
-    <bean id="myFilter" class="net.sunmingchun.www.shiro.filter.MyShiroFilter">
-
-    </bean>
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
        <property name="realm" ref="myRealm"></property>
     </bean>
 
     <bean id="myRealm" class="net.sunmingchun.www.shiro.realm.MyAuthorizationRealm"></bean>
 
-
     <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
-
 
 </beans>

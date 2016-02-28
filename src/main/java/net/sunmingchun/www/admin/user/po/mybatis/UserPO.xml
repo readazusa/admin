@@ -9,8 +9,8 @@
     </sql>
 	<insert id="save" parameterType="UserPO">
         insert into t_sys_user(id,username,usercode,name,sex,birthday,province,city,area,
-        address,idcard,mobile,email,createtime,updatetime) values (#{id},#{username},#{userCode},#{name},#{sex},#{birthday},
-        #{province},#{city},#{area},#{address},#{idCard},#{mobile},#{email},#{createTime},#{updateTime})
+        address,idcard,mobile,email,password,createtime,updatetime) values (#{id},#{username},#{userCode},#{name},#{sex},#{birthday},
+        #{province},#{city},#{area},#{address},#{idCard},#{mobile},#{email},#{password},#{createTime},#{updateTime})
 	</insert>
 
     <delete id="delete" parameterType="java.lang.String">
@@ -98,5 +98,12 @@
         select roleid from t_sys_user_vs_role where userid = #{userId}
     </select>
 
+     <select id="validateUser" resultType="UserPO" parameterType="java.util.Map">
+           select * from t_sys_user where  password = #{password} and  ( email = #{condition} or username = #{condition} )
+     </select>
+
+     <update id="updatePsd" parameterType="java.util.Map">
+         update t_sys_user set password = #{password} where email = #{condition} or username = #{condition}
+     </update>
 
 </mapper>

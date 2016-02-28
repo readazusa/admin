@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by smc on 2015/11/19.
@@ -83,5 +84,10 @@ public class UserDaoImpl extends SqlSessionDaoSupport implements IUserDao {
     @Override
     public List<String> selectRoleIdsByUserId(String userId) {
         return this.getSqlSession().selectList("UserPO.selectRoleIdsByUserId",userId);
+    }
+
+    @Override
+    public UserPO validateUser(Map<String,String> map){
+        return this.getSqlSession().selectOne("UserPO.validateUser",map);
     }
 }

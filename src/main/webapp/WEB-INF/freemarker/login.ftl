@@ -18,10 +18,10 @@
     </div>
     <div class="login-box-body">
         <p class="login-box-msg">全名享受管理系统</p>
-        <form method="post" action="${base}/auth.htm" id="loginForm">
+        <form method="post" action="${base}/login.htm" id="loginForm">
             <div class="form-group has-feedback input-group">
                 <div class="input-group-addon">邮箱</div>
-                <input type="email" class="form-control" placeholder="邮箱" name="condition"/>
+                <input type="email" class="form-control" placeholder="邮箱" name="username"/>
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback input-group">
@@ -31,7 +31,7 @@
             </div>
             <div class="row">
                 <div class="col-xs-8">
-                    <input type="checkbox" name="isRemember"> Remember Me
+                    <input type="checkbox" name="rememberMe" value="true">记住我
                 </div>
                 <div class="col-xs-4">
                     <a href="javascript:void(0);"   data-url="regist/forget" style="color: #3f1fe9">忘记密码</a>

@@ -27,6 +27,8 @@ public class UserPO extends BasePO {
     private String mobile;
     private String email;
     private  String  area;
+    private String password;
+
 
 
     public String getUserCode() {
@@ -127,5 +129,11 @@ public class UserPO extends BasePO {
         this.email = email;
     }
 
+    public String getPassword() {
+        return password;
+    }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

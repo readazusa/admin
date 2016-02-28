@@ -22,6 +22,7 @@
         <mapper resource="net/sunmingchun/www/admin/area/po/mybatis/AreaPO.xml"></mapper>
         <mapper resource="net/sunmingchun/www/admin/role/po/mybatis/RolePO.xml"></mapper>
         <mapper resource="net/sunmingchun/www/admin/resource/po/mybatis/ResourcePO.xml"></mapper>
+        <mapper resource="net/sunmingchun/www/shiro/dao/mybatis/ShiroAuth.xml"></mapper>
     </mappers>
 
 </configuration>

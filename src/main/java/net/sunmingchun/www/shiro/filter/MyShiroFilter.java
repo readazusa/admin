@@ -6,7 +6,6 @@ import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * net.sunmingchun.www.shiro.filter
@@ -20,11 +19,11 @@ public class MyShiroFilter extends FormAuthenticationFilter {
 
     @Override
     protected AuthenticationToken createToken(ServletRequest request, ServletResponse response) {
-        String condition = this.getCondition((HttpServletRequest)request);
-        String password = this.getPassword((HttpServletRequest)request);
-        String isRemember = this.getIsRemember((HttpServletRequest) request);
-        String reqId = this.getReqIp((HttpServletRequest)request);
-        String verCode = this.getVerCode((HttpServletRequest)request);
+        String condition = this.getCondition(request);
+        String password = this.getPassword(request);
+        String isRemember = this.getIsRemember( request);
+        String reqId = this.getReqIp(request);
+        String verCode = this.getVerCode(request);
         MyUsernamePasswordToken myUsernamePasswordToken = new MyUsernamePasswordToken(condition,password,verCode,reqId);
         if(IS_REMEMBER.equals(isRemember)){
             myUsernamePasswordToken.setRememberMe(true);
@@ -34,23 +33,23 @@ public class MyShiroFilter extends FormAuthenticationFilter {
         return myUsernamePasswordToken;
     }
 
-    public String  getCondition(HttpServletRequest request){
+    public String  getCondition(ServletRequest request){
         return request.getParameter("condition");
     }
 
-    public String getIsRemember(HttpServletRequest request){
+    public String getIsRemember(ServletRequest request){
         return request.getParameter("isRemember");
     }
 
-    public String  getPassword(HttpServletRequest request){
+    public String  getPassword(ServletRequest request){
         return request.getParameter("password");
     }
 
-    public String getReqIp(HttpServletRequest request){
+    public String getReqIp(ServletRequest request){
         return request.getRemoteAddr();
     }
 
-    public String getVerCode(HttpServletRequest request){
+    public String getVerCode(ServletRequest request){
         return request.getParameter("verCode");
     }
 

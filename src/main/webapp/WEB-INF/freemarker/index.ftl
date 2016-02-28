@@ -24,6 +24,9 @@
                  </@template.content>
              </div>
             <@template.footer></@template.footer>
+           <@shiro.hasAnyRoles  name="test">
+               测试地址
+           </@shiro.hasAnyRoles>
        </div>
       <@common.bootJS></@common.bootJS>
       <@common.adminJS></@common.adminJS>
