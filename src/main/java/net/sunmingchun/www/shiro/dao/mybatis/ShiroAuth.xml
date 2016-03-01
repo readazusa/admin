@@ -12,7 +12,7 @@
         select role.* from t_sys_role role ,t_sys_user_vs_role ur where role.id = ur.roleid and ur.userid =#{userid}
     </select>
 
-    <select id="queryAuthResourcesByUserId" parameterType="java.lang.String" resultType="RoleResourcePO">
+    <select id="queryAuthResourcesByUserId" parameterType="java.lang.String" resultType="ResourcePO">
         select res.* from t_sys_resource res ,t_sys_role_vs_resource rr ,t_sys_user_vs_role ur where
          ur.roleid = rr.roleid and res.id = rr.resid and ur.userid = #{userid}
     </select>

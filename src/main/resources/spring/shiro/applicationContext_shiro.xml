@@ -23,6 +23,7 @@
         <property name="filterChainDefinitions">
             <value>
                 /login.htm=authc
+                /logout.htm=logout
                 /**=user
             </value>
         </property>

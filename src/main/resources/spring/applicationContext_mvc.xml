@@ -14,8 +14,11 @@
     <mvc:interceptors>
             <mvc:interceptor>
                 <mvc:mapping path="/**" />
+                <mvc:exclude-mapping path="/login.htm"/>
+                <mvc:exclude-mapping path="/api/**"/>
                 <bean class="net.sunmingchun.www.interceptor.AllSystemInterceptor"></bean>
             </mvc:interceptor>
+
     </mvc:interceptors>
 
     <bean id="freemarkerConfig" class="net.sunmingchun.www.util.ShiroFreeMarkerConfigurer">

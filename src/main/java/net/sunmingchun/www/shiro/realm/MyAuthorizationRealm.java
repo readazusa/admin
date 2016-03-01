@@ -27,12 +27,24 @@ import java.util.*;
  */
 public class MyAuthorizationRealm extends AuthorizingRealm {
 
+    private static final String ROLE_KEY="role_";
+
+    private static final String RES_KEY="res_";
+
     @Resource
     private AuthorizationDao authorizationDao;
 
+    private Map<String,Collection<String>> userRolesMap = new HashMap<>();  //key表示方式:role_userid
+
+    private Map<String,Collection<String>> userResMap = new HashMap<>();  //key表示: res_userid
+
     /**
      * 给用户授权
-     *
+     * 这个方法只要页面上使用标签就会被调用一次
+     * 好处：当某个用户权限或者角色发生变化的时候
+     * 系统可以在不做任何改变的情况下，改变该用户的角色权限
+     * 确定：每次都会调用数据库这样牵涉到的数据库交互比较多
+     * 后期看情况修改，可以放在缓冲中,在每次登陆的时候修改权限
      * @param principals
      * @return
      */
@@ -40,14 +52,41 @@ public class MyAuthorizationRealm extends AuthorizingRealm {
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
+
         UserPO userPO = (UserPO)principals.getPrimaryPrincipal();
-        Map<String,Collection<String>> roleMap =getCollectionRoles(userPO.getId());
-        simpleAuthorizationInfo.addRoles(roleMap.get("roleNames"));
-        simpleAuthorizationInfo.addRoles(roleMap.get("roleCodes"));
-        Map<String,Collection<String>> resMap = getCollectionRes(userPO.getId());
-        simpleAuthorizationInfo.addStringPermissions(resMap.get("resNames"));
-        simpleAuthorizationInfo.addStringPermissions(resMap.get("resCodes"));
+        if(userRolesMap.get(ROLE_KEY+userPO.getId()) == null){
+            insertRoleMap(userPO);
+        }
+        if(userResMap.get(RES_KEY+userPO.getId()) == null){
+            insertResMap(userPO);
+        }
+        if(null != userRolesMap.get(ROLE_KEY+userPO.getId())){
+            simpleAuthorizationInfo.addRoles(userRolesMap.get(ROLE_KEY+userPO.getId()));
+        }
+        if(null != userResMap.get(RES_KEY+userPO.getId())){
+            simpleAuthorizationInfo.addStringPermissions(userResMap.get(RES_KEY+userPO.getId()));
+        }
         return simpleAuthorizationInfo;
+    }
+
+    private void insertRoleMap(UserPO userPO){
+        synchronized (userPO){
+            Map<String,Collection<String>> roleMap =getCollectionRoles(userPO.getId());
+            Collection<String> collection = new ArrayList<>();
+            collection.addAll(roleMap.get("roleNames"));
+            collection.addAll(roleMap.get("roleCodes"));
+            userRolesMap.put(ROLE_KEY+userPO.getId(),collection);
+        }
+    }
+
+    private  void insertResMap(UserPO userPO){
+        synchronized (userPO){
+            Map<String,Collection<String>> resMap =getCollectionRes(userPO.getId());
+            Collection<String> collection = new ArrayList<>();
+            collection.addAll(resMap.get("resNames"));
+            collection.addAll(resMap.get("resCodes"));
+            userResMap.put(RES_KEY+userPO.getId(),collection);
+        }
     }
 
     private  Map<String,Collection<String>> getCollectionRoles(String userId) {
@@ -93,6 +132,7 @@ public class MyAuthorizationRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+
         UsernamePasswordToken usernamePasswordToken = (UsernamePasswordToken) token;
         String password = new String(usernamePasswordToken.getPassword());
         String username = usernamePasswordToken.getUsername();
@@ -101,8 +141,13 @@ public class MyAuthorizationRealm extends AuthorizingRealm {
         map.put("password", DESUtils.encrypt(password));
         UserPO userPO = authorizationDao.getValidateUser(map);
         if (null == userPO) {
+            Subject subject = SecurityUtils.getSubject();
+            Session session = subject.getSession();
+            session.setAttribute("error","用户名或密码不正确");
             throw new AuthenticationException("用户名或密码不正确");
         }
+        userResMap.remove(RES_KEY+userPO.getId());
+        userRolesMap.remove(ROLE_KEY + userPO.getId());
         setUserSession(userPO);
         SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(userPO, password, username);
         return simpleAuthenticationInfo;

@@ -8,7 +8,9 @@
         <@common.bootCSS></@common.bootCSS>
         <@common.adminCSS></@common.adminCSS>
         <@common.jquery></@common.jquery>
-
+        <@shiro.hasAnyRoles name="adduer">
+            user
+        </@shiro.hasAnyRoles>
     </head>
     <body class="skin-green-light sidebar-mini">
        <div class="wrapper">
@@ -24,9 +26,7 @@
                  </@template.content>
              </div>
             <@template.footer></@template.footer>
-           <@shiro.hasAnyRoles  name="test">
-               测试地址
-           </@shiro.hasAnyRoles>
+
        </div>
       <@common.bootJS></@common.bootJS>
       <@common.adminJS></@common.adminJS>

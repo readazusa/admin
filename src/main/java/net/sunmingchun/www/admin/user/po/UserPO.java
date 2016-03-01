@@ -7,6 +7,7 @@ import net.sunmingchun.www.util.BaseDateSerializer;
 import org.springframework.format.annotation.DateTimeFormat;
 
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**

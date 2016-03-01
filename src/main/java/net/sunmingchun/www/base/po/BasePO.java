@@ -3,13 +3,14 @@ package net.sunmingchun.www.base.po;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import net.sunmingchun.www.util.BaseDateSerializer;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by smc on 2015/11/19
  *
  */
-public class BasePO {
+public class BasePO  implements Serializable {
     private String id;
     private Date createTime;
     private Date updateTime;

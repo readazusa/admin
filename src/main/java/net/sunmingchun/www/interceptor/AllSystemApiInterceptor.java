@@ -7,7 +7,6 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -17,8 +16,9 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Created by smc on 2016/1/23.
  */
-public class AllSystemInterceptor extends HandlerInterceptorAdapter {
-    private  static  final Logger log  = LoggerFactory.getLogger("AllSystemInterceptor");
+public class AllSystemApiInterceptor extends HandlerInterceptorAdapter {
+
+    private  static  final Logger log  = LoggerFactory.getLogger(AllSystemApiInterceptor.class);
     @Override
     public void afterConcurrentHandlingStarted(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
@@ -34,14 +34,7 @@ public class AllSystemInterceptor extends HandlerInterceptorAdapter {
      */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        Subject subject = SecurityUtils.getSubject();
-        UserPO userPO = (UserPO)subject.getPrincipal();
-        if(null != userPO){
-            subject.getSession().setAttribute(CodeConstantUtils.USER_INFO,userPO);
-            return true;
-        }else{
-            return false;
-        }
+        return true;
     }
 
     @Override

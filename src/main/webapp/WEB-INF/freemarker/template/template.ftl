@@ -14,6 +14,9 @@
 
     <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
+            <li>
+                <a href="${base}/logout.htm" ></a>
+            </li>
             <li class="dropdown messages-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     <i class="fa fa-envelope-o"></i>

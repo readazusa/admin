@@ -36,6 +36,7 @@
                 <div class="col-xs-4">
                     <a href="javascript:void(0);"   data-url="regist/forget" style="color: #3f1fe9">忘记密码</a>
                 </div>
+                <#--${Session["error"]?default("")}-->
             </div>
             <br>
             <div class="row">
@@ -63,6 +64,7 @@
     function doSubmit(){
         $("#loginForm").submit();
     }
+
 </script>
 </body>
 </html>
