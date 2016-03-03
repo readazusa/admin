@@ -49,14 +49,14 @@ public class RoleController extends BaseController{
 
     @RequestMapping("edit")
     public String gotoEditPage(String id,ModelMap model){
-//        RolePO rolePO = roleService.queryObjectById(id);
-//        model.put("role",rolePO);
+        RolePO rolePO = roleService.queryObjectById(id);
+        model.put("role",rolePO);
         return "admin/role/edit";
     }
 
     @RequestMapping("view")
     public String gotoViewPage(String id,ModelMap model){
-//        RolePO rolePO = roleService.queryObjectById(id);
+        RolePO rolePO = roleService.queryObjectById(id);
         return "admin/role/view";
     }
 
@@ -96,7 +96,7 @@ public class RoleController extends BaseController{
     public Result remove(String id){
         Result result = new Result();
         try{
-//            roleService.deleteById(id);
+            roleService.deleteById(id);
             result.setCode(Result.SUCCESS);
         }catch (Exception ex){
             result.setCode(Result.ERROR);
@@ -108,8 +108,8 @@ public class RoleController extends BaseController{
     @RequestMapping("role_res")
     public String gotoRoleResPage(String id,ModelMap model){
         model.put("roleId",id);
-//        List<ResourcePO> resourcePOList = roleService.queryResourcePOByRoleId(id);
-//        model.put("resources",resourcePOList);
+        List<ResourcePO> resourcePOList = roleService.queryResourcePOByRoleId(id);
+        model.put("resources",resourcePOList);
 
         return "admin/role/role_res";
     }
