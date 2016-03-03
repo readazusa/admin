@@ -18,6 +18,21 @@ public class VisitLogPO  extends BasePO{
 
     private  String username;  //用户名
 
+    private  String method;  //请求的类方法
+
+
+    public VisitLogPO(){
+
+    }
+
+    public VisitLogPO(String userAgent,String userIp,String adddress,String url,String method){
+        this.userAgent= userAgent;
+        this.userIp = userIp;
+        this.address = adddress;
+        this.url = url;
+        this.method = method;
+    }
+
     public String getUserAgent() {
         return userAgent;
     }
@@ -56,5 +71,13 @@ public class VisitLogPO  extends BasePO{
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getMethod() {
+        return method;
+    }
+
+    public void setMethod(String method) {
+        this.method = method;
     }
 }

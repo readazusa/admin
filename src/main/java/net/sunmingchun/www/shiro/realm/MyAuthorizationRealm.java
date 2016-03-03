@@ -125,7 +125,6 @@ public class MyAuthorizationRealm extends AuthorizingRealm {
 
     /**
      * 认证用户的真实性
-     *
      * @param token
      * @return
      * @throws AuthenticationException

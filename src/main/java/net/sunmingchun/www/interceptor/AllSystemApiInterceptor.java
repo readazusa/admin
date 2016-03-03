@@ -1,10 +1,7 @@
 package net.sunmingchun.www.interceptor;
 
 
-import net.sunmingchun.www.admin.user.po.UserPO;
-import net.sunmingchun.www.util.CodeConstantUtils;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.subject.Subject;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.ModelAndView;
@@ -34,6 +31,8 @@ public class AllSystemApiInterceptor extends HandlerInterceptorAdapter {
      */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
         return true;
     }
 

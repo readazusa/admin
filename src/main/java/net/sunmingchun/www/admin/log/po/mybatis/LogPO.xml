@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="LogPO">
+       <insert id="insertVisitLog" parameterType="VisitLogPO">
+          insert into t_visitlog(id,userAgent,userIp,address,url,username,method,createTime,updateTime) values(#{id},#{userAgent},#{userIp},#{address},
+          #{url},#{username},#{method},#{createTime},#{updateTime})
+       </insert>
+
+       <insert id="insertOperationLog" parameterType="OperationLogPO">
+           insert into t_operationlog(id,userAgent,userIp,address,url,username,method,name,operationName,createTime,updateTime) values(#{id},#{userAgent},#{userIp},#{address},
+          #{url},#{username},#{method},#{name},#{operationName},#{createTime},#{updateTime})
+       </insert>
+</mapper>
