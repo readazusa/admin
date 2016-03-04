@@ -36,14 +36,15 @@ public final class HttpUtils {
     private static Logger log = LoggerFactory.getLogger(HttpUtils.class);
     public static HttpUtils httpUtils = null;
 
-
     private HttpUtils() {
 
     }
 
     public static HttpUtils getInstance() {
         if (httpUtils == null) {
-            httpUtils = new HttpUtils();
+            synchronized (HttpUtils.class){
+                httpUtils = new HttpUtils();
+            }
         }
         return httpUtils;
     }
