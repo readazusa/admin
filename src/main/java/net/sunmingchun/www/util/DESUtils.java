@@ -1,5 +1,6 @@
 package net.sunmingchun.www.util;
 
+import org.apache.commons.lang3.StringUtils;
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
@@ -19,23 +20,18 @@ public class DESUtils {
     private static String CHARSETNAME = "UTF-8";// 编码
     private static String ALGORITHM = "DES";// 加密类型
 
-    static {
+    public static String encrypt(String source,String keyStr) {
+        String keyNewStr = KEY_STR;
+        if(StringUtils.isNotBlank(keyStr)){
+            keyNewStr = keyStr;
+        }
         try {
             KeyGenerator generator = KeyGenerator.getInstance(ALGORITHM);
-            generator.init(new SecureRandom(KEY_STR.getBytes()));
+            generator.init(new SecureRandom(keyNewStr.getBytes()));
             key = generator.generateKey();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }
-
-    /**
-     * 对str进行DES加密
-     *
-     * @param source 加密字符串源
-     * @return 密文字符串
-     */
-    public static String encrypt(String source) {
         BASE64Encoder base64encoder = new BASE64Encoder();
         try {
             byte[] bytes = source.getBytes(CHARSETNAME);
@@ -46,15 +42,21 @@ public class DESUtils {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }
 
-    /**
-     * 对str进行DES解密
-     *
-     * @param source 待解密字符串
-     * @return 明文字符串
-     */
-    public static String decrypt(String source) {
+
+    }
+    public static String decrypt(String source,String keyStr) {
+        String keyNewStr = KEY_STR;
+        if(StringUtils.isNotBlank(keyStr)){
+            keyNewStr = keyStr;
+        }
+        try {
+            KeyGenerator generator = KeyGenerator.getInstance(ALGORITHM);
+            generator.init(new SecureRandom(keyNewStr.getBytes()));
+            key = generator.generateKey();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         BASE64Decoder base64decoder = new BASE64Decoder();
         try {
             byte[] bytes = base64decoder.decodeBuffer(source);
@@ -65,5 +67,24 @@ public class DESUtils {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+    /**
+     * 对str进行DES加密
+     *
+     * @param source 加密字符串源
+     * @return 密文字符串
+     */
+    public static String encrypt(String source) {
+       return encrypt(source,null);
+    }
+
+    /**
+     * 对str进行DES解密
+     *
+     * @param source 待解密字符串
+     * @return 明文字符串
+     */
+    public static String decrypt(String source) {
+        return decrypt(source,null);
     }
 }
