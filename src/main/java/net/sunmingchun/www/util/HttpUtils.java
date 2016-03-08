@@ -1,5 +1,6 @@
 package net.sunmingchun.www.util;
 
+import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.StatusLine;
@@ -7,15 +8,18 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.nio.client.CloseableHttpAsyncClient;
 import org.apache.http.impl.nio.client.HttpAsyncClients;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -116,12 +120,13 @@ public final class HttpUtils {
             } catch (UnsupportedEncodingException e) {
                 log.error("UnsupportedEncodingException: 异常，获取地址：{}失败，错误信息如下：{}", url, e.getMessage());
             }
+           httpPost.setHeader("Content-type","application/json; charset=utf-8");
             httpPost.setEntity(uefEntity);
         }
         try {
             CloseableHttpResponse closeableHttpResponse = httpclient.execute(httpPost);
             InputStream inputStream = closeableHttpResponse.getEntity().getContent();
-            Reader reader = new InputStreamReader(inputStream);
+            Reader reader = new InputStreamReader(inputStream,"UTF-8");
             BufferedReader bufferedReader = new BufferedReader(reader);
             String str = null;
             while ((str = bufferedReader.readLine()) != null) {
@@ -144,4 +149,36 @@ public final class HttpUtils {
         httpUtils.get("https://open.weixin.qq.com/");
     }
 
+
+    public  void tt(String url,String json){
+        StringBuffer sb = new StringBuffer();
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+        HttpPost httpPost = new HttpPost(url);
+        httpPost.addHeader("Content-type","application/x-www-form-urlencoded");
+        httpPost.setHeader("Accept", "application/json");
+        try {
+            httpPost.setEntity(new StringEntity(json,"application/x-www-form-urlencoded", "UTF-8"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        try {
+            CloseableHttpResponse closeableHttpResponse = httpclient.execute(httpPost);
+            InputStream inputStream = closeableHttpResponse.getEntity().getContent();
+            Reader reader = new InputStreamReader(inputStream,"UTF-8");
+            BufferedReader bufferedReader = new BufferedReader(reader);
+            String str = null;
+            while ((str = bufferedReader.readLine()) != null) {
+                sb.append(str);
+            }
+        } catch (IOException e) {
+            log.error("IOException：异常,获取地址：{}失败，错误信息如下：{}", url, e.getMessage());
+        } finally {
+            try {
+                httpclient.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println(sb.toString());
+    }
 }

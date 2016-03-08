@@ -10,7 +10,8 @@
             classpath:spring/mysql/applicationContext_database.xml,
             classpath:spring/shiro/applicationContext_shiro.xml,
             classpath:spring/applicationContext_mvc.xml,
-            classpath:spring/applicationContext_base.xml
+            classpath:spring/applicationContext_base.xml,
+            classpath:spring/mq/applicationContext_mq.xml
         </param-value>
     </context-param>
     <listener>

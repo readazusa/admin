@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd 
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+           http://www.springframework.org/schema/tx  http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+           http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
+
+	<bean id="targetConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+		<!-- 此种url方式为了监听网络断开的情况下，后续可以重新相连    -->
+		<property name="brokerURL" value="failover:tcp://223.4.57.31:30001" />
+		<!--<property name="brokerURL" value="failover:tcp://localhost:61616" />-->
+		<property name="userName" value="admin"></property>
+		<property name="password" value="admin"></property>
+	</bean>
+
+	<bean id="jmsFactory" class="org.apache.activemq.pool.PooledConnectionFactory" destroy-method="stop">
+		<property name="connectionFactory" ref="targetConnectionFactory" />
+	</bean>
+
+	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="jmsFactory"></property>
+		<property name="defaultDestination" ref="queue"></property>
+		<property name="deliveryPersistent" value="true"></property>
+	</bean>
+
+	<bean id="queue" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg index="0" value="new.speed.test"></constructor-arg>
+	</bean>
+
+	<bean class="org.springframework.jms.listener.SimpleMessageListenerContainer">
+		<property name="connectionFactory" ref="jmsFactory"/>
+		<property name="destination" ref="queue"/>
+		<property name="messageListener" ref="oneListener"/>
+	</bean>
+	<bean class="org.springframework.jms.listener.SimpleMessageListenerContainer">
+		<property name="connectionFactory" ref="jmsFactory"/>
+		<property name="destination" ref="queue"/>
+		<property name="messageListener" ref="oneListener"/>
+		<!--<property name="replyPubSubDomain" value="true"></property>-->
+	</bean>
+
+	<bean id="oneListener" class="net.sunmingchun.www.test.listener.OneListener"></bean>
+	<!--<bean id="twoListener" class="net.sunmingchun.www.test.listener.TwoListener"></bean>-->
+</beans>

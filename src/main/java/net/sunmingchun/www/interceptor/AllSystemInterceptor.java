@@ -48,14 +48,15 @@ public class AllSystemInterceptor extends HandlerInterceptorAdapter {
      */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        Subject subject = SecurityUtils.getSubject();
-        UserPO userPO = (UserPO)subject.getPrincipal();
-        if(null != userPO){
-            subject.getSession().setAttribute(CodeConstantUtils.USER_INFO,userPO);
-            return true;
-        }else{
-            return false;
-        }
+//        Subject subject = SecurityUtils.getSubject();
+//        UserPO userPO = (UserPO)subject.getPrincipal();
+//        if(null != userPO){
+//            subject.getSession().setAttribute(CodeConstantUtils.USER_INFO,userPO);
+//            return true;
+//        }else{
+//            return false;
+//        }
+        return true;
     }
 
     @Override
