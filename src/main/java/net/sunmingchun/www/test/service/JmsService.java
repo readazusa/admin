@@ -24,7 +24,7 @@ public class JmsService {
     @Resource
     private ThreadPoolTaskExecutor threadPoolTaskExecutor;
 
-    @Resource
+//    @Resource
     private JmsTemplate jmsTemplate;
 
     public void start() {

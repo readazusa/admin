@@ -42,9 +42,8 @@ public class DESUtils {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
-
     }
+
     public static String decrypt(String source,String keyStr) {
         String keyNewStr = KEY_STR;
         if(StringUtils.isNotBlank(keyStr)){

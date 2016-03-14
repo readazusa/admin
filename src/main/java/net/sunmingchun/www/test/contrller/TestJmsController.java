@@ -21,14 +21,15 @@ public class TestJmsController {
 
     private static final Logger log = LoggerFactory.getLogger(TestJmsController.class);
 
-    @Resource
+//    @Resource
     private JmsService jmsService;
 
     @RequestMapping("start")
     @ResponseBody
     public void start(){
+
         log.error("开启线程");
-        jmsService.start();
+//        jmsService.start();
     }
 
 }

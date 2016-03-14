@@ -4,6 +4,8 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 		  http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          version="3.0">
+    
+
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
@@ -11,15 +13,21 @@
             classpath:spring/shiro/applicationContext_shiro.xml,
             classpath:spring/applicationContext_mvc.xml,
             classpath:spring/applicationContext_base.xml,
-            classpath:spring/mq/applicationContext_mq.xml
+            <!--classpath:spring/mq/applicationContext_mq.xml,-->
+            classpath:spring/redis/applicationContext_redis.xml
         </param-value>
     </context-param>
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
-    <!--<listener>-->
-    <!--<listener-class>org.apache.shiro.web.env.EnvironmentLoaderListener</listener-class>-->
-    <!--</listener>-->
+    <!-- logback 集成spring-->
+    <context-param>
+        <param-name>logbackConfigLocation</param-name>
+        <param-value>classpath:logback.xml</param-value>
+    </context-param>
+    <listener>
+        <listener-class>ch.qos.logback.ext.spring.web.LogbackConfigListener</listener-class>
+    </listener>
 
     <filter>
         <filter-name>encodingFilter</filter-name>

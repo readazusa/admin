@@ -7,6 +7,7 @@
 		<setting name="cacheEnabled" value="true" />
         <setting name="lazyLoadingEnabled" value="true"/>  
         <setting name="aggressiveLazyLoading" value="false"/>
+        <setting name="logPrefix" value="dao"/>
 	</settings>
     <typeAliases>
         <typeAlias type="net.sunmingchun.www.base.po.BaseSearchPO" alias="BaseSearchPO"></typeAlias>
