@@ -22,6 +22,7 @@ public class MyFreemarkerView extends FreeMarkerView {
     protected void exposeHelpers(Map<String, Object> model, HttpServletRequest request) throws Exception {
         log.debug("freemarker的基本路径:{}",BASE_CONTEXT);
         model.put(BASE_CONTEXT,request.getContextPath());
+        model.put("token",UuidUtils.getUpperUuid());
         super.exposeHelpers(model, request);
     }
 }
