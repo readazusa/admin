@@ -15,19 +15,22 @@
         <property name="loginUrl" value="/login.htm"/>
         <property name="successUrl" value="/index.htm"/>
         <property name="unauthorizedUrl" value="/login.htm"/>
-        <!--<property name="filters">-->
-            <!--<util:map>-->
-            <!--</util:map>-->
-        <!--</property>-->
+        <property name="filters">
+            <util:map>
+                    <entry key="myFormAuthenticationFilter" value-ref="myFormAuthenticationFilter"></entry>
+            </util:map>
+        </property>
         <property name="filterChainDefinitions">
             <value>
-                /login.htm=authc
+                /login.htm=myFormAuthenticationFilter
+                <!--/login.htm=authc-->
                 /logout.htm=logout
                 /**=user
             </value>
         </property>
     </bean>
 
+    <bean id="myFormAuthenticationFilter" class="net.sunmingchun.www.shiro.filter.MyFormAuthenticationFilter"></bean>
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
        <property name="realm" ref="myRealm"></property>
     </bean>

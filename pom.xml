@@ -315,6 +315,11 @@
             <artifactId>ojdbc7</artifactId>
             <version>12.1.0.2</version>
         </dependency>
+        <dependency>
+            <groupId>com.github.cage</groupId>
+            <artifactId>cage</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
     <build>
         <finalName>admin</finalName>

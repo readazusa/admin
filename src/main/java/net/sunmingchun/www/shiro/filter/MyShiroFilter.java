@@ -19,18 +19,19 @@ public class MyShiroFilter extends FormAuthenticationFilter {
 
     @Override
     protected AuthenticationToken createToken(ServletRequest request, ServletResponse response) {
-        String condition = this.getCondition(request);
-        String password = this.getPassword(request);
-        String isRemember = this.getIsRemember( request);
-        String reqId = this.getReqIp(request);
-        String verCode = this.getVerCode(request);
-        MyUsernamePasswordToken myUsernamePasswordToken = new MyUsernamePasswordToken(condition,password,verCode,reqId);
-        if(IS_REMEMBER.equals(isRemember)){
-            myUsernamePasswordToken.setRememberMe(true);
-        }else{
-            myUsernamePasswordToken.setRememberMe(false);
-        }
-        return myUsernamePasswordToken;
+//        String condition = this.getCondition(request);
+//        String password = this.getPassword(request);
+//        String isRemember = this.getIsRemember( request);
+//        String reqId = this.getReqIp(request);
+//        String verCode = this.getVerCode(request);
+////        MyUsernamePasswordToken myUsernamePasswordToken = new MyUsernamePasswordToken(condition,password,verCode,reqId);
+//        if(IS_REMEMBER.equals(isRemember)){
+//            myUsernamePasswordToken.setRememberMe(true);
+//        }else{
+//            myUsernamePasswordToken.setRememberMe(false);
+//        }
+//        return myUsernamePasswordToken;
+        return null;
     }
 
     public String  getCondition(ServletRequest request){

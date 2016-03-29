@@ -20,27 +20,45 @@
 
         <form method="post" action="${base}/login.htm" id="loginForm">
             <div class="form-group has-feedback input-group">
-                <div class="input-group-addon">邮箱</div>
+                <div class="input-group-addon">邮&nbsp;&nbsp;&nbsp;箱</div>
                 <input type="email" class="form-control" placeholder="邮箱" name="username" id="email"/>
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback input-group">
-                <div class="input-group-addon">密码</div>
+                <div class="input-group-addon">密&nbsp;&nbsp;&nbsp;码</div>
                 <input type="password" class="form-control" placeholder="密码" name="password" id="password"/>
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
-            <div class="form-group has-feedback input-group">
-                <div class="input-group-addon">验证码</div>
-                <input type="text" class="form-control" placeholder="验证码" name="validateCode" id="validateCode"/>
+            <div class="row">
+                <div class="col-xs-4">
+                    <input type="text" class="form-control" placeholder="验证码" name="validatecode" id="validateCode"/>
+                </div>
+                <div class="col-xs-8">
+                    <img src="${base}/api/validatecode" style="width:75px;" id="validatecode">
+                    <a href="javascript:reloadImage();" style="cursor:pointer;" >看不清，换一张</a>
+                </div>
+            </div>
+            <br>
+            <#--<div class="form-group  input-group">-->
+                <#--<div class="input-group-addon">验证码</div>-->
+                <#--<input type="text" class="form-control" placeholder="验证码" name="validateCode" id="validateCode"/>-->
+                <#--<span class="glyphicon form-control-feedback" style="width: 200px;cursor:pointer;" onclick="reloadImage();" >-->
+                    <#--<img src="${base}/api/validatecode" style="width:75px;padding-bottom: 6px;padding-left: 10px;cursor:pointer;" id="validatecode">-->
+                    <#--<a href="#"  >看不清，换一张</a>-->
+                <#--</span>-->
+            <#--</div>-->
+            <div class="row">
+                <div class="col-xs-12">
+                  <span style="color: red;">${Session["error"]?default("")}</span>
+                </div>
             </div>
             <div class="row">
                 <div class="col-xs-8">
-                    <input type="checkbox" name="rememberMe" value="true">记住我
+                    <input type="checkbox" name="rememberMe" value="true">&nbsp;&nbsp;记住我
                 </div>
                 <div class="col-xs-4">
                     <a href="javascript:void(0);" data-url="regist/forget" style="color: #3f1fe9">忘记密码</a>
                 </div>
-            <#--${Session["error"]?default("")}-->
             </div>
             <br>
 
@@ -68,18 +86,18 @@
         $("#loginForm").keydown(function (e) {
             var curkey = e.which;
             if (13 == curkey) {
-                if($("#email").val() && $("#password").val()){
+                if ($("#email").val() && $("#password").val()) {
                     doSubmit();
                 }
             }
         });
-
-
     });
     function doSubmit() {
         $("#loginForm").submit();
     }
-
+    function reloadImage(){
+        $("#validatecode").attr("src","${base}/api/validatecode?t="+ new Date().getTime());
+    }
 
 </script>
 </body>

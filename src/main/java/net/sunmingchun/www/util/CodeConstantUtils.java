@@ -7,5 +7,6 @@ package net.sunmingchun.www.util;
 public final class CodeConstantUtils {
     public static final String USER_INFO="USER";
 
+    public static final String VALIDATE_CODE = "VALIDATE_CODE";
 
 }
