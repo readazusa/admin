@@ -17,7 +17,6 @@
         <property name="unauthorizedUrl" value="/login.htm"/>
         <!--<property name="filters">-->
             <!--<util:map>-->
-                <!--<entry key="anAlias" value-ref="myFilter"/>-->
             <!--</util:map>-->
         <!--</property>-->
         <property name="filterChainDefinitions">
