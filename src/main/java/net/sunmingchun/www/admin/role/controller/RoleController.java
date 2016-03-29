@@ -57,6 +57,7 @@ public class RoleController extends BaseController{
     @RequestMapping("view")
     public String gotoViewPage(String id,ModelMap model){
         RolePO rolePO = roleService.queryObjectById(id);
+        model.put("role",rolePO);
         return "admin/role/view";
     }
 

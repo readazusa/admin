@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -24,9 +23,6 @@ public class IndexController {
 
     @RequestMapping("index")
     public String index(HttpServletRequest request){
-        log.info("logback测试输入文件");
-
-        Cookie[] cookie = request.getCookies();
         Subject subject = SecurityUtils.getSubject();
         UserPO userPO = (UserPO)subject.getPrincipal();
         HttpSession session = request.getSession();

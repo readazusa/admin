@@ -1,4 +1,4 @@
-<#macro adminAddJS url title=" ">
+<#macro adminAddJS url title=" " width="50%" height="70%">
      <script type="application/javascript">
             function add(){
                 index = layer.open({
@@ -8,7 +8,7 @@
                     shade: 0.8,
                     shift: 2,
                     maxmin: true,
-                    area: ['50%', '70%'],
+                    area: ['${width}', '${height}'],
                     content: "${url}"
                 });
             }
@@ -37,8 +37,8 @@
     </script>
 </#macro>
 
-<#macro adminEditJS url title="">
-    <script type="application/javascript">
+<#macro adminEditJS url title="" width="50%" height="70%">
+    <script type="application/javascript" >
         function edit(id){
             index = layer.open({
                 type: 2,
@@ -47,14 +47,14 @@
                 shade: 0.8,
                 shift: 2,
                 maxmin: true,
-                area: ['50%', '70%'],
+                area: ['${width}', '${height}'],
                 content: "${url}?id="+id
             });
         }
     </script>
 </#macro>
 
-<#macro adminViewJS url title="">
+<#macro adminViewJS url title="" width="50%" height="70%">
     <script type="application/javascript">
         function view(id){
             index = layer.open({
@@ -64,7 +64,7 @@
                 shade: 0.8,
                 shift: 2,
                 maxmin: true,
-                area: ['50%', '70%'],
+                area: ['${width}', '${height}'],
                 content: "${url}?id="+id
             });
         }

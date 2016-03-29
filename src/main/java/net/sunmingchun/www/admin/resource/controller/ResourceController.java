@@ -33,6 +33,7 @@ public class ResourceController extends BaseController {
 
     @RequestMapping("new")
     public String gotoNewPage(){
+        log.debug("123");
         return "admin/resource/new";
     }
 

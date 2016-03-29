@@ -26,16 +26,23 @@
         <property name="freemarkerSettings">
             <props>
                 <prop key="default_encoding">UTF-8</prop>
+                <prop key="locale">zh_CN</prop>
+                <prop key="datetime_format">yyyy-MM-dd HH:mm:ss</prop>
+                <prop key="date_format">yyyy-MM-dd</prop>
+                <prop key="number_format">#.##</prop>
             </props>
         </property>
     </bean>
+
     <bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
         <property name="viewClass" value="net.sunmingchun.www.util.MyFreemarkerView"></property>
-        <property name="cache" value="true"/>
+        <!--<property name="cache" value="false"/>-->
         <property name="contentType" value="text/html;charset=UTF-8"></property>
+        <!--<property name="cacheUnresolved" value="false"></property>-->
         <property name="prefix" value="/"/>
         <property name="suffix" value=".ftl"/>
         <property name="order" value="1"></property>
+        <!--<property name="allowSessionOverride" value="true"></property>-->
     </bean>
 
 	<!-- 文件上传解析器 -->
@@ -46,13 +53,10 @@
 	
 	<bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">   
         <property name="defaultErrorView">     
-            <value>/error/error</value>   
+            <value>/error/error</value>
         </property>   
         <property name="defaultStatusCode">     
             <value>500</value>   
         </property>      
-    <property name="warnLogCategory">     
-            <value>org.springframework.web.servlet.handler.SimpleMappingExceptionResolver</value>   
-        </property>      
-    </bean>    
+    </bean>
 </beans>

@@ -8,9 +8,6 @@
         <@common.bootCSS></@common.bootCSS>
         <@common.adminCSS></@common.adminCSS>
         <@common.jquery></@common.jquery>
-        <@shiro.hasAnyRoles name="adduer">
-            user
-        </@shiro.hasAnyRoles>
     </head>
     <body class="skin-green-light sidebar-mini">
        <div class="wrapper">
@@ -22,7 +19,7 @@
            </aside>
              <div class="content-wrapper">
                  <@template.content>
-
+                        hello word!
                  </@template.content>
              </div>
             <@template.footer></@template.footer>

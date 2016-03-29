@@ -8,6 +8,7 @@ import net.sunmingchun.www.admin.user.po.UserRolePO;
 import net.sunmingchun.www.admin.user.service.IUserService;
 import net.sunmingchun.www.base.po.BasePagePO;
 import net.sunmingchun.www.base.po.BaseSearchPO;
+import net.sunmingchun.www.util.DESUtils;
 import net.sunmingchun.www.util.UuidUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -35,6 +36,7 @@ public class UserServiceImpl implements IUserService {
            obj.setCreateTime(new Date());
            obj.setUpdateTime(new Date());
        }
+       obj.setPassword( DESUtils.encrypt(obj.getPassword()));
        userDao.save(obj);
     }
 

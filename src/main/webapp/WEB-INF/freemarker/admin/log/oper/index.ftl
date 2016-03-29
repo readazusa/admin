@@ -1,11 +1,11 @@
-<#import "../../config/common.ftl"  as common>
-<#import "../../template/template.ftl" as template>
-<#import  "../../config/baseJS.ftl" as baseJS>
+<#import "../../../config/common.ftl"  as common>
+<#import "../../../template/template.ftl" as template>
+<#import  "../../../config/baseJS.ftl" as baseJS>
 <#escape x as x?html>
 <!DOCTYPE HTML>
 <html>
 <head lang="en">
-    <@template.head title="权限管理"></@template.head>
+    <@template.head title="用户操作日志"></@template.head>
         <@common.bootCSS></@common.bootCSS>
         <@common.adminCSS></@common.adminCSS>
         <@common.jquery></@common.jquery>
@@ -20,23 +20,23 @@
         <@template.header></@template.header>
     </header>
     <aside class="main-sidebar">
-        <@template.aside flag="resource"></@template.aside>
+        <@template.aside flag="operlog"></@template.aside>
     </aside>
     <div class="content-wrapper">
         <@template.content>
             <div class="content">
             <div class="box">
                 <div class="box-header">
-                    <a href="javascript:add();" class="button button-action button-rounded"><li class="fa fa-plus"></li>新增权限</a>
+                    <#--<a href="javascript:add();" class="button button-action button-rounded"><li class="fa fa-plus"></li>新增用户</a>-->
                 </div>
                 <div class="box-body">
-                    <table id="resourceData" class="display" cellspacing="0" width="100%">
+                    <table id="userData" class="display" cellspacing="0" width="100%">
                         <thead>
                         <tr>
-                            <th>编号</th>
-                            <th>权限名称</th>
-                            <th>权限编码</th>
-                            <th>操作</th>
+                            <th>登录编号</th>
+                            <th>来访地址</th>
+                            <th>请求url</th>
+                            <th>请求时间</th>
                         </tr>
                         </thead>
                     </table>
@@ -59,14 +59,15 @@
         var table = null;
         var index = 0;
         $(document).ready(function() {
-            table = $('#resourceData').DataTable({
+            table = $('#userData').DataTable({
                "processing":true,
                 "serverSide": true,
-                "ajax": "${base}/resource/list.json",
+                "ajax": "${base}/vislog/list.json",
                 columns: [
                     { data: 'id' },
-                    { data: 'name' },
-                    { data: 'code' },
+                    { data: 'username' },
+                    { data: 'url' },
+                    { data: 'createTime' },
                     {data:"id"}
                 ],
                 "language": {
@@ -83,12 +84,13 @@
                     }
                 },
                 columnDefs: [
-                    { targets: 3,  render: function (data) {
+                    { targets: 7,  render: function (data) {
                         var html =  '<span class="button-dropdown" data-buttons="dropdown"><button class="button button-rounded button-small">选择</button>'+
                                 '<ul class="button-dropdown-list is-below">'+
                                 ' <li><a href="javascript:edit(\''+data+'\');"><i class="fa fa-edit"></i> 修改</a></li>'+
                                 ' <li><a href="javascript:remove(\''+data+'\');"><i class="fa fa-trash-o"></i> 删除</a></li>'+
                                 ' <li><a href="javascript:view(\''+data+'\');"><i class="fa fa-street-view"></i> 查看</a></li>'+
+                                ' <li><a href="javascript:setRole(\''+data+'\');"><i class="fa fa-gears"></i> 赋角色</a></li>'+
                                 '</ul></span>';
                         return html;
                       },
@@ -99,16 +101,29 @@
             $.fn.bootstrapDropdownHover();
         } );
 
+        function setRole(id){
+            index = layer.open({
+                type: 2,
+                title:"赋角色",
+                shadeClose: true,
+                shade: 0.8,
+                shift: 2,
+                maxmin: true,
+                area: ['50%', '50%'],
+                content:"${base}/user/user_role.htm?id="+id
+            });
+        }
+
        function refresh(){
            table.ajax.reload();
            layer.close(index);
        }
 
 </script>
-    <@baseJS.adminAddJS url="${base}/resource/new.htm" title="新增权限"></@baseJS.adminAddJS>
-    <@baseJS.adminDeleteJS url="${base}/resource/delete.json" title="删除权限"></@baseJS.adminDeleteJS>
-    <@baseJS.adminEditJS url="${base}/resource/edit.htm" title="修改权限"></@baseJS.adminEditJS>
-    <@baseJS.adminViewJS url="${base}/resource/view.htm" title="查看权限"></@baseJS.adminViewJS>
+    <@baseJS.adminAddJS url="${base}/user/new.htm" title="新增用户"></@baseJS.adminAddJS>
+    <@baseJS.adminDeleteJS url="${base}/user/delete.json" title="删除用户"></@baseJS.adminDeleteJS>
+    <@baseJS.adminEditJS url="${base}/user/edit.htm" title="修改用户"></@baseJS.adminEditJS>
+    <@baseJS.adminViewJS url="${base}/user/view.htm" title="查看用户"></@baseJS.adminViewJS>
 </body>
 </html>
 </#escape>

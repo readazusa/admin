@@ -231,13 +231,13 @@
                     </li>
                     <li class="user-body">
                         <div class="col-xs-4 text-center">
-                            <a href="#">Followers</a>
+                            <#--<a href="#">Followers</a>-->
                         </div>
                         <div class="col-xs-4 text-center">
-                            <a href="#">Sales</a>
+                            <#--<a href="#">Sales</a>-->
                         </div>
                         <div class="col-xs-4 text-center">
-                            <a href="#">Friends</a>
+                            <#--<a href="#">Friends</a>-->
                         </div>
                     </li>
                     <li class="user-footer">
@@ -245,7 +245,7 @@
                             <a href="#" class="btn btn-default btn-flat">Profile</a>
                         </div>
                         <div class="pull-right">
-                            <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                            <a href="${base}/logout.htm" class="btn btn-default btn-flat">Sign out</a>
                         </div>
                     </li>
                 </ul>
@@ -260,7 +260,7 @@
 <#macro aside flag="index">
 <section class="sidebar">
     <ul class="sidebar-menu">
-        <li class='treeview   <#if flag=="role" || flag=="resources" || flag=="log" || flag=="user">active</#if>'>
+        <li class='treeview   <#if flag=="role" || flag=="resource" || flag=="vislog" || flag=="user" || flag=="operlog">active</#if>'>
             <a href="#">
                 <i class="fa fa-user-plus"></i> <span>系统管理</span> <i class="fa fa-angle-left pull-right"></i>
             </a>
@@ -269,10 +269,12 @@
                 </li>
                 <li class='<#if flag=="role">active</#if>'><a href="${base}/role/index.htm"><i
                         class="fa fa-hand-rock-o"></i> 角色管理</a></li>
-                <li class='<#if flag=="resources">active</#if>'><a href="${base}/resource/index.htm"><i
+                <li class='<#if flag=="resource">active</#if>'><a href="${base}/resource/index.htm"><i
                         class="fa fa-hand-spock-o"></i> 资源管理</a></li>
-                <li class='<#if flag=="log">active</#if>'><a href="${base}/log/index.htm"><i
-                        class="fa fa-bookmark-o"></i> 日志管理</a></li>
+                <li class='<#if flag=="vislog">active</#if>'><a href="${base}/vislog/index.htm"><i
+                        class="fa fa-bookmark-o"></i> 访问日志管理</a></li>
+                <#--<li class='<#if flag=="operlog">active</#if>'><a href="${base}/operlog/index.htm"><i-->
+                        <#--class="fa fa-bookmark-o"></i> 操作日志管理</a></li>-->
             </ul>
         </li>
     </ul>
@@ -281,18 +283,18 @@
             <a href="#">
                 <i class="fa fa-user-plus"></i> <span>爬虫管理</span> <i class="fa fa-angle-left pull-right"></i>
             </a>
-            <ul class="treeview-menu">
-                <li class='<#if flag="user">active</#if>'><a href="${base}/user/index.htm"><i class="fa fa-user"></i>用户管理</a>
-                </li>
-                <li class='<#if flag="role">active</#if>'><a href="${base}/role/index.htm"><i
-                        class="fa fa-hand-rock-o"></i> 角色管理</a></li>
-                <li class='<#if flag="resources">active</#if>'><a href="${base}/resources/index.htm"><i
-                        class="fa fa-hand-spock-o"></i> 资源管理</a></li>
-                <li class='<#if flag="log">active</#if>'><a href="${base}/log/index.htm"><i
-                        class="fa fa-bookmark-o"></i> 日志管理</a></li>
-                <li class='<#if flag="log">active</#if>'><a href="${base}/reptile/index.htm"><i
-                        class="fa fa-bookmark-o"></i> ueditor</a></li>
-            </ul>
+            <#--<ul class="treeview-menu">-->
+                <#--<li class='<#if flag="user">active</#if>'><a href="${base}/user/index.htm"><i class="fa fa-user"></i>用户管理</a>-->
+                <#--</li>-->
+                <#--<li class='<#if flag="role">active</#if>'><a href="${base}/role/index.htm"><i-->
+                        <#--class="fa fa-hand-rock-o"></i> 角色管理</a></li>-->
+                <#--<li class='<#if flag="resource">active</#if>'><a href="${base}/resource/index.htm"><i-->
+                        <#--class="fa fa-hand-spock-o"></i> 资源管理</a></li>-->
+                <#--<li class='<#if flag="log">active</#if>'><a href="${base}/log/index.htm"><i-->
+                        <#--class="fa fa-bookmark-o"></i> 日志管理</a></li>-->
+                <#--<li class='<#if flag="log">active</#if>'><a href="${base}/reptile/index.htm"><i-->
+                        <#--class="fa fa-bookmark-o"></i> ueditor</a></li>-->
+            <#--</ul>-->
         </li>
     </ul>
 </section>

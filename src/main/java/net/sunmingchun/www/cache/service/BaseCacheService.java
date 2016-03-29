@@ -17,7 +17,7 @@ import java.io.Serializable;
  * Created by smc
  * date on 2016/3/13.
  * Email:sunmch@163.com
- * 缓冲处理类
+ * 缓存处理类
  */
 
 @Service

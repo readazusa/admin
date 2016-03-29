@@ -11,4 +11,7 @@ import net.sunmingchun.www.base.po.BasePO;
 public interface ILogService {
 
     public void insertLog(BasePO basePO);
+
+
+
 }

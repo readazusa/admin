@@ -20,15 +20,15 @@
         <@template.header></@template.header>
     </header>
     <aside class="main-sidebar">
-        <@template.aside flag="user"></@template.aside>
+        <@template.aside flag="role"></@template.aside>
     </aside>
     <div class="content-wrapper">
         <@template.content>
             <div class="content">
             <div class="box">
                 <div class="box-header">
-                    <a href="javascript:add();" class="button button-action button-rounded"><li class="fa fa-plus"></li>新增角色</a>
-                </div>
+                <a href="javascript:add();" class="button button-action button-rounded"><li class="fa fa-plus"></li>新增角色</a>
+            </div>
                 <div class="box-body">
                     <table id="roleData" class="display" cellspacing="0" width="100%">
                         <thead>

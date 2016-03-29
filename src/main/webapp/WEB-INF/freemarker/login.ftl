@@ -7,7 +7,6 @@
     <title>全名享受</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <@common.bootMinCSS></@common.bootMinCSS>
-    <#--<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />-->
     <@common.adminCSS></@common.adminCSS>
     <@common.jquery></@common.jquery>
     <@common.icheckCSS></@common.icheckCSS>
@@ -18,34 +17,40 @@
     </div>
     <div class="login-box-body">
         <p class="login-box-msg">全名享受管理系统</p>
+
         <form method="post" action="${base}/login.htm" id="loginForm">
             <div class="form-group has-feedback input-group">
                 <div class="input-group-addon">邮箱</div>
-                <input type="email" class="form-control" placeholder="邮箱" name="username"/>
+                <input type="email" class="form-control" placeholder="邮箱" name="username" id="email"/>
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback input-group">
                 <div class="input-group-addon">密码</div>
-                <input type="password" class="form-control" placeholder="密码" name="password"/>
+                <input type="password" class="form-control" placeholder="密码" name="password" id="password"/>
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback input-group">
+                <div class="input-group-addon">验证码</div>
+                <input type="text" class="form-control" placeholder="验证码" name="validateCode" id="validateCode"/>
             </div>
             <div class="row">
                 <div class="col-xs-8">
                     <input type="checkbox" name="rememberMe" value="true">记住我
                 </div>
                 <div class="col-xs-4">
-                    <a href="javascript:void(0);"   data-url="regist/forget" style="color: #3f1fe9">忘记密码</a>
+                    <a href="javascript:void(0);" data-url="regist/forget" style="color: #3f1fe9">忘记密码</a>
                 </div>
-                <#--${Session["error"]?default("")}-->
+            <#--${Session["error"]?default("")}-->
             </div>
             <br>
+
             <div class="row">
-                    <div class="col-xs-5 col-xs-offset-1">
-                        <a class="button button-action button-rounded button-small" href="javascript:doSubmit();">登录</a>
-                    </div>
-                    <div class="col-xs-5 col col-xs-offset-1">
-                        <a class="button button-action button-rounded button-small">注册</a>
-                    </div>
+                <div class="col-xs-5 col-xs-offset-1">
+                    <a class="button button-action button-rounded button-small" href="javascript:doSubmit();">登录</a>
+                </div>
+                <div class="col-xs-5 col col-xs-offset-1">
+                    <a class="button button-action button-rounded button-small">注册</a>
+                </div>
             </div>
         </form>
     </div>
@@ -60,10 +65,21 @@
             radioClass: 'iradio_square-blue',
             increaseArea: '20%'
         });
+        $("#loginForm").keydown(function (e) {
+            var curkey = e.which;
+            if (13 == curkey) {
+                if($("#email").val() && $("#password").val()){
+                    doSubmit();
+                }
+            }
+        });
+
+
     });
-    function doSubmit(){
+    function doSubmit() {
         $("#loginForm").submit();
     }
+
 
 </script>
 </body>

@@ -12,4 +12,57 @@
            insert into t_operationlog(id,userAgent,userIp,address,url,username,method,name,operationName,createTime,updateTime) values(#{id},#{userAgent},#{userIp},#{address},
           #{url},#{username},#{method},#{name},#{operationName},#{createTime},#{updateTime})
        </insert>
+
+
+    <select id="queryVisPage" parameterType="BaseSearchPO" resultType="VisitLogPO">
+        select * from t_visitlog where 1=1
+        <if test="obj.username != null and obj.username != ''">
+            and username like '${obj.name}%'
+        </if>
+        <if test="obj.search != null and obj.search != ''">
+            and username = '${obj.search}%'
+        </if>
+        <if test="orderName != null and orderName != ''">
+            order by ${orderName} ${orderValue}
+        </if>
+        limit #{pageIndex},#{pageSize}
+    </select>
+
+    <select id="queryVisTotalCount" parameterType="VisitLogPO" resultType="java.lang.Integer">
+        select count(1) from t_visitlog where 1=1
+        <if test="search != null and search != ''">
+            and username = '${search}%'
+        </if>
+    </select>
+
+
+    <select id="queryOperPage" parameterType="BaseSearchPO" resultType="OperationLogPO">
+        select * from t_operationlog where 1=1
+        <if test="obj.username != null and obj.username != ''">
+            and username like '${obj.username}%'
+        </if>
+        <if test="obj.search != null and obj.search != ''">
+            and username = '${obj.search}%'
+        </if>
+        <if test="orderName != null and orderName != ''">
+            order by ${orderName} ${orderValue}
+        </if>
+        limit #{pageIndex},#{pageSize}
+    </select>
+
+    <select id="queryOperTotalCount" parameterType="OperationLogPO" resultType="java.lang.Integer">
+        select count(1) from t_operationlog where 1=1
+        <if test="search != null and search != ''">
+            and username = '${search}%'
+        </if>
+    </select>
+
+    <select id="queryVisObjectById" parameterType="java.lang.String" resultType="VisitLogPO">
+        select * from t_visitlog where id = #{id}
+    </select>
+
+    <select id="queryOperObjectById" parameterType="java.lang.String" resultType="OperationLogPO">
+        select * from  t_operationlog  where id = #{id}
+    </select>
+
 </mapper>
