@@ -33,6 +33,7 @@
 
 <#macro adminJS>
     <script src="${base}/resources/scripts/admin/js/app.js" type="application/javascript"></script>
+<#--<script src="${base}/resources/scripts/admin/js/app.min.js" type="application/javascript"></script>-->
 </#macro>
 
 <#macro adminCSS>
@@ -101,12 +102,21 @@
     <link href="${base}/resources/scripts/jscrop/css/jquery.Jcrop.css" rel="stylesheet" type="text/css">
 </#macro>
 
+<#macro infinitescroll>
+   <script src="${base}/resources/scripts/infinitescroll/jquery.infinitescroll.js" type="application/javascript"></script>
+<#--<script src="${base}/resources/scripts/infinitescroll/jquery.infinitescroll.min.js" type="application/javascript"></script>-->
+</#macro>
+
+
 <#macro ltIE9>
 <![if lt IE 9]>
    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </#macro>
+
+
+
 
 
 

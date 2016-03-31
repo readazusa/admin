@@ -112,9 +112,11 @@
                         <div>
                             <input type="hidden" id="areaName" name="area">
                         </div>
+                        <div>
+                            <input type="hidden" name="token"  value="${token}">
+                        </div>
                     </form>
                 </div>
-
                 <div class="box-footer">
                     <button class="btn btn-info pull-right" onclick="doSubmit();">保存</button>
                 </div>

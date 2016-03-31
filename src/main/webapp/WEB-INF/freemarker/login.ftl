@@ -39,14 +39,6 @@
                 </div>
             </div>
             <br>
-            <#--<div class="form-group  input-group">-->
-                <#--<div class="input-group-addon">验证码</div>-->
-                <#--<input type="text" class="form-control" placeholder="验证码" name="validateCode" id="validateCode"/>-->
-                <#--<span class="glyphicon form-control-feedback" style="width: 200px;cursor:pointer;" onclick="reloadImage();" >-->
-                    <#--<img src="${base}/api/validatecode" style="width:75px;padding-bottom: 6px;padding-left: 10px;cursor:pointer;" id="validatecode">-->
-                    <#--<a href="#"  >看不清，换一张</a>-->
-                <#--</span>-->
-            <#--</div>-->
             <div class="row">
                 <div class="col-xs-2"></div>
                 <div class="col-xs-8">
