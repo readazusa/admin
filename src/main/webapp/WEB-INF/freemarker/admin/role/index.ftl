@@ -11,8 +11,8 @@
         <@common.jquery></@common.jquery>
         <@common.dataTableCSS></@common.dataTableCSS>
         <@common.layerCSS></@common.layerCSS>
-        <@common.bootDropdownCSS></@common.bootDropdownCSS>
-        <@common.bootSelectCSS></@common.bootSelectCSS>
+        <#--<@common.bootDropdownCSS></@common.bootDropdownCSS>-->
+        <#--<@common.bootSelectCSS></@common.bootSelectCSS>-->
 </head>
 <body class="skin-green-light sidebar-mini">
 <div class="wrapper">

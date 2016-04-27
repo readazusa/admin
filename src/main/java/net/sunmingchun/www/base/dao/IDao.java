@@ -29,4 +29,6 @@ public interface IDao<T> {
 
     public List<T> queryPage(BaseSearchPO<T> baseSearchPO);   //获取分页的数据数
 
+    public int queryTotalCount(BaseSearchPO<T> baseSearchPO);
+
 }

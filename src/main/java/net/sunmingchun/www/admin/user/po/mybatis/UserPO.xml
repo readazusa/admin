@@ -16,9 +16,6 @@
     <delete id="delete" parameterType="java.lang.String">
         delete  from t_sys_user where id = #{id}
     </delete>
-
-
-
     <update id="update"  parameterType="UserPO">
         UPDATE t_sys_user set name = #{name},birthday=#{birthday},province=#{province},city=#{city},username=#{username},sex=#{sex},
         area=#{area},address=#{address},idcard=#{idCard},mobile=#{mobile},email=#{email},updatetime = #{updateTime} where id = #{id}
@@ -85,7 +82,30 @@
         </if>
     </select>
 
-
+    <select id="queryPageTotalCount" resultType="java.lang.Integer" parameterType="BaseSearchPO">
+       select count(1) from t_sys_user where 1 =1
+        <if test="username !=null and username != ''">
+            and  username like '${username}%'
+        </if>
+        <if test="name != null and name != ''">
+            and name like '${name}%'
+        </if>
+        <if test="province != null and province != ''">
+            and province like '${province}%'
+        </if>
+        <if test="area != null and area !=''">
+            and area like '${area}%'
+        </if>
+        <if test="address != null and address != ''">
+            and address like '${address}%'
+        </if>
+        <if test="city != null and city != ''">
+            and city like '${city}%'
+        </if>
+        <if test="search != null and search !=''">
+            and (username like '${search}%' or name like '${search}%' or city like '${search}%')
+        </if>
+    </select>
     <insert id="saveUserRole" parameterType="UserRolePO">
         insert into t_sys_user_vs_role(id,userid,roleId,createTime) values(#{id},#{userId},#{roleId},#{createTime})
     </insert>

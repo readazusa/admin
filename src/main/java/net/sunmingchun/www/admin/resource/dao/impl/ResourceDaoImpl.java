@@ -66,4 +66,9 @@ public class ResourceDaoImpl extends SqlSessionDaoSupport implements IResourceDa
     public List<ResourcePO> queryList() {
         return this.getSqlSession().selectList("ResourcePO.queryList");
     }
+
+    @Override
+    public int queryTotalCount(BaseSearchPO<ResourcePO> baseSearchPO) {
+        return this.getSqlSession().selectOne("ResourcePO.queryPageTotalCount",baseSearchPO);
+    }
 }

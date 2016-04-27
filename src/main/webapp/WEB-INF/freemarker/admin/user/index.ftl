@@ -11,8 +11,6 @@
         <@common.jquery></@common.jquery>
         <@common.dataTableCSS></@common.dataTableCSS>
         <@common.layerCSS></@common.layerCSS>
-        <@common.bootDropdownCSS></@common.bootDropdownCSS>
-        <@common.bootSelectCSS></@common.bootSelectCSS>
 </head>
 <body class="skin-green-light sidebar-mini">
 <div class="wrapper">
@@ -108,18 +106,7 @@
             $.fn.bootstrapDropdownHover();
         } );
 
-        function setRole(id){
-            index = layer.open({
-                type: 2,
-                title:"赋角色",
-                shadeClose: true,
-                shade: 0.8,
-                shift: 2,
-                maxmin: true,
-                area: ['50%', '50%'],
-                content:"${base}/user/user_role.htm?id="+id
-            });
-        }
+
 
        function refresh(){
            table.ajax.reload();

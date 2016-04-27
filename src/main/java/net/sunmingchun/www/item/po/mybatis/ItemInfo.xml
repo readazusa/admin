@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ItemInfo">
+        <sql id="param">
+                uid,title,price,pcpicurl,phonepicurl,descr,listtime,delisttime,stock,discountprice,orgin,postage,status,company,cid
+        </sql>
+        <insert id="save" parameterType="ItemInfo">
+                insert into t_wx_item(uid,title,price,pcpicurl,phonepicurl,descr,listtime,delisttime,stock,discountprice,orgin,postage,status,company,cid)
+                values(#{uid},#{title},#{price},#{pcPicUrl},#{phonePicUrl},#{descr},#{listTime},#{delistTime},#{stock},#{discountPrice},
+                #{orgin},#{postage},#{status},#{company},#{cid})
+        </insert>
+
+        <select id="select" parameterType="java.lang.String" resultType="ItemInfo">
+                select * from t_wx_item where uid = #{id}
+        </select>
+
+        <select id="queryPage" resultType="ItemInfo" parameterType="BaseSearchPO">
+                select <include refid="param"></include> from  t_wx_item where 1=1
+                limit #{pageIndex},#{pageSize}
+        </select>
+
+        <select id="queryTotalCount" resultType="java.lang.Integer" parameterType="ItemInfo">
+                select count(1) from t_sys_user where 1 =1
+                <if test="title !=null and title != ''">
+                        and  title like '${title}%'
+                </if>
+
+                <if test="search != null and search !=''">
+                        and (title like '${search}%' )
+                </if>
+        </select>
+
+        <select id="queryPageTotalCount" resultType="java.lang.Integer" parameterType="BaseSearchPO">
+                select count(1) from t_sys_user where 1 =1
+        </select>
+
+
+</mapper>

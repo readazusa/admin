@@ -276,23 +276,13 @@
                         <#--class="fa fa-bookmark-o"></i> 操作日志管理</a></li>-->
             </ul>
         </li>
-    <#--</ul>-->
-    <#--<ul class="sidebar-menu" >-->
-        <li class='treeview  <#if flag=="member">active</#if>'>
+        <li class='treeview  <#if flag=="item">active</#if>'>
             <a href="#">
-                <i class="fa fa-user-plus"></i> <span>查看管理</span> <i class="fa fa-angle-left pull-right"></i>
+                <i class="fa fa-user-plus"></i> <span>商品管理</span> <i class="fa fa-angle-left pull-right"></i>
             </a>
             <ul class="treeview-menu">
-                <li class='<#if flag="member">active</#if>'><a href="${base}/member/index.htm"><i class="fa fa-user"></i>会员查看</a>
+                <li class='<#if flag="item">active</#if>'><a href="${base}/item/index.htm"><i class="fa fa-user"></i>商品管理</a>
                 </li>
-                <#--<li class='<#if flag="role">active</#if>'><a href="${base}/role/index.htm"><i-->
-                        <#--class="fa fa-hand-rock-o"></i> 角色管理</a></li>-->
-                <#--<li class='<#if flag="resource">active</#if>'><a href="${base}/resource/index.htm"><i-->
-                        <#--class="fa fa-hand-spock-o"></i> 资源管理</a></li>-->
-                <#--<li class='<#if flag="log">active</#if>'><a href="${base}/log/index.htm"><i-->
-                        <#--class="fa fa-bookmark-o"></i> 日志管理</a></li>-->
-                <#--<li class='<#if flag="log">active</#if>'><a href="${base}/reptile/index.htm"><i-->
-                        <#--class="fa fa-bookmark-o"></i> ueditor</a></li>-->
             </ul>
         </li>
     </ul>

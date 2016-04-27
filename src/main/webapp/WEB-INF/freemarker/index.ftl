@@ -19,7 +19,7 @@
            </aside>
              <div class="content-wrapper">
                  <@template.content>
-                        hello word!
+                        hello word!asdsad
                  </@template.content>
              </div>
             <@template.footer></@template.footer>

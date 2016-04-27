@@ -24,25 +24,25 @@
 	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
 		<property name="connectionFactory" ref="jmsFactory"></property>
 		<property name="defaultDestination" ref="queue"></property>
-		<property name="deliveryPersistent" value="true"></property>
+		<property name="deliveryPersistent" value="false"></property>
 	</bean>
 
 	<bean id="queue" class="org.apache.activemq.command.ActiveMQQueue">
 		<constructor-arg index="0" value="new.speed.test"></constructor-arg>
 	</bean>
 
-	<bean class="org.springframework.jms.listener.SimpleMessageListenerContainer">
-		<property name="connectionFactory" ref="jmsFactory"/>
-		<property name="destination" ref="queue"/>
-		<property name="messageListener" ref="oneListener"/>
-	</bean>
-	<bean class="org.springframework.jms.listener.SimpleMessageListenerContainer">
-		<property name="connectionFactory" ref="jmsFactory"/>
-		<property name="destination" ref="queue"/>
-		<property name="messageListener" ref="oneListener"/>
-		<!--<property name="replyPubSubDomain" value="true"></property>-->
-	</bean>
+	<!--<bean class="org.springframework.jms.listener.SimpleMessageListenerContainer">-->
+		<!--<property name="connectionFactory" ref="jmsFactory"/>-->
+		<!--<property name="destination" ref="queue"/>-->
+		<!--<property name="messageListener" ref="oneListener"/>-->
+	<!--</bean>-->
+	<!--<bean class="org.springframework.jms.listener.SimpleMessageListenerContainer">-->
+		<!--<property name="connectionFactory" ref="jmsFactory"/>-->
+		<!--<property name="destination" ref="queue"/>-->
+		<!--<property name="messageListener" ref="oneListener"/>-->
+		<!--&lt;!&ndash;<property name="replyPubSubDomain" value="true"></property>&ndash;&gt;-->
+	<!--</bean>-->
 
-	<bean id="oneListener" class="net.sunmingchun.www.test.listener.OneListener"></bean>
+	<!--<bean id="oneListener" class="net.sunmingchun.www.test.listener.OneListener"></bean>-->
 	<!--<bean id="twoListener" class="net.sunmingchun.www.test.listener.TwoListener"></bean>-->
 </beans>

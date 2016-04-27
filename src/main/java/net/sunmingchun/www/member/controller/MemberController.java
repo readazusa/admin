@@ -35,6 +35,9 @@ public class MemberController {
         return "member/test";
     }
 
-
+    @RequestMapping("vedio")
+   public  String vedio(){
+       return "member/vedio";
+   }
 
 }

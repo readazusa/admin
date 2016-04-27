@@ -9,6 +9,8 @@ import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.spec.SecretKeySpec;
 import java.math.BigInteger;
+import java.security.AlgorithmParameters;
+import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
 /**
@@ -99,11 +101,16 @@ public class AESUtils {
 
     public static void main(String[] args) {
         try {
-            String s = aesEncrypt("我爱你","123456");
-            System.out.println(s);
-        } catch (Exception e) {
+            System.out.println(AlgorithmParameters.getInstance("DES").getAlgorithm());
+        } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
+//        try {
+//            String s = aesEncrypt("我爱你","123456");
+//            System.out.println(s);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 
 
     }

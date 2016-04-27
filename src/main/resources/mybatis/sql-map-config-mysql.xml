@@ -19,6 +19,15 @@
         <typeAlias type="net.sunmingchun.www.admin.area.po.AreaPO" alias="AreaPO"></typeAlias>
         <typeAlias type="net.sunmingchun.www.admin.log.po.VisitLogPO" alias="VisitLogPO"></typeAlias>
         <typeAlias type="net.sunmingchun.www.admin.log.po.OperationLogPO" alias="OperationLogPO"></typeAlias>
+
+        <typeAlias type="net.sunmingchun.www.item.po.ItemInfo" alias="ItemInfo"></typeAlias>
+        <typeAlias type="net.sunmingchun.www.item.po.CommentInfo" alias="CommentInfo"></typeAlias>
+        <typeAlias type="net.sunmingchun.www.item.po.ImageInfo" alias="ImageInfo"></typeAlias>
+        <typeAlias type="net.sunmingchun.www.item.po.ItemType" alias="ItemType"></typeAlias>
+        <typeAlias type="net.sunmingchun.www.item.po.OrderInfo" alias="OrderInfo"></typeAlias>
+        <typeAlias type="net.sunmingchun.www.item.po.ShopCart" alias="ShopCart"></typeAlias>
+        <typeAlias type="net.sunmingchun.www.item.po.TradeInfo" alias="TradeInfo"></typeAlias>
+
     </typeAliases>
     <mappers>
         <mapper resource="net/sunmingchun/www/admin/user/po/mybatis/UserPO.xml"></mapper>
@@ -27,7 +36,16 @@
         <mapper resource="net/sunmingchun/www/admin/resource/po/mybatis/ResourcePO.xml"></mapper>
         <mapper resource="net/sunmingchun/www/shiro/dao/mybatis/ShiroAuth.xml"></mapper>
         <mapper resource="net/sunmingchun/www/admin/log/po/mybatis/LogPO.xml"></mapper>
+
+        <mapper resource="net/sunmingchun/www/item/po/mybatis/CommentInfo.xml"></mapper>
+        <mapper resource="net/sunmingchun/www/item/po/mybatis/ImageInfo.xml"></mapper>
+        <mapper resource="net/sunmingchun/www/item/po/mybatis/ItemInfo.xml"></mapper>
+        <mapper resource="net/sunmingchun/www/item/po/mybatis/ItemType.xml"></mapper>
+        <mapper resource="net/sunmingchun/www/item/po/mybatis/OrderInfo.xml"></mapper>
+        <mapper resource="net/sunmingchun/www/item/po/mybatis/ShopCart.xml"></mapper>
+        <mapper resource="net/sunmingchun/www/item/po/mybatis/TradeInfo.xml"></mapper>
     </mappers>
+
 
 </configuration>
  

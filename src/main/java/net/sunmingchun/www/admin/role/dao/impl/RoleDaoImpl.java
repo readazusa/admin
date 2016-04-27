@@ -85,4 +85,9 @@ public class RoleDaoImpl extends SqlSessionDaoSupport implements IRoleDao {
     public List<String> selectResIdsByRoleId(String roleId) {
         return this.getSqlSession().selectList("RolePO.selectResIdsByRoleId",roleId);
     }
+
+    @Override
+    public int queryTotalCount(BaseSearchPO<RolePO> baseSearchPO) {
+        return this.getSqlSession().selectOne("RolePO.queryPageTotalCount",baseSearchPO);
+    }
 }

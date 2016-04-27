@@ -90,4 +90,9 @@ public class UserDaoImpl extends SqlSessionDaoSupport implements IUserDao {
     public UserPO validateUser(Map<String,String> map){
         return this.getSqlSession().selectOne("UserPO.validateUser",map);
     }
+
+    @Override
+    public int queryTotalCount(BaseSearchPO<UserPO> baseSearchPO) {
+        return this.getSqlSession().selectOne("UserPO.queryPageTotalCount",baseSearchPO);
+    }
 }

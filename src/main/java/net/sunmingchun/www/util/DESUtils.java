@@ -1,13 +1,19 @@
 package net.sunmingchun.www.util;
 
+
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
-import javax.crypto.Cipher;
-import javax.crypto.KeyGenerator;
+import javax.crypto.*;
+import javax.crypto.spec.DESKeySpec;
+import java.io.IOException;
+import java.security.InvalidKeyException;
 import java.security.Key;
-import java.security.SecureRandom;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 
 /**
  * Created by smc on 2015/11/25.
@@ -16,57 +22,90 @@ import java.security.SecureRandom;
 public class DESUtils {
 
     private static Key key;
-    private static String KEY_STR = "ZXCVBNM<>s?'+q_)(*&^%$#@!qmac";// 密钥
-    private static String CHARSETNAME = "UTF-8";// 编码
+    private static String KEY_STR = "12345678";// 密钥
     private static String ALGORITHM = "DES";// 加密类型
 
-    public static String encrypt(String source,String keyStr) {
-        String keyNewStr = KEY_STR;
-        if(StringUtils.isNotBlank(keyStr)){
-            keyNewStr = keyStr;
+    private static final Logger log = LoggerFactory.getLogger(DESUtils.class);
+
+    public static String encrypt(String source, String keyStr) {
+        String keyS = null;
+        String result = null;
+        if (StringUtils.isNotBlank(keyStr)) {
+            if (keyStr.length() < 8) {
+                log.error("秘钥不正确，必须使用长度大于8");
+            }
+            keyS = keyStr;
+        } else {
+            keyS = KEY_STR;
         }
         try {
-            KeyGenerator generator = KeyGenerator.getInstance(ALGORITHM);
-            generator.init(new SecureRandom(keyNewStr.getBytes()));
-            key = generator.generateKey();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-        BASE64Encoder base64encoder = new BASE64Encoder();
-        try {
-            byte[] bytes = source.getBytes(CHARSETNAME);
+            DESKeySpec desKeySpec = new DESKeySpec(keyS.getBytes());
             Cipher cipher = Cipher.getInstance(ALGORITHM);
-            cipher.init(Cipher.ENCRYPT_MODE, key);
-            byte[] doFinal = cipher.doFinal(bytes);
-            return base64encoder.encode(doFinal);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+            SecretKeyFactory secretKeyFactory = SecretKeyFactory.getInstance(ALGORITHM);
+            SecretKey secretKey = secretKeyFactory.generateSecret(desKeySpec);
+            cipher.init(Cipher.ENCRYPT_MODE, secretKey);
+            BASE64Encoder base64encoder = new BASE64Encoder();
+            byte[] bytes = cipher.doFinal(source.getBytes());
+            result = base64encoder.encode(bytes);
+        } catch (InvalidKeyException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (NoSuchPaddingException e) {
+            e.printStackTrace();
+        } catch (InvalidKeySpecException e) {
+            e.printStackTrace();
+        } catch (IllegalBlockSizeException e) {
+            e.printStackTrace();
+        } catch (BadPaddingException e) {
+            e.printStackTrace();
         }
+        return result;
+
     }
 
-    public static String decrypt(String source,String keyStr) {
-        String keyNewStr = KEY_STR;
-        if(StringUtils.isNotBlank(keyStr)){
-            keyNewStr = keyStr;
+    public static String decrypt(String source, String keyStr) {
+        String keyS = null;
+        String result = null;
+        if (StringUtils.isNotBlank(keyStr)) {
+            if (keyStr.length() < 8) {
+                log.error("秘钥不正确，必须使用长度大于8");
+            }
+            keyS = keyStr;
+        } else {
+            keyS = KEY_STR;
         }
         try {
-            KeyGenerator generator = KeyGenerator.getInstance(ALGORITHM);
-            generator.init(new SecureRandom(keyNewStr.getBytes()));
-            key = generator.generateKey();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-        BASE64Decoder base64decoder = new BASE64Decoder();
-        try {
-            byte[] bytes = base64decoder.decodeBuffer(source);
+            DESKeySpec desKeySpec = new DESKeySpec(keyS.getBytes());
             Cipher cipher = Cipher.getInstance(ALGORITHM);
-            cipher.init(Cipher.DECRYPT_MODE, key);
-            byte[] doFinal = cipher.doFinal(bytes);
-            return new String(doFinal, CHARSETNAME);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+            SecretKeyFactory secretKeyFactory = SecretKeyFactory.getInstance(ALGORITHM);
+            SecretKey secretKey = secretKeyFactory.generateSecret(desKeySpec);
+            cipher.init(Cipher.DECRYPT_MODE, secretKey);
+            BASE64Decoder decoder = new BASE64Decoder();
+            byte[] bytes = null;
+            try {
+                bytes = cipher.doFinal(decoder.decodeBuffer(source));
+                result = new String(bytes);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        } catch (InvalidKeyException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (NoSuchPaddingException e) {
+            e.printStackTrace();
+        } catch (InvalidKeySpecException e) {
+            e.printStackTrace();
+        } catch (IllegalBlockSizeException e) {
+            e.printStackTrace();
+        } catch (BadPaddingException e) {
+            e.printStackTrace();
         }
+        return result;
     }
+
     /**
      * 对str进行DES加密
      *
@@ -74,7 +113,7 @@ public class DESUtils {
      * @return 密文字符串
      */
     public static String encrypt(String source) {
-       return encrypt(source,null);
+        return encrypt(source, null);
     }
 
     /**
@@ -84,6 +123,11 @@ public class DESUtils {
      * @return 明文字符串
      */
     public static String decrypt(String source) {
-        return decrypt(source,null);
+        return decrypt(source, null);
+    }
+
+
+    public static void main(String[] args) {
+        System.out.println(encrypt("smc"));
     }
 }

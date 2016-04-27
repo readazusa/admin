@@ -28,7 +28,9 @@ public class JmsService {
     private JmsTemplate jmsTemplate;
 
     public void start() {
-        threadPoolTaskExecutor.execute(new Jms());
+//        threadPoolTaskExecutor.execute(new Jms());
+        jmsTemplate.convertAndSend(Thread.currentThread().getName() + "  测试mq");
+        System.out.println("==========成功====================");
     }
 
     private class Jms implements Runnable {

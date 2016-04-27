@@ -29,9 +29,13 @@
 
     <select id="queryTotalCount" parameterType="RolePO" resultType="java.lang.Integer">
       select count(1) from t_sys_role where 1=1
-      <if test="search">
-         AND  name like '${search}%'
-      </if>
+    </select>
+
+    <select id="queryPageTotalCount" parameterType="BaseSearchPO" resultType="java.lang.Integer">
+        select count(1) from t_sys_role where 1=1
+        <if test="obj.search != null and obj.search != ''">
+            and name like '${obj.search}%'
+        </if>
     </select>
 
     <select id="queryPage" parameterType="BaseSearchPO" resultType="RolePO">
