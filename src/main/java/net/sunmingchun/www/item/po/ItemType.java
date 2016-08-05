@@ -20,7 +20,6 @@ public class ItemType {
 
     private Date createTime;
 
-
     public String getUid() {
         return uid;
     }
