@@ -31,13 +31,34 @@
                 <div class="my-from-group">
                     <div class="my-item-input-name">手机端宝贝图片</div>
                     <div class="my-item-input-div my-item-media">
-                        <div onclick="doUploadImageDiv('#oneImage')">
-                            <img src="http://120.26.208.194:8888/yd/add.png" id="oneImage">
-                        </div>
-                        <div>
-                            <img src="http://120.26.208.194:8888/yd/add.png">
-                        </div>
+                        <ul>
+                            <li class="choice-image">
+                                <img src="http://120.26.208.194:8888/yd/add.png" id="oneImage">
+                                <span class="choice-image-span">删除</span>
+                            </li>
+                            <li class="choice-image">
+                                <img src="http://120.26.208.194:8888/yd/add.png" id="oneImage">
+                                <span class="choice-image-span">asd</span>
+                            </li>
+                            <li class="choice-image">
+                                <img src="http://120.26.208.194:8888/yd/add.png" id="oneImage">
+                                <span class="choice-image-span">asd</span>
+                            </li>
+                            <li class="choice-image">
+                                <img src="http://120.26.208.194:8888/yd/add.png" id="oneImage">
+                                <span class="choice-image-span">asd</span>
+                            </li>
+                            <li class="choice-image">
+                                <img src="http://120.26.208.194:8888/yd/add.png" id="oneImage">
+                                <span class="choice-image-span"></span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
 
+                <div class="my-from-group">
+                    <div class="my-item-input-name">商品描述</div>
+                    <div class="my-item-input-div">
 
                     </div>
                 </div>

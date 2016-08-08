@@ -112,7 +112,7 @@
        }
 
 </script>
-    <@baseJS.adminAddJS url="${base}/item/new.htm" title="新增商品"></@baseJS.adminAddJS>
+    <@baseJS.adminAddJS url="${base}/item/new.htm" title="新增商品" width="100%" height="100%"></@baseJS.adminAddJS>
 </body>
 </html>
 </#escape>
