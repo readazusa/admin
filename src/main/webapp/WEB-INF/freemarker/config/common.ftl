@@ -115,6 +115,10 @@
 <![endif]-->
 </#macro>
 
+<#macro animateCSS>
+<link href="${base}/resources/animate/animate.css" rel="stylesheet" type="text/css">
+</#macro>
+
 
 
 

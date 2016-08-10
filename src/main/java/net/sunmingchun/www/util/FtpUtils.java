@@ -81,13 +81,24 @@ public final class FtpUtils {
             login();
         }
         try {
+            ftpClient.changeToParentDirectory();
             if(ftpClient.listFiles(dir).length==0){
                 ftpClient.makeDirectory(dir);
             }
             ftpClient.changeWorkingDirectory(dir);
-            ftpClient.storeFile(remote,inputStream);
+            /**
+             * 调用FTPClient.enterLocalPassiveMode();这个方法的意思就是每次数据连接之前，ftp client告诉ftp server开通一个端口来传输数据。
+             * 为什么要这样做呢，因为ftp server可能每次开启不同的端口来传输数据，但是在linux上，由于安全限制，可能某些端口没有开启，所以就出现阻塞。
+             */
+            ftpClient.enterLocalPassiveMode();//
+             ftpClient.setBufferSize(1024);
+            ftpClient.setControlEncoding("UTF-8");
+            //二进制
+            ftpClient.setFileType(FTPClient.BINARY_FILE_TYPE);
+            Boolean uploadFtpBool = ftpClient.storeFile(remote,inputStream);
+            log.info("==========上传ftp返回结果:{}============",uploadFtpBool);
         } catch (IOException e) {
-            e.printStackTrace();
+              log.error("上传ftp失败: ",e);
         }finally {
             try {
                 inputStream.close();
@@ -112,7 +123,15 @@ public final class FtpUtils {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
 
+    public static void main(String[] args) {
+        try {
+            FileInputStream inputStream = new FileInputStream(new File("G:"+File.separator+"PortalController.java"));
+            FtpUtils.getInstance().sendFile("1111111","test.txt",inputStream);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
 }

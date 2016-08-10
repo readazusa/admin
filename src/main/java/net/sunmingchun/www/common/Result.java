@@ -14,7 +14,7 @@ public final class Result {
 
     private String code=SUCCESS;
 
-    public Object obj = null;
+    public Object data = null;
 
     private String msg="成功";
 
@@ -28,12 +28,12 @@ public final class Result {
 
     public Result(String code,Object obj){
         this.code=code;
-        this.obj=obj;
+        this.data=obj;
     }
 
     public Result(String code,String msg,Object obj){
         this(code,msg);
-        this.obj=obj;
+        this.data=obj;
     }
 
     public String getMsg() {
@@ -44,12 +44,12 @@ public final class Result {
         this.msg = msg;
     }
 
-    public Object getObj() {
-        return obj;
+    public Object getData() {
+        return data;
     }
 
-    public void setObj(Object obj) {
-        this.obj = obj;
+    public void setData(Object data) {
+        this.data = data;
     }
 
     public String getCode() {

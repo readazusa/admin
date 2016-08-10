@@ -55,6 +55,7 @@ ul,li,ol{
     margin-left: 10px;
     padding-left: 0px;
     position: relative;
+    border: 1px silver solid;
 }
 
 
@@ -71,16 +72,15 @@ ul,li,ol{
 .my-from-group  .my-item-input-div.my-item-media .choice-image .choice-image-span{
     height: 20px;
     width: 120px;
-    background-color: red;
+    background-color: #9cc2cb;
     position: absolute;
     bottom: 0px;
     opacity: 0.5;
     right: 0px;
     text-align: center;
-    /*display: none;*/
+    display: none;
     cursor: pointer;
 }
-
-.choice-image-span:hover{
+.my-from-group  .my-item-input-div.my-item-media .choice-image .choice-image-span-show{
     display: block;
 }
