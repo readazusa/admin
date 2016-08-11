@@ -120,7 +120,15 @@
 </#macro>
 
 
+<#macro umeJS>
+    <script src="${base}/resources/umeditor/umeditor.config.js" type="application/javascript"></script>
+    <script src="${base}/resources/umeditor/umeditor.js" type="application/javascript"></script>
+<script src="${base}/resources/umeditor/lang/zh-cn/zh-cn.js" type="application/javascript"></script>
+</#macro>
 
+<#macro umeCSS>
+<link href="${base}/resources/umeditor/themes/default/css/umeditor.min.css" rel="stylesheet" type="text/css">
+</#macro>
 
 
 

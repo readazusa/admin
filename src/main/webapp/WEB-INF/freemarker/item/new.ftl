@@ -12,7 +12,7 @@
         <@common.laydateCSS></@common.laydateCSS>
         <@common.allCSS></@common.allCSS>
         <@common.icheckCSS></@common.icheckCSS>
-        <@common.animateCSS></@common.animateCSS>
+        <@common.umeCSS></@common.umeCSS>
 </head>
 <body>
 <div class="container">
@@ -58,6 +58,9 @@
                 <div class="my-from-group">
                     <div class="my-item-input-name">商品描述</div>
                     <div class="my-item-input-div">
+                        <script type="text/plain" id="myEditor" style="width:100%;height:500px;">
+                <p>这里我可以写一些输入提示</p>
+            </script>
                     </div>
                 </div>
                 <input type="hidden" name="fileIds">
@@ -65,6 +68,8 @@
             <form id="fileForm" method="post" action="${base}/upload/ftp.json" enctype="multipart/form-data">
                 <input type="file" style="display: none" id="uploadImage" onchange="doUpload();" name="file">
             </form>
+
+
         </div>
         <div class="box-footer">
             <button class="btn btn-info pull-right" onclick="doSubmit();">保存</button>
@@ -81,8 +86,10 @@
     <@common.layerJS></@common.layerJS>
     <@common.laydateJS></@common.laydateJS>
     <@common.icheckJS></@common.icheckJS>
+    <@common.umeJS></@common.umeJS>
 <script type="application/javascript">
     var setItme = null;
+    var um = UM.getEditor('myEditor');
     $(function () {
         $("li").on('click', function () {
             var img = $(this).children("img");
@@ -133,11 +140,11 @@
         $("#fileForm").ajaxSubmit({
             url: "${base}/upload/ftp.json",
             success: function (resp) {
-                if("SUCCESS" == resp.code){
+                if ("SUCCESS" == resp.code) {
                     var url = resp.data.url;
                     var imageId = $("#choiceImg").val();
-                    $(imageId).attr("src",url);
-                }else{
+                    $(imageId).attr("src", url);
+                } else {
                     layer.alert("上传图片失败,请重新操作");
                 }
 
