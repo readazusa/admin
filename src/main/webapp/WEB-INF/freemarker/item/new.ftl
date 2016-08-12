@@ -160,11 +160,17 @@
             $(span).removeClass("choice-image-span-show");
         });
 
+        //删除图片
         $("li .choice-image-span").on("click",function(e){
             var img = $(this).prev();
             $(img).attr("flag","ys");
             $(img).attr("src",default_add_pic);
             $(this).removeClass("choice-image-span-show");
+            var imageId = $(this).attr("id");
+            if("oneImage" == imageId){   //如果主图片被清空，删除保存的图片url，这个url使用后续的图片
+                $("#phonePicUrl").val("");
+            }
+            map.remove(imageId);
         });
     });
 
@@ -205,8 +211,9 @@
                     //图片的标记 flag:ys(原始):表示没有添加图片，表示添加图片 ,flag:tj  表示已经添加的图片
                     $(imageId).attr("flag","tj");
                     map.put(imageId,resp.data.id);
-
-
+                    if("oneImage" == imageId){
+                        $("#phonePicUrl").val(url);
+                    }
                 } else {
                     layer.alert("上传图片失败,请重新操作");
                 }
@@ -215,6 +222,19 @@
                 layer.alert("上传图片失败,请重新操作");
             }
         });
+    }
+    function setUrl(){
+        if(!$("#phonePicUrl").val()){
+            var url = null;
+            $("li img").each(function(){
+                    if(!url){
+                        url = $(this).attr("src");
+                    }
+            });
+            !$("#phonePicUrl").val(url);
+        }
+
+
     }
 
     function setDescr(){
