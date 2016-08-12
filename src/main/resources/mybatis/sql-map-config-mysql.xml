@@ -7,7 +7,6 @@
 		<setting name="cacheEnabled" value="true" />
         <setting name="lazyLoadingEnabled" value="true"/>  
         <setting name="aggressiveLazyLoading" value="false"/>
-        <setting name="logPrefix" value="dao"/>
 	</settings>
     <typeAliases>
         <typeAlias type="net.sunmingchun.www.base.po.BaseSearchPO" alias="BaseSearchPO"></typeAlias>
@@ -27,6 +26,8 @@
         <typeAlias type="net.sunmingchun.www.item.po.OrderInfo" alias="OrderInfo"></typeAlias>
         <typeAlias type="net.sunmingchun.www.item.po.ShopCart" alias="ShopCart"></typeAlias>
         <typeAlias type="net.sunmingchun.www.item.po.TradeInfo" alias="TradeInfo"></typeAlias>
+        <typeAlias type="net.sunmingchun.www.item.po.ItemVsFilePO" alias="ItemVsFilePO"></typeAlias>
+        <typeAlias type="net.sunmingchun.www.file.po.UploadFilePO" alias="UploadFilePO"></typeAlias>
 
     </typeAliases>
     <mappers>
@@ -36,7 +37,6 @@
         <mapper resource="net/sunmingchun/www/admin/resource/po/mybatis/ResourcePO.xml"></mapper>
         <mapper resource="net/sunmingchun/www/shiro/dao/mybatis/ShiroAuth.xml"></mapper>
         <mapper resource="net/sunmingchun/www/admin/log/po/mybatis/LogPO.xml"></mapper>
-
         <mapper resource="net/sunmingchun/www/item/po/mybatis/CommentInfo.xml"></mapper>
         <mapper resource="net/sunmingchun/www/item/po/mybatis/ImageInfo.xml"></mapper>
         <mapper resource="net/sunmingchun/www/item/po/mybatis/ItemInfo.xml"></mapper>
@@ -44,6 +44,10 @@
         <mapper resource="net/sunmingchun/www/item/po/mybatis/OrderInfo.xml"></mapper>
         <mapper resource="net/sunmingchun/www/item/po/mybatis/ShopCart.xml"></mapper>
         <mapper resource="net/sunmingchun/www/item/po/mybatis/TradeInfo.xml"></mapper>
+        <mapper resource="net/sunmingchun/www/item/po/mybatis/ItemVsFilePO.xml"></mapper>
+        <mapper resource="net/sunmingchun/www/file/po/mybatis/UploadFilePO.xml"></mapper>
+
+
     </mappers>
 
 

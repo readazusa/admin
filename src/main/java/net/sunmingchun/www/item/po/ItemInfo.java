@@ -48,6 +48,7 @@ public class ItemInfo extends BasePO{
 
     private String conpany;  //单位  斤  瓶
 
+    private String fileIds;
 
     public String getUid() {
         return uid;
@@ -175,5 +176,13 @@ public class ItemInfo extends BasePO{
 
     public void setSearch(String search) {
         this.search = search;
+    }
+
+    public String getFileIds() {
+        return fileIds;
+    }
+
+    public void setFileIds(String fileIds) {
+        this.fileIds = fileIds;
     }
 }

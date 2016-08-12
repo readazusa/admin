@@ -13,6 +13,7 @@
         <@common.allCSS></@common.allCSS>
         <@common.icheckCSS></@common.icheckCSS>
         <@common.umeCSS></@common.umeCSS>
+        <@common.bootSelectCSS></@common.bootSelectCSS>
 </head>
 <body>
 <div class="container">
@@ -21,7 +22,17 @@
             <h3 class="box-title">新增商品</h3>
         </div>
         <div class="box-body">
-            <form>
+            <form id="itemForm" method="post">
+                <div class="my-from-group">
+                    <div class="my-item-input-name">商品类别</div>
+                    <div class="my-item-input-div">
+                        <select class="selectpicker" id="selectpicker" name="cid">
+                            <option value="1">水</option>
+                            <option value="2">霜</option>
+                            <option value="3">乳</option>
+                        </select>
+                    </div>
+                </div>
                 <div class="my-from-group">
                     <div class="my-item-input-name">商品名称</div>
                     <div class="my-item-input-div">
@@ -33,43 +44,77 @@
                     <div class="my-item-input-div my-item-media">
                         <ul>
                             <li class="choice-image">
+                                <span class="choice-image-index">主图片</span>
                                 <img src="http://120.26.208.194:8888/yd/add_pp.png" id="oneImage" flag="ys">
-                                <span class="choice-image-span">删除</span>
+                                <span class="choice-image-span" >删除</span>
                             </li>
                             <li class="choice-image">
                                 <img src="http://120.26.208.194:8888/yd/add_pp.png" id="twoImage" flag="ys">
-                                <span class="choice-image-span"></span>
+                                <span class="choice-image-span">删除</span>
                             </li>
                             <li class="choice-image">
                                 <img src="http://120.26.208.194:8888/yd/add_pp.png" id="threeImage" flag="ys">
-                                <span class="choice-image-span">asd</span>
+                                <span class="choice-image-span">删除</span>
                             </li>
                             <li class="choice-image">
                                 <img src="http://120.26.208.194:8888/yd/add_pp.png" id="fourImage" flag="ys">
-                                <span class="choice-image-span">asd</span>
+                                <span class="choice-image-span">删除</span>
                             </li>
                             <li class="choice-image">
                                 <img src="http://120.26.208.194:8888/yd/add_pp.png" id="fiveImage" flag="ys">
-                                <span class="choice-image-span"></span>
+                                <span class="choice-image-span">删除</span>
                             </li>
                         </ul>
                     </div>
                 </div>
                 <div class="my-from-group">
+                    <div class="my-item-input-name">价格与数量</div>
+                    <div>
+                        <div class="my-item-input-div">
+                            <table class="gridtable">
+                                <thead>
+                                <tr>
+                                    <th>单价</th>
+                                    <th>单位</th>
+                                    <th>库存</th>
+                                </tr>
+                                </thead>
+                                <tr>
+                                    <td>
+                                        <input name="price">
+                                    </td>
+                                    <td>
+                                        <input name="conpany">
+                                    </td>
+                                    <td>
+                                        <input name="stock">
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="my-from-group">
                     <div class="my-item-input-name">商品描述</div>
                     <div class="my-item-input-div">
                         <script type="text/plain" id="myEditor" style="width:100%;height:500px;">
-                <p>这里我可以写一些输入提示</p>
-            </script>
+                        </script>
                     </div>
                 </div>
-                <input type="hidden" name="fileIds">
+                <div class="my-from-group">
+                    <div class="my-item-input-name">邮费</div>
+                    <div class="my-item-input-div">
+                        <input class="my-item-input">
+                    </div>
+                </div>
+                <input type="hidden" name="descr" id="descr">
+                <input type="hidden" name="fileIds" id="fileIds">
+                <input type="hidden" name="phonePicUrl" id="phonePicUrl">
             </form>
             <form id="fileForm" method="post" action="${base}/upload/ftp.json" enctype="multipart/form-data">
                 <input type="file" style="display: none" id="uploadImage" onchange="doUpload();" name="file">
             </form>
-
-
         </div>
         <div class="box-footer">
             <button class="btn btn-info pull-right" onclick="doSubmit();">保存</button>
@@ -87,27 +132,39 @@
     <@common.laydateJS></@common.laydateJS>
     <@common.icheckJS></@common.icheckJS>
     <@common.umeJS></@common.umeJS>
+    <@common.bootSelectJS></@common.bootSelectJS>
+    <@common.ownMapJS></@common.ownMapJS>
 <script type="application/javascript">
     var setItme = null;
-    var um = UM.getEditor('myEditor');
+    var um =null;
+    var default_add_pic="http://120.26.208.194:8888/yd/add_pp.png";
+    var map = new Map();
     $(function () {
-        $("li").on('click', function () {
-            var img = $(this).children("img");
-            var imgId = $(img).attr("id");
+        UM.getEditor('myEditor');
+        $("li img").on('click', function () {
+            var imgId =$(this).attr("id");
             $("#choiceImg").val("#" + imgId);
             $("#uploadImage").click();
         });
 
         $("li").on("mouseover", function () {
-            var date = new Date();
-            var span = $(this).children("span");
-            $(span).addClass("choice-image-span-show");
+            var span = $(this).children(".choice-image-span");
+            var img = $(this).children("img");
+            if("tj" == $(img).attr("flag")){
+                $(span).addClass("choice-image-span-show");
+            }
         });
 
         $("li").on("mouseout", function () {
-            var date = new Date();
-            var span = $(this).children("span");
+            var span = $(this).children(".choice-image-span");
             $(span).removeClass("choice-image-span-show");
+        });
+
+        $("li .choice-image-span").on("click",function(e){
+            var img = $(this).prev();
+            $(img).attr("flag","ys");
+            $(img).attr("src",default_add_pic);
+            $(this).removeClass("choice-image-span-show");
         });
     });
 
@@ -143,14 +200,50 @@
                 if ("SUCCESS" == resp.code) {
                     var url = resp.data.url;
                     var imageId = $("#choiceImg").val();
+                    console.info("图片上传url： "+ url);
                     $(imageId).attr("src", url);
+                    //图片的标记 flag:ys(原始):表示没有添加图片，表示添加图片 ,flag:tj  表示已经添加的图片
+                    $(imageId).attr("flag","tj");
+                    map.put(imageId,resp.data.id);
+
+
                 } else {
                     layer.alert("上传图片失败,请重新操作");
                 }
-
             },
             error: function (resp) {
                 layer.alert("上传图片失败,请重新操作");
+            }
+        });
+    }
+
+    function setDescr(){
+        var descr = um.getContent();
+        $("#descr").val(descr);
+    }
+
+    function  setFileIds(){
+        var fileIds = map.getValue("&&");
+        $("#fileIds").val(fileIds);
+    }
+
+    function doSubmit(){
+        setDescr();
+        setFileIds();
+        $("#itemForm").ajaxSubmit({
+            url: "${base}/item/save.json",
+            success: function (resp) {
+                if (resp.code == 'SUCCESS') {
+                    layer.alert(resp.msg);
+                    layer.alert(resp.msg, function (index) {
+                        top.refresh();
+                    });
+                } else {
+                    layer.alert(resp.msg);
+                }
+            },
+            error: function (resp) {
+                layer.alert(JSON.stringify(resp));
             }
         });
     }

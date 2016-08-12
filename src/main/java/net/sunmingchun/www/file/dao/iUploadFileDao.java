@@ -9,7 +9,7 @@ import net.sunmingchun.www.file.po.UploadFilePO;
  * author: 念梓
  * des:
  */
-public interface UploadFileDao {
+public interface IUploadFileDao {
 
     public void save(UploadFilePO uploadFileInfo);
 }

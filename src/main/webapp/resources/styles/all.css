@@ -56,6 +56,7 @@ ul,li,ol{
     padding-left: 0px;
     position: relative;
     border: 1px silver solid;
+    cursor: pointer;
 }
 
 
@@ -72,15 +73,70 @@ ul,li,ol{
 .my-from-group  .my-item-input-div.my-item-media .choice-image .choice-image-span{
     height: 20px;
     width: 120px;
-    background-color: #9cc2cb;
+    background-color: #00b7ee;
     position: absolute;
     bottom: 0px;
-    opacity: 0.5;
+    color: #fff;
+    opacity: 0.8;
     right: 0px;
     text-align: center;
     display: none;
     cursor: pointer;
+    z-index: 100;
 }
+
+.my-from-group  .my-item-input-div.my-item-media .choice-image .choice-image-index{
+    height: 20px;
+    width: 120px;
+    background-color: red;
+    position: absolute;
+    color: #fff;
+    top: 0px;
+    opacity: 0.9;
+    right: 0px;
+    text-align: center;
+    cursor: pointer;
+}
+
+
 .my-from-group  .my-item-input-div.my-item-media .choice-image .choice-image-span-show{
     display: block;
+}
+
+#myEditor img{
+    text-align: center;
+    max-width: 99%;
+}
+
+table.gridtable{
+    font-family: verdana,arial,sans-serif;
+    font-size:11px;
+    color:#333333;
+    border-width: 1px;
+    border-color: #666666;
+    border-collapse: collapse;
+}
+
+table.gridtable thead tr th {
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #666666;
+    text-align: center;
+    background-color:#00E8D7;
+}
+table.gridtable td {
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #666666;
+    background-color: #ffffff;
+}
+
+table.gridtable td input {
+    border: none;
+}
+
+table.gridtable td input:hover{
+    border: 1px silver solid;
 }

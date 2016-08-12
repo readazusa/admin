@@ -6,7 +6,7 @@
 
     <insert id="save" parameterType="UploadFilePO">
           insert into t_wx_file(id,name,contentType,size,url,subffix,origName,createTime,updateTime)
-          values(#{id},#{contentType},#{size},#{url},#{subffix},#{origName},#{createTime},#{updateTime})
+          values(#{id},#{name},#{contentType},#{size},#{url},#{subffix},#{origName},#{createTime},#{updateTime})
     </insert>
 
 </mapper>

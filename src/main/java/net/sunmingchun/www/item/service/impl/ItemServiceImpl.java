@@ -5,10 +5,16 @@ import net.sunmingchun.www.base.po.BasePagePO;
 import net.sunmingchun.www.base.po.BaseSearchPO;
 import net.sunmingchun.www.item.dao.IItemDao;
 import net.sunmingchun.www.item.po.ItemInfo;
+import net.sunmingchun.www.item.po.ItemVsFilePO;
 import net.sunmingchun.www.item.service.IItemService;
+import net.sunmingchun.www.util.UuidUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -39,7 +45,23 @@ public class ItemServiceImpl implements IItemService {
     }
 
     @Override
+    @Transactional
     public void save(ItemInfo obj) {
+        obj.setUpdateTime(new Date());
+        obj.setCreateTime(new Date());
+        obj.setUid(UuidUtils.getUpperUuid());
+        itemDao.save(obj);
+        String fileIds = obj.getFileIds();
+        if(StringUtils.isNoneBlank(fileIds)){
+            Arrays.asList(fileIds.split("&&")).forEach(e->{
+                ItemVsFilePO itemVsFilePO = new ItemVsFilePO();
+                itemVsFilePO.setFileId(e);
+                itemVsFilePO.setItemId(obj.getUid());
+                itemVsFilePO.setId(UuidUtils.getUpperUuid());
+
+            });
+        }
+
         itemDao.save(obj);
     }
 

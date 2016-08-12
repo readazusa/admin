@@ -20,6 +20,8 @@ public class ItemType {
 
     private Date createTime;
 
+    private Date updateTime;
+
     public String getUid() {
         return uid;
     }
@@ -58,5 +60,13 @@ public class ItemType {
 
     public void setDeep(int deep) {
         this.deep = deep;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
 }

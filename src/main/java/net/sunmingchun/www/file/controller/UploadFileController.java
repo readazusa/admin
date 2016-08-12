@@ -39,6 +39,7 @@ public class UploadFileController {
             Map<String,String> uploadFtpFileResult = uploadFileService.uploadFtpFile(multipartFile);
             result.setData(uploadFtpFileResult);
         }catch (Exception ex){
+            result.setCode("ERROR");
             log.error("上传文件到ftp出错，错误信息： ",ex);
         }
         return result;

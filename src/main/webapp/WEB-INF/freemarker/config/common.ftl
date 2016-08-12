@@ -134,7 +134,9 @@
     <script src="http://api.map.baidu.com/api?v=2.0&ak=6GKR4K0GxjtatCCqRP4vNDNPkfCDRQI6"  type="text/javascript"></script>
 </#macro>
 
-
+<#macro ownMapJS>
+    <script src="${base}/resources/scripts/Map.js" type="application/javascript"></script>
+</#macro>
 
 
 

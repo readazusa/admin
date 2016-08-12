@@ -1,21 +1,19 @@
 package net.sunmingchun.www.file.service.impl;
 
-import net.coobird.thumbnailator.Thumbnailator;
-import net.coobird.thumbnailator.Thumbnails;
+import net.sunmingchun.www.file.dao.IUploadFileDao;
 import net.sunmingchun.www.file.po.UploadFilePO;
 import net.sunmingchun.www.file.service.UploadFileService;
 import net.sunmingchun.www.util.DateFormatUtils;
 import net.sunmingchun.www.util.FtpUtils;
 import net.sunmingchun.www.util.UuidUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.jsoup.helper.DataUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
+import javax.annotation.Resource;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -37,6 +35,9 @@ public class UploadFileServiceImpl implements UploadFileService {
 
     private static final Logger log = LoggerFactory.getLogger(UploadFileServiceImpl.class);
 
+    @Resource
+    private IUploadFileDao uploadFileDao;
+
     @Override
     public Map<String,String> uploadFtpFile(MultipartFile multipartFile) {
 
@@ -54,8 +55,13 @@ public class UploadFileServiceImpl implements UploadFileService {
         }
         UploadFilePO uploadFilePO = new UploadFilePO();
         uploadFilePO.setContentType(contentType);
-        StringBuffer sb = new StringBuffer(img_url).append("/").append(dir).append("/").append(uploadFtpFileName);
+        StringBuffer sb = new StringBuffer(img_url).append(dir).append("/").append(uploadFtpFileName);
         String uploadFileUrl = sb.toString();
+        uploadFilePO.setSize(size);
+        uploadFilePO.setName(uploadFtpFileName);
+        uploadFilePO.setOrigName(origName);
+        uploadFilePO.setSubffix(subffix);
+        uploadFilePO.setUrl(uploadFileUrl);
         save(uploadFilePO);
         Map<String,String> resultMap = new HashMap<>();
         resultMap.put("url",uploadFileUrl);
@@ -79,6 +85,8 @@ public class UploadFileServiceImpl implements UploadFileService {
             uploadFilePO.setCreateTime(nowDate);
             uploadFilePO.setUpdateTime(nowDate);
         }
+        uploadFileDao.save(uploadFilePO);
+
     }
 
 }

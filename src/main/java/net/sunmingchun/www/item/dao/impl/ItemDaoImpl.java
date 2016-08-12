@@ -3,6 +3,7 @@ package net.sunmingchun.www.item.dao.impl;
 import net.sunmingchun.www.base.po.BaseSearchPO;
 import net.sunmingchun.www.item.dao.IItemDao;
 import net.sunmingchun.www.item.po.ItemInfo;
+import net.sunmingchun.www.item.po.ItemVsFilePO;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
@@ -19,6 +20,7 @@ import java.util.List;
  */
 @Repository
 public class ItemDaoImpl extends SqlSessionDaoSupport  implements IItemDao {
+
 
     @Autowired
     @Override
@@ -72,5 +74,13 @@ public class ItemDaoImpl extends SqlSessionDaoSupport  implements IItemDao {
     @Override
     public int queryTotalCount(BaseSearchPO<ItemInfo> baseSearchPO) {
         return this.getSqlSession().selectOne("ItemInfo.queryPageTotalCount",baseSearchPO);
+    }
+
+    @Override
+    public int saveItemVsFile(ItemVsFilePO itemVsFilePO) {
+
+
+
+        return 0;
     }
 }
