@@ -276,12 +276,14 @@
                         <#--class="fa fa-bookmark-o"></i> 操作日志管理</a></li>-->
             </ul>
         </li>
-        <li class='treeview  <#if flag=="item">active</#if>'>
+        <li class='treeview  <#if flag=="item" || flag=="shop">active</#if>'>
             <a href="#">
                 <i class="fa fa-user-plus"></i> <span>商品管理</span> <i class="fa fa-angle-left pull-right"></i>
             </a>
             <ul class="treeview-menu">
                 <li class='<#if flag="item">active</#if>'><a href="${base}/item/index.htm"><i class="fa fa-user"></i>商品管理</a>
+                </li>
+                <li class='<#if flag="shop">active</#if>'><a href="${base}/shop/index.htm"><i class="fa fa-user"></i>店铺管理</a>
                 </li>
             </ul>
         </li>

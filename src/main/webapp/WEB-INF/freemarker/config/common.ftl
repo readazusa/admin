@@ -130,6 +130,11 @@
 <link href="${base}/resources/umeditor/themes/default/css/umeditor.min.css" rel="stylesheet" type="text/css">
 </#macro>
 
+<#macro bdMapJS>
+    <script src="http://api.map.baidu.com/api?v=2.0&ak=6GKR4K0GxjtatCCqRP4vNDNPkfCDRQI6"  type="text/javascript"></script>
+</#macro>
+
+
 
 
 
