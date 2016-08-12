@@ -78,9 +78,6 @@ public class ItemDaoImpl extends SqlSessionDaoSupport  implements IItemDao {
 
     @Override
     public int saveItemVsFile(ItemVsFilePO itemVsFilePO) {
-
-
-
-        return 0;
+        return this.getSqlSession().insert("ItemVsFilePO.save",itemVsFilePO);
     }
 }

@@ -109,7 +109,7 @@ function Map() {
         var str = "";
         for (var i = 0; i < this.keys.length; i++) {
             var key = this.keys[i];
-            str = this.data[key] + flag;
+            str += this.data[key] + flag;
         }
         return str;
     }

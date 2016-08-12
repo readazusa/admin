@@ -46,7 +46,7 @@ public class ItemInfo extends BasePO{
      */
     private String cid;
 
-    private String conpany;  //单位  斤  瓶
+    private String company;  //单位  斤  瓶
 
     private String fileIds;
 
@@ -146,12 +146,12 @@ public class ItemInfo extends BasePO{
         this.postage = postage;
     }
 
-    public String getConpany() {
-        return conpany;
+    public String getCompany() {
+        return company;
     }
 
-    public void setConpany(String conpany) {
-        this.conpany = conpany;
+    public void setCompany(String company) {
+        this.company = company;
     }
 
     public String getStatus() {

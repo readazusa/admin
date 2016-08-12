@@ -36,7 +36,7 @@
                 <div class="my-from-group">
                     <div class="my-item-input-name">商品名称</div>
                     <div class="my-item-input-div">
-                        <input class="my-item-input">
+                        <input class="my-item-input" name="title">
                     </div>
                 </div>
                 <div class="my-from-group">
@@ -84,7 +84,7 @@
                                         <input name="price">
                                     </td>
                                     <td>
-                                        <input name="conpany">
+                                        <input name="company">
                                     </td>
                                     <td>
                                         <input name="stock">
@@ -105,7 +105,7 @@
                 <div class="my-from-group">
                     <div class="my-item-input-name">邮费</div>
                     <div class="my-item-input-div">
-                        <input class="my-item-input">
+                        <input class="my-item-input" name="postage">
                     </div>
                 </div>
                 <input type="hidden" name="descr" id="descr">
@@ -140,7 +140,7 @@
     var default_add_pic="http://120.26.208.194:8888/yd/add_pp.png";
     var map = new Map();
     $(function () {
-        UM.getEditor('myEditor');
+        um = UM.getEditor('myEditor');
         $("li img").on('click', function () {
             var imgId =$(this).attr("id");
             $("#choiceImg").val("#" + imgId);
@@ -174,29 +174,7 @@
         });
     });
 
-    function doSubmit() {
-        var validateResultBool = $.validateForm.validate("#userInfo");
-        if (!validateResultBool) {
-            return;
-        } else {
-            $("#userInfo").ajaxSubmit({
-                url: "${base}/item/save.json",
-                success: function (resp) {
-                    if (resp.code == 'SUCCESS') {
-                        layer.alert(resp.msg);
-                        layer.alert(resp.msg, function (index) {
-                            top.refresh();
-                        });
-                    } else {
-                        layer.alert(resp.msg);
-                    }
-                },
-                error: function (resp) {
-                    layer.alert(JSON.stringify(resp));
-                }
-            });
-        }
-    }
+
 
     function doUpload() {
         console.info("开始上传图片.....");
@@ -206,7 +184,6 @@
                 if ("SUCCESS" == resp.code) {
                     var url = resp.data.url;
                     var imageId = $("#choiceImg").val();
-                    console.info("图片上传url： "+ url);
                     $(imageId).attr("src", url);
                     //图片的标记 flag:ys(原始):表示没有添加图片，表示添加图片 ,flag:tj  表示已经添加的图片
                     $(imageId).attr("flag","tj");
@@ -250,6 +227,7 @@
     function doSubmit(){
         setDescr();
         setFileIds();
+        setUrl();
         $("#itemForm").ajaxSubmit({
             url: "${base}/item/save.json",
             success: function (resp) {

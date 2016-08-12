@@ -47,8 +47,9 @@ public class ItemServiceImpl implements IItemService {
     @Override
     @Transactional
     public void save(ItemInfo obj) {
-        obj.setUpdateTime(new Date());
-        obj.setCreateTime(new Date());
+        Date nowItem= new Date();
+
+        obj.setListTime(nowItem);
         obj.setUid(UuidUtils.getUpperUuid());
         itemDao.save(obj);
         String fileIds = obj.getFileIds();
@@ -58,12 +59,15 @@ public class ItemServiceImpl implements IItemService {
                 itemVsFilePO.setFileId(e);
                 itemVsFilePO.setItemId(obj.getUid());
                 itemVsFilePO.setId(UuidUtils.getUpperUuid());
-
+                Date now = new Date();
+                itemVsFilePO.setCreateTime(now);
+                itemVsFilePO.setUpdateTime(now);
+                itemDao.saveItemVsFile(itemVsFilePO);
             });
         }
-
-        itemDao.save(obj);
     }
+
+
 
     @Override
     public void deleteById(String uid) {
