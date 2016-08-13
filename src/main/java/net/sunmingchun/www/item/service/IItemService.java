@@ -17,4 +17,9 @@ public interface IItemService extends IService<ItemInfo> {
 
 
     public BasePagePO<ItemInfo> getBasePagePO(int pageIndex, int pageSize, String searchValue, String orderColumn, String orderValue, int draw);
+
+
+
+
+
 }

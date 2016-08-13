@@ -9,9 +9,15 @@ public class BasePagePO<T> {
 
     private int draw;
 
-    private int recordsTotal;
+    private int recordsTotal;   //总条数
 
-    private int recordsFiltered;
+    private int recordsFiltered;   //
+
+    private int currentPage;  //当前是第几页
+
+    private int totalPage;  // 总共多少页
+
+    private int pageSize = 10;  //每页显示条数
 
     private List<T> data;
 
@@ -45,5 +51,33 @@ public class BasePagePO<T> {
 
     public void setData(List<T> data) {
         this.data = data;
+    }
+
+    public int getCurrentPage() {
+        return currentPage;
+    }
+
+    public void setCurrentPage(int currentPage) {
+        this.currentPage = currentPage;
+    }
+
+    public int getTotalPage() {
+        if(recordsTotal % pageSize == 0){
+            return recordsTotal/pageSize;
+        }else{
+            return recordsTotal/pageSize+1;
+        }
+    }
+
+    public void setTotalPage(int totalPage) {
+        this.totalPage = totalPage;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
     }
 }

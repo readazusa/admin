@@ -138,5 +138,12 @@
     <script src="${base}/resources/scripts/Map.js" type="application/javascript"></script>
 </#macro>
 
+<#macro bootPageJS>
+    <script src="${base}/resources/scripts/bootpaginator/bootstrap-paginator.js" type="application/javascript"></script>
+</#macro>
+
+<#macro myJS>
+    <script src="${base}/resources/scripts/my.js"></script>
+</#macro>
 
 

@@ -1,5 +1,6 @@
 package net.sunmingchun.www.item.service.impl;
 
+import ch.qos.logback.classic.LoggerContext;
 import net.sunmingchun.www.admin.user.po.UserPO;
 import net.sunmingchun.www.base.po.BasePagePO;
 import net.sunmingchun.www.base.po.BaseSearchPO;
@@ -9,6 +10,8 @@ import net.sunmingchun.www.item.po.ItemVsFilePO;
 import net.sunmingchun.www.item.service.IItemService;
 import net.sunmingchun.www.util.UuidUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,6 +28,8 @@ import java.util.List;
  */
 @Service
 public class ItemServiceImpl implements IItemService {
+
+    private static final Logger log = LoggerFactory.getLogger(ItemServiceImpl.class);
 
     @Resource
     private IItemDao itemDao;
@@ -81,7 +86,6 @@ public class ItemServiceImpl implements IItemService {
 
     @Override
     public void update(ItemInfo itemInfo) {
-
     }
 
     @Override
@@ -91,7 +95,20 @@ public class ItemServiceImpl implements IItemService {
 
     @Override
     public BasePagePO<ItemInfo> getBasePagePO(int pageIndex, int pageSize, ItemInfo itemInfo) {
-        return null;
+        BasePagePO<ItemInfo> basePagePO = new BasePagePO<>();
+        int total = itemDao.queryTotalCount(itemInfo);
+        BaseSearchPO<ItemInfo> baseSearchPO = new BaseSearchPO<>();
+        baseSearchPO.setObj(itemInfo);
+        baseSearchPO.setPageIndex((pageIndex-1)*pageSize);
+        baseSearchPO.setPageSize(pageSize);
+        List<ItemInfo> itemInfoList = itemDao.queryPage(baseSearchPO);
+        basePagePO.setPageSize(pageSize);
+        basePagePO.setCurrentPage(pageIndex);
+        basePagePO.setData(itemInfoList);
+        basePagePO.setRecordsTotal(total);
+        int totalPage = basePagePO.getTotalPage();
+        log.debug("totalpage:{}",totalPage);
+        return basePagePO;
     }
 
     @Override

@@ -140,3 +140,31 @@ table.gridtable td input {
 table.gridtable td input:hover{
     border: 1px silver solid;
 }
+
+.my-item-ul ul{
+    list-style: none;
+}
+
+.my-item-ul ul li{
+      list-style: none;
+      float: left;
+      width: 20%;
+      /*margin-right: 10px;*/
+  }
+.my-item-ul ul li .box{
+   padding-right: 10px;
+}
+.my-item-ul ul li img{
+     max-width: 100%;
+     height: 200px;
+}
+
+#page{
+    margin: 0 !important;
+    float: right; !important;
+    cursor: pointer;
+}
+.exec button{
+    width: 33.33%;
+    float: left;
+}

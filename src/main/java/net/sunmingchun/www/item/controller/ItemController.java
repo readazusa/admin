@@ -8,6 +8,7 @@ import net.sunmingchun.www.item.po.ItemInfo;
 import net.sunmingchun.www.item.service.IItemService;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -31,7 +32,9 @@ public class ItemController extends BaseController {
     private IItemService itemService;
 
     @RequestMapping("index")
-    public String index(){
+    public String index(Model model){
+        BasePagePO<ItemInfo> basePagePO = itemService.getBasePagePO(1,10,null);
+        model.addAttribute("pages",basePagePO);
         return "item/index";
     }
 
@@ -70,12 +73,9 @@ public class ItemController extends BaseController {
         return result;
     }
 
-
-
     @RequestMapping("list")
     @ResponseBody
     public Object list(HttpServletRequest request){
-
         String searchValue = request.getParameter("search[value]");
         String orderColumnStr =  request.getParameter("order[0][column]");  //排序的列
         String orderName = this.getOrderName(request,orderColumnStr);
@@ -87,7 +87,11 @@ public class ItemController extends BaseController {
         return basePagePO;
     }
 
-
+    @RequestMapping("page")
+    @ResponseBody
+   public Object page(){
+       return null;
+   }
 
 
 }

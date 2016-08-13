@@ -11,6 +11,7 @@
         <@common.jquery></@common.jquery>
         <@common.dataTableCSS></@common.dataTableCSS>
         <@common.layerCSS></@common.layerCSS>
+        <@common.allCSS></@common.allCSS>
         <#--<@common.bootDropdownCSS></@common.bootDropdownCSS>-->
         <#--<@common.bootSelectCSS></@common.bootSelectCSS>-->
 </head>
@@ -27,26 +28,34 @@
             <div class="content">
                 <div class="box">
                     <div class="box-header">
-                        <a href="javascript:add();" class="button button-action button-rounded"><li class="fa fa-plus"></li>新增商品</a>
+                        <a href="javascript:add();" class="button button-action button-rounded">
+                            <li class="fa fa-plus"></li>
+                            新增商品</a>
                     </div>
-                    <div class="box-body">
-                        <table id="userData" class="display" cellspacing="0" width="100%">
-                            <thead>
-                            <tr>
-                                <th>商品编号</th>
-                                <th>商品标题</th>
-                                <th>价格</th>
-                                <th>库存</th>
-                                <th>产地</th>
-                                <th>打折后价格</th>
-                                <th>上架时间</th>
-                                <th>照片</th>
-                                <th>操作</th>
-                            </tr>
-                            </thead>
-                        </table>
+                    <div class="box-body my-item-ul">
+                        <ul>
+                            <#list pages.data as item>
+                                <li>
+                                    <div class="box">
+                                        <div class="box-body">
+                                            <img src="${item.phonePicUrl}">
+                                        </div>
+                                        <div class="box-footer"> ${item.title}
+
+                                        </div>
+                                        <div class="box-footer exec">
+                                            <button class="btn btn-box-tool" data-widget="collapse">删除</button>
+                                            <button class="btn btn-box-tool" data-widget="collapse">修改</button>
+                                            <button class="btn btn-box-tool" data-widget="collapse">查看</button>
+                                        </div>
+                                    </div>
+                                </li>
+                            </#list>
+                        </ul>
                     </div>
-                    <div class="box-footer"></div>
+                    <div class="box-footer">
+                        <ul id="page" class="pagination"></ul>
+                    </div>
                 </div>
             </div>
         </@template.content>
@@ -59,57 +68,25 @@
     <@common.layerJS></@common.layerJS>
     <@common.validateJS></@common.validateJS>
     <@common.bootDropdownJS></@common.bootDropdownJS>
-    <@common.bootSelectJS></@common.bootSelectJS>
-    <script type="application/javascript">
-        var table = null;
-        var index = 0;
-        $(document).ready(function() {
-            table = $('#userData').DataTable({
-               "processing":true,
-                "serverSide": true,
-                "ajax": "${base}/item/list.json",
-                columns: [
-                    { data: 'uid' },
-                    { data: 'title' },
-                    { data: 'price' },
-                    { data: 'stock' },
-                    {data:'discountPrice'},
-                    {data:'idCard'},
-                    {data:'createTime'},
-                    {data:"uid"}
-                ],
-                "language": {
-                    "lengthMenu": "每页 _MENU_ 条记录",
-                    "zeroRecords": "没有找到记录",
-                    "info": "第 _PAGE_ 页 ( 总共 _PAGES_ 页 , _TOTAL_ 条 )",
-                    "infoEmpty": "无记录",
-                    search: "搜索:",
-                    "oPaginate": {
-                        "sFirst": "首页",
-                        "sPrevious": "上页",
-                        "sNext": "下页",
-                        "sLast": "末页"
-                    }
-                },
-                columnDefs: [
-                    { targets: 7,  render: function (data) {
-                        var html =  '<span class="button-dropdown" data-buttons="dropdown"><button class="button button-rounded button-small">选择</button>'+
-                                '<ul class="button-dropdown-list is-below">'+
-                                ' <li><a href="javascript:edit(\''+data+'\');"><i class="fa fa-edit"></i> 修改</a></li>'+
-                                '</ul></span>';
-                        return html;
-                      },
-                        orderable: false
-                    },
-                ]
-            });
-            $.fn.bootstrapDropdownHover();
-        } );
+    <@common.bootPageJS></@common.bootPageJS>
+    <@common.myJS></@common.myJS>
+    <@baseJS.pageOption totalPages="${pages.totalPage}"></@baseJS.pageOption>
 
-       function refresh(){
-           table.ajax.reload();
-           layer.close(index);
-       }
+<script type="application/javascript">
+    var table = null;
+    var index = 0;
+    $(document).ready(function () {
+    <#--$.fn.bootstrapDropdownHover();-->
+        $('#page').bootstrapPaginator(options);
+    });
+    function refresh() {
+        table.ajax.reload();
+        layer.close(index);
+    }
+
+    function page(newPage) {
+
+    }
 
 </script>
     <@baseJS.adminAddJS url="${base}/item/new.htm" title="新增商品" width="100%" height="100%"></@baseJS.adminAddJS>

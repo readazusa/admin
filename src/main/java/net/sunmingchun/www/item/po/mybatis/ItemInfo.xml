@@ -22,19 +22,18 @@
         </select>
 
         <select id="queryTotalCount" resultType="java.lang.Integer" parameterType="ItemInfo">
-                select count(1) from t_sys_user where 1 =1
+                select count(1) from t_wx_item where 1 =1
                 <if test="title !=null and title != ''">
-                        and  title like '${title}%'
-                </if>
-
-                <if test="search != null and search !=''">
-                        and (title like '${search}%' )
+                    and  title like '${title}%'
                 </if>
         </select>
 
         <select id="queryPageTotalCount" resultType="java.lang.Integer" parameterType="BaseSearchPO">
-                select count(1) from t_sys_user where 1 =1
+
         </select>
+
+
+
 
 
 </mapper>
