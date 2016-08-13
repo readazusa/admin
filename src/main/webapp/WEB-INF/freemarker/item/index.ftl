@@ -44,9 +44,9 @@
 
                                         </div>
                                         <div class="box-footer exec">
-                                            <button class="btn btn-box-tool" data-widget="collapse">删除</button>
-                                            <button class="btn btn-box-tool" data-widget="collapse">修改</button>
-                                            <button class="btn btn-box-tool" data-widget="collapse">查看</button>
+                                            <button class="btn btn-box-tool" data-widget="collapse"  >删除</button>
+                                            <button class="btn btn-box-tool" data-widget="collapse" onclick="edit('${item.uid}');">修改</button>
+                                            <button class="btn btn-box-tool" data-widget="collapse" onclick="view('${item.uid}')">查看</button>
                                         </div>
                                     </div>
                                 </li>
@@ -90,6 +90,12 @@
 
 </script>
     <@baseJS.adminAddJS url="${base}/item/new.htm" title="新增商品" width="100%" height="100%"></@baseJS.adminAddJS>
+
+
+    <@baseJS.adminEditJS url="${base}/item/edit.htm" title="新增商品" width="100%" height="100%"></@baseJS.adminEditJS>
+
+    <@baseJS.adminViewJS url="${base}/item/view.htm" title="新增商品" width="100%" height="100%"></@baseJS.adminViewJS>
+
 </body>
 </html>
 </#escape>

@@ -134,6 +134,7 @@
     <@common.umeJS></@common.umeJS>
     <@common.bootSelectJS></@common.bootSelectJS>
     <@common.ownMapJS></@common.ownMapJS>
+    <@common.xyValidate></@common.xyValidate>
 <script type="application/javascript">
     var setItme = null;
     var um =null;
@@ -210,8 +211,6 @@
             });
             !$("#phonePicUrl").val(url);
         }
-
-
     }
 
     function setDescr(){
@@ -228,22 +227,26 @@
         setDescr();
         setFileIds();
         setUrl();
-        $("#itemForm").ajaxSubmit({
-            url: "${base}/item/save.json",
-            success: function (resp) {
-                if (resp.code == 'SUCCESS') {
-                    layer.alert(resp.msg);
-                    layer.alert(resp.msg, function (index) {
-                        top.refresh();
-                    });
-                } else {
-                    layer.alert(resp.msg);
+        if($.xyValidateForm(document.getElementById("itemForm"))){
+            $("#itemForm").ajaxSubmit({
+                url: "${base}/item/save.json",
+                success: function (resp) {
+                    if (resp.code == 'SUCCESS') {
+                        layer.alert(resp.msg);
+                        layer.alert(resp.msg, function (index) {
+                            top.refresh();
+                        });
+                    } else {
+                        layer.alert(resp.msg);
+                    }
+                },
+                error: function (resp) {
+                    layer.alert(JSON.stringify(resp));
                 }
-            },
-            error: function (resp) {
-                layer.alert(JSON.stringify(resp));
-            }
-        });
+            });
+        }
+
+
     }
 
 </script>

@@ -143,7 +143,9 @@
 </#macro>
 
 <#macro myJS>
-    <script src="${base}/resources/scripts/my.js"></script>
+    <script src="${base}/resources/scripts/my.js" type="application/javascript"></script>
 </#macro>
 
-
+<#macro xyValidate>
+<script src="${base}/resources/scripts/xy_validate_form.js" type="application/javascript"></script>
+</#macro>
