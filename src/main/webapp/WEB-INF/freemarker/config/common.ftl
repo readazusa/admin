@@ -121,6 +121,7 @@
 
 
 <#macro umeJS>
+<#--<script src="${base}/resources/umeditor/third-party/jquery.min.js" type="application/javascript"></script>-->
     <script src="${base}/resources/umeditor/umeditor.config.js" type="application/javascript"></script>
     <script src="${base}/resources/umeditor/umeditor.js" type="application/javascript"></script>
 <script src="${base}/resources/umeditor/lang/zh-cn/zh-cn.js" type="application/javascript"></script>

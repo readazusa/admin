@@ -1,6 +1,7 @@
 package net.sunmingchun.www.item.dao.impl;
 
 import net.sunmingchun.www.base.po.BaseSearchPO;
+import net.sunmingchun.www.file.po.UploadFilePO;
 import net.sunmingchun.www.item.dao.IItemDao;
 import net.sunmingchun.www.item.po.ItemInfo;
 import net.sunmingchun.www.item.po.ItemVsFilePO;
@@ -44,7 +45,7 @@ public class ItemDaoImpl extends SqlSessionDaoSupport  implements IItemDao {
     }
     @Override
     public void update(ItemInfo itemInfo) {
-
+        this.getSqlSession().update("ItemInfo.update",itemInfo);
     }
     @Override
     public ItemInfo queryObjectById(String id) {
@@ -79,5 +80,15 @@ public class ItemDaoImpl extends SqlSessionDaoSupport  implements IItemDao {
     @Override
     public int saveItemVsFile(ItemVsFilePO itemVsFilePO) {
         return this.getSqlSession().insert("ItemVsFilePO.save",itemVsFilePO);
+    }
+
+    @Override
+    public List<UploadFilePO> getUploadFileListByItemId(String uid) {
+        return this.getSqlSession().selectList("UploadFilePO.selectFileListByItemId",uid);
+    }
+
+    @Override
+    public int deleteItemVsFileByItemId(String itemId) {
+        return this.getSqlSession().delete("ItemInfo.deleteItemVsFileByItemId",itemId);
     }
 }

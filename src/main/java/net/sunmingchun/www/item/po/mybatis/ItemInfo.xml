@@ -16,6 +16,10 @@
                 select * from t_wx_item where uid = #{id}
         </select>
 
+        <update id="update" parameterType="ItemInfo">
+                update t_wx_item set title=#{title},price=#{price},pcpicurl=#{pcPicUrl},descr=#{descr},stock=#{stock},postage = #{postage} where uid = #{uid}
+        </update>
+
         <select id="queryPage" resultType="ItemInfo" parameterType="BaseSearchPO">
                 select <include refid="param"></include> from  t_wx_item where 1=1
                 limit #{pageIndex},#{pageSize}
@@ -31,6 +35,12 @@
         <select id="queryPageTotalCount" resultType="java.lang.Integer" parameterType="BaseSearchPO">
 
         </select>
+
+
+        <delete id="deleteItemVsFileByItemId" parameterType="java.lang.String">
+                delete from t_wx_item_vs_file where itemid = #{id}
+        </delete>
+
 
 
 

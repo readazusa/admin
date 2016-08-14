@@ -9,4 +9,13 @@
           values(#{id},#{name},#{contentType},#{size},#{url},#{subffix},#{origName},#{createTime},#{updateTime})
     </insert>
 
+
+    <select id="selectFileListByItemId" parameterType="java.lang.String" resultType="UploadFilePO">
+        select file.* from t_wx_file file ,t_wx_item_vs_file itemfile where file.id = itemfile.fileid and itemfile.itemid = #{id}
+    </select>
+
+    <delete id="deleteFileByItemId" parameterType="java.lang.String">
+         delete  file.* from t_wx_file file ,t_wx_item_vs_file itemfile where file.id = itemfile.fileid and itemfile.itemid = #{id}
+    </delete>
+
 </mapper>

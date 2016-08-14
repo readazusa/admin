@@ -4,6 +4,7 @@ import net.sunmingchun.www.base.controller.BaseController;
 import net.sunmingchun.www.base.log.LogFactory;
 import net.sunmingchun.www.base.po.BasePagePO;
 import net.sunmingchun.www.common.Result;
+import net.sunmingchun.www.file.po.UploadFilePO;
 import net.sunmingchun.www.item.po.ItemInfo;
 import net.sunmingchun.www.item.service.IItemService;
 import org.slf4j.Logger;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * net.sunmingchun.www.item.controller
@@ -46,13 +48,22 @@ public class ItemController extends BaseController {
     @RequestMapping("edit")
     public String gotoEditPage(String id,ModelMap model){
         ItemInfo itemInfo = itemService.queryObjectById(id);
+        List<UploadFilePO> uploadFilePOList = itemService.getUploadFileListByItemId(itemInfo.getUid());
         model.put("item",itemInfo);
+        model.put("files",uploadFilePOList);
+        StringBuffer fileIds = new StringBuffer();
+        uploadFilePOList.forEach(e->{
+            fileIds.append(e.getId()).append("&&");
+        });
+        model.put("fileIds",fileIds.toString());
         return "item/edit";
     }
 
     @RequestMapping("view")
     public String gotoViewPage(String id,ModelMap model){
         ItemInfo itemInfo = itemService.queryObjectById(id);
+        List<UploadFilePO> uploadFilePOList = itemService.getUploadFileListByItemId(itemInfo.getUid());
+        model.put("files",uploadFilePOList);
         model.put("item",itemInfo);
         return "item/view";
     }
@@ -86,6 +97,24 @@ public class ItemController extends BaseController {
         BasePagePO basePagePO = itemService.getBasePagePO(pageIndex,pageSize,searchValue,orderName,orderValue,draw);
         return basePagePO;
     }
+
+    @RequestMapping("update")
+    @ResponseBody
+    public Object update(ItemInfo itemInfo){
+        Result result =  new Result();
+        try{
+            itemService.update(itemInfo);
+            result.setCode(Result.SUCCESS);
+            result.setMsg("更新商品成功");
+        }catch (Exception ex){
+            result.setCode(Result.ERROR);
+            result.setMsg(ex.getMessage());
+            log.error("修改宝贝信息错误，错误信息如下： ",ex);
+        }
+        return result;
+    }
+
+
 
     @RequestMapping("page")
     @ResponseBody

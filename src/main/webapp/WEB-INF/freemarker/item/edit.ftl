@@ -36,7 +36,7 @@
                 <div class="my-from-group">
                     <div class="my-item-input-name">商品名称</div>
                     <div class="my-item-input-div">
-                        <input class="my-item-input" name="title">
+                        <input class="my-item-input" name="title" value="${item.title}">
                     </div>
                 </div>
                 <div class="my-from-group">
@@ -45,23 +45,40 @@
                         <ul>
                             <li class="choice-image">
                                 <span class="choice-image-index">主图片</span>
-                                <img src="http://120.26.208.194:8888/yd/add_pp.png" id="oneImage" flag="ys">
+                                <img src="${item.phonePicUrl}" id="oneImage" flag="tj">
                                 <span class="choice-image-span" >删除</span>
                             </li>
                             <li class="choice-image">
-                                <img src="http://120.26.208.194:8888/yd/add_pp.png" id="twoImage" flag="ys">
+                                <#if (files?size>1)>
+                                    <img src="${files[1].url}" id="twoImage" flag="tj">
+                                <#else>
+                                    <img src="http://120.26.208.194:8888/yd/add_pp.png" id="twoImage" flag="ys">
+                                </#if>
                                 <span class="choice-image-span">删除</span>
                             </li>
                             <li class="choice-image">
-                                <img src="http://120.26.208.194:8888/yd/add_pp.png" id="threeImage" flag="ys">
+                                <#if (files?size>2)>
+                                    <img src="${files[2].url}" id="threeImage" flag="tj">
+                                <#else>
+                                    <img src="http://120.26.208.194:8888/yd/add_pp.png" id="threeImage" flag="ys">
+                                </#if>
+
                                 <span class="choice-image-span">删除</span>
                             </li>
                             <li class="choice-image">
-                                <img src="http://120.26.208.194:8888/yd/add_pp.png" id="fourImage" flag="ys">
+                                <#if (files?size>3)>
+                                    <img src="${files[1].url}" id="fourImage" flag="tj">
+                                <#else>
+                                    <img src="http://120.26.208.194:8888/yd/add_pp.png" id="fourImage" flag="ys">
+                                </#if>
                                 <span class="choice-image-span">删除</span>
                             </li>
                             <li class="choice-image">
-                                <img src="http://120.26.208.194:8888/yd/add_pp.png" id="fiveImage" flag="ys">
+                                <#if (files?size>4)>
+                                    <img src="${files[4].url}" id="fourImage" flag="tj">
+                                <#else>
+                                    <img src="http://120.26.208.194:8888/yd/add_pp.png" id="fiveImage" flag="ys">
+                                </#if>
                                 <span class="choice-image-span">删除</span>
                             </li>
                         </ul>
@@ -81,43 +98,44 @@
                                 </thead>
                                 <tr>
                                     <td>
-                                        <input name="price">
+                                        <input name="price" value="${item.price}">
                                     </td>
                                     <td>
-                                        <input name="company">
+                                        <input name="company" value="${item.company}">
                                     </td>
                                     <td>
-                                        <input name="stock">
+                                        <input name="stock" value="${item.stock}">
                                     </td>
                                 </tr>
                             </table>
                         </div>
                     </div>
                 </div>
-
                 <div class="my-from-group">
                     <div class="my-item-input-name">商品描述</div>
                     <div class="my-item-input-div">
                         <script type="text/plain" id="myEditor" style="width:100%;height:500px;">
+                                 <#noescape> ${item.descr}</#noescape>
                         </script>
                     </div>
                 </div>
                 <div class="my-from-group">
                     <div class="my-item-input-name">邮费</div>
                     <div class="my-item-input-div">
-                        <input class="my-item-input" name="postage">
+                        <input class="my-item-input" name="postage" value="${item.postage}">
                     </div>
                 </div>
                 <input type="hidden" name="descr" id="descr">
-                <input type="hidden" name="fileIds" id="fileIds">
-                <input type="hidden" name="phonePicUrl" id="phonePicUrl">
+                <input type="hidden" name="fileIds" id="fileIds" value="${fileIds}">
+                <input type="hidden" name="phonePicUrl" id="phonePicUrl" value="${item.phonePicUrl}">
+                <input type="hidden" name="uid" value="${item.uid}">
             </form>
             <form id="fileForm" method="post" action="${base}/upload/ftp.json" enctype="multipart/form-data">
                 <input type="file" style="display: none" id="uploadImage" onchange="doUpload();" name="file">
             </form>
         </div>
         <div class="box-footer">
-            <button class="btn btn-info pull-right" onclick="doSubmit();">保存</button>
+            <button class="btn btn-info pull-right" onclick="doSubmit();">更新</button>
             <input type="hidden" id="choiceImg">
             <input type="hidden" id="validateSpan">
         </div>
@@ -137,11 +155,12 @@
     <@common.xyValidate></@common.xyValidate>
 <script type="application/javascript">
     var setItme = null;
-    var um =null;
+    var um = UM.getEditor('myEditor');
     var default_add_pic="http://120.26.208.194:8888/yd/add_pp.png";
+    var default_loading_pic="http://120.26.208.194:8888/yd/loading.gif";
     var map = new Map();
     $(function () {
-        um = UM.getEditor('myEditor');
+
         $("li img").on('click', function () {
             var imgId =$(this).attr("id");
             $("#choiceImg").val("#" + imgId);
@@ -174,8 +193,6 @@
             map.remove(imageId);
         });
     });
-
-
 
     function doUpload() {
         console.info("开始上传图片.....");
@@ -229,7 +246,7 @@
         setUrl();
         if($.xyValidateForm(document.getElementById("itemForm"))){
             $("#itemForm").ajaxSubmit({
-                url: "${base}/item/save.json",
+                url: "${base}/item/update.json",
                 success: function (resp) {
                     if (resp.code == 'SUCCESS') {
                         layer.alert(resp.msg);
@@ -245,6 +262,12 @@
                 }
             });
         }
+
+
+    }
+
+    function receive(data) {
+        alert(data.age);
     }
 
 </script>

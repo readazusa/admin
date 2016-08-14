@@ -80,7 +80,7 @@
         $('#page').bootstrapPaginator(options);
     });
     function refresh() {
-        table.ajax.reload();
+//        table.ajax.reload();
         layer.close(index);
     }
 

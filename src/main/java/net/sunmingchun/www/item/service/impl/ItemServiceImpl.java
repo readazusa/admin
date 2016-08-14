@@ -4,6 +4,7 @@ import ch.qos.logback.classic.LoggerContext;
 import net.sunmingchun.www.admin.user.po.UserPO;
 import net.sunmingchun.www.base.po.BasePagePO;
 import net.sunmingchun.www.base.po.BaseSearchPO;
+import net.sunmingchun.www.file.po.UploadFilePO;
 import net.sunmingchun.www.item.dao.IItemDao;
 import net.sunmingchun.www.item.po.ItemInfo;
 import net.sunmingchun.www.item.po.ItemVsFilePO;
@@ -53,7 +54,6 @@ public class ItemServiceImpl implements IItemService {
     @Transactional
     public void save(ItemInfo obj) {
         Date nowItem= new Date();
-
         obj.setListTime(nowItem);
         obj.setUid(UuidUtils.getUpperUuid());
         itemDao.save(obj);
@@ -86,6 +86,19 @@ public class ItemServiceImpl implements IItemService {
 
     @Override
     public void update(ItemInfo itemInfo) {
+        String fileIds = itemInfo.getFileIds();
+        itemDao.update(itemInfo);
+        itemDao.deleteItemVsFileByItemId(itemInfo.getUid());
+        Arrays.asList(fileIds.split("&&")).forEach(e->{
+            ItemVsFilePO itemVsFilePO = new ItemVsFilePO();
+            itemVsFilePO.setFileId(e);
+            itemVsFilePO.setItemId(itemInfo.getUid());
+            itemVsFilePO.setId(UuidUtils.getUpperUuid());
+            Date now = new Date();
+            itemVsFilePO.setCreateTime(now);
+            itemVsFilePO.setUpdateTime(now);
+            itemDao.saveItemVsFile(itemVsFilePO);
+        });
     }
 
     @Override
@@ -146,5 +159,8 @@ public class ItemServiceImpl implements IItemService {
         return basePagePO;
     }
 
-
+    @Override
+    public List<UploadFilePO> getUploadFileListByItemId(String itemId) {
+        return itemDao.getUploadFileListByItemId(itemId);
+    }
 }
