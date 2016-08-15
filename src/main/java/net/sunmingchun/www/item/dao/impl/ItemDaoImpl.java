@@ -36,7 +36,7 @@ public class ItemDaoImpl extends SqlSessionDaoSupport  implements IItemDao {
 
     @Override
     public void deleteById(String uid) {
-
+        this.getSqlSession().delete("ItemInfo.delete",uid);
     }
 
     @Override

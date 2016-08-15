@@ -1,4 +1,4 @@
-package net.sunmingchun.www.item.po;
+package net.sunmingchun.www.trade.po;
 
 import java.util.Date;
 

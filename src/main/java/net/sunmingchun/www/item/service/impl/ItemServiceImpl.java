@@ -1,11 +1,11 @@
 package net.sunmingchun.www.item.service.impl;
 
-import ch.qos.logback.classic.LoggerContext;
 import net.sunmingchun.www.admin.user.po.UserPO;
 import net.sunmingchun.www.base.po.BasePagePO;
 import net.sunmingchun.www.base.po.BaseSearchPO;
 import net.sunmingchun.www.file.po.UploadFilePO;
 import net.sunmingchun.www.item.dao.IItemDao;
+import net.sunmingchun.www.item.dao.impl.ItemTypeDaoImpl;
 import net.sunmingchun.www.item.po.ItemInfo;
 import net.sunmingchun.www.item.po.ItemVsFilePO;
 import net.sunmingchun.www.item.service.IItemService;
@@ -76,7 +76,7 @@ public class ItemServiceImpl implements IItemService {
 
     @Override
     public void deleteById(String uid) {
-
+        itemDao.deleteById(uid);
     }
 
     @Override

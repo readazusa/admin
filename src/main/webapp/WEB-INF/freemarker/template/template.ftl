@@ -15,7 +15,7 @@
     <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
             <li>
-                <a href="${base}/logout.htm" ></a>
+                <a href="${base}/logout.htm"></a>
             </li>
             <li class="dropdown messages-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -230,13 +230,13 @@
                     </li>
                     <li class="user-body">
                         <div class="col-xs-4 text-center">
-                            <#--<a href="#">Followers</a>-->
+                        <#--<a href="#">Followers</a>-->
                         </div>
                         <div class="col-xs-4 text-center">
-                            <#--<a href="#">Sales</a>-->
+                        <#--<a href="#">Sales</a>-->
                         </div>
                         <div class="col-xs-4 text-center">
-                            <#--<a href="#">Friends</a>-->
+                        <#--<a href="#">Friends</a>-->
                         </div>
                     </li>
                     <li class="user-footer">
@@ -272,18 +272,49 @@
                         class="fa fa-hand-spock-o"></i> 资源管理</a></li>
                 <li class='<#if flag=="vislog">active</#if>'><a href="${base}/vislog/index.htm"><i
                         class="fa fa-bookmark-o"></i> 访问日志管理</a></li>
-                <#--<li class='<#if flag=="operlog">active</#if>'><a href="${base}/operlog/index.htm"><i-->
-                        <#--class="fa fa-bookmark-o"></i> 操作日志管理</a></li>-->
+            <#--<li class='<#if flag=="operlog">active</#if>'><a href="${base}/operlog/index.htm"><i-->
+            <#--class="fa fa-bookmark-o"></i> 操作日志管理</a></li>-->
             </ul>
         </li>
-        <li class='treeview  <#if flag=="item" || flag=="shop">active</#if>'>
+        <li class='treeview  <#if flag=="item" || flag=="itemtype">active</#if>'>
             <a href="#">
                 <i class="fa fa-user-plus"></i> <span>商品管理</span> <i class="fa fa-angle-left pull-right"></i>
             </a>
             <ul class="treeview-menu">
                 <li class='<#if flag="item">active</#if>'><a href="${base}/item/index.htm"><i class="fa fa-user"></i>商品管理</a>
                 </li>
-                <li class='<#if flag="shop">active</#if>'><a href="${base}/shop/index.htm"><i class="fa fa-user"></i>店铺管理</a>
+                <li class='<#if flag="itemtype">active</#if>'><a href="${base}/itemtype/index.htm"><i
+                        class="fa fa-user"></i>商品类型管理</a>
+                </li>
+            <#--<li class='<#if flag="trade">active</#if>'><a href="${base}/trade/index.htm"><i class="fa fa-user"></i>订单管理</a>-->
+            <#--</li>-->
+            <#--<li class='<#if flag="shopcart">active</#if>'><a href="${base}/shopcart/index.htm"><i class="fa fa-user"></i>购物车管理</a>-->
+            <#--</li>-->
+            </ul>
+        </li>
+
+        <li class='treeview  <#if flag=="shop" || flag == "shopcart" || flag=="trade">active</#if>'>
+            <a href="#">
+                <i class="fa fa-user-plus"></i> <span>店铺管理</span> <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                <li class='<#if flag="shop">active</#if>'><a href="${base}/item/index.htm"><i class="fa fa-user"></i>店铺管理</a>
+                </li>
+                <li class='<#if flag="trade">active</#if>'><a href="${base}/item/index.htm"><i class="fa fa-user"></i>订单管理</a>
+                </li>
+                <li class='<#if flag="shopcart">active</#if>'><a href="${base}/shopcart/index.htm"><i
+                        class="fa fa-user"></i>购物车管理</a>
+                </li>
+            </ul>
+        </li>
+        <li class='treeview  <#if flag=="tradefx" || flag=="shopfx">active</#if>'>
+            <a href="#">
+                <i class="fa fa-user-plus"></i> <span>统计分析</span> <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                <li class='<#if flag="tradefx">active</#if>'><a href="${base}/item/index.htm"><i class="fa fa-user"></i>订单分析</a>
+                </li>
+                <li class='<#if flag="shopfx">active</#if>'><a href="${base}/item/index.htm"><i class="fa fa-user"></i>商品分析</a>
                 </li>
             </ul>
         </li>

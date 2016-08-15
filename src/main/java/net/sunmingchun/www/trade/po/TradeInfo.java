@@ -1,4 +1,4 @@
-package net.sunmingchun.www.item.po;
+package net.sunmingchun.www.trade.po;
 
 import java.util.Date;
 import java.util.List;
@@ -35,7 +35,7 @@ public class TradeInfo {
 
     private String receiveTown; //收货人街道
 
-    private String status; //
+    private String status; //订单状态  0:待付款  1：已付款， 2：待发货 ， 3：已收货 ，4：待评价 ,5:已完成
 
     private Date createTime;
 
