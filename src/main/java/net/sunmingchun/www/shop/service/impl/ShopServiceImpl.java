@@ -1,10 +1,13 @@
 package net.sunmingchun.www.shop.service.impl;
 
 import net.sunmingchun.www.base.po.BasePagePO;
+import net.sunmingchun.www.base.po.BaseSearchPO;
+import net.sunmingchun.www.shop.dao.IShopDao;
 import net.sunmingchun.www.shop.po.ShopInfo;
 import net.sunmingchun.www.shop.service.IShopService;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +21,8 @@ import java.util.List;
 @Service
 public class ShopServiceImpl implements IShopService {
 
+    @Resource
+    private IShopDao shopDao;
 
     @Override
     public BasePagePO<ShopInfo> getBasePagePO(int pageIndex, int pageSize, String searchValue, String orderColumn, String orderValue, int draw) {
@@ -32,7 +37,7 @@ public class ShopServiceImpl implements IShopService {
 
     @Override
     public ShopInfo queryObjectById(String id) {
-        return null;
+        return shopDao.queryObjectById(id);
     }
 
     @Override
@@ -47,12 +52,12 @@ public class ShopServiceImpl implements IShopService {
 
     @Override
     public void save(ShopInfo obj) {
-
+        shopDao.save(obj);
     }
 
     @Override
     public void deleteById(String uid) {
-
+        shopDao.deleteById(uid);
     }
 
     @Override
@@ -62,7 +67,7 @@ public class ShopServiceImpl implements IShopService {
 
     @Override
     public void update(ShopInfo shopInfo) {
-
+        shopDao.update(shopInfo);
     }
 
     @Override
@@ -72,11 +77,22 @@ public class ShopServiceImpl implements IShopService {
 
     @Override
     public BasePagePO<ShopInfo> getBasePagePO(int pageIndex, int pageSize, ShopInfo shopInfo) {
-        return null;
+        BasePagePO<ShopInfo> basePagePO = new BasePagePO<>();
+        int totalCount = shopDao.queryTotalCount(shopInfo);
+        BaseSearchPO<ShopInfo> baseSearchPO = new BaseSearchPO<>();
+        baseSearchPO.setPageSize(pageSize);
+        baseSearchPO.setPageIndex((pageIndex-1)*pageSize);
+        List<ShopInfo> shopInfoList = shopDao.queryPage(baseSearchPO);
+        basePagePO.setCurrentPage(pageIndex);
+        basePagePO.setData(shopInfoList);
+        basePagePO.setRecordsTotal(totalCount);
+        return basePagePO;
     }
 
     @Override
     public List<ShopInfo> queryListPO(int pageIndex, int pageSize, ShopInfo shopInfo) {
+
+
         return null;
     }
 }

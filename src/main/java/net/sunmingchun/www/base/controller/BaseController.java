@@ -17,8 +17,6 @@ import java.util.Date;
  */
 public abstract  class BaseController {
 
-
-
     public void saveSession(HttpSession session,String key,Object obj){
         session.setAttribute(key,obj);
     }

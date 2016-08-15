@@ -76,7 +76,7 @@
     var table = null;
     var index = 0;
     $(document).ready(function () {
-    <#--$.fn.bootstrapDropdownHover();-->
+    $.fn.bootstrapDropdownHover();
         $('#page').bootstrapPaginator(options);
     });
     function refresh() {

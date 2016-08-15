@@ -150,3 +150,16 @@
 <#macro xyValidate>
 <script src="${base}/resources/scripts/xy_validate_form.js" type="application/javascript"></script>
 </#macro>
+
+<#macro gdMapJS>
+    <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=bf66a874b5a547128a00bcf30a71cb7d"></script>
+</#macro>
+
+
+<#macro bootSwitchJS>
+<script src="${base}/resources/scripts/bootswitch/js/bootstrap-switch.js" type="application/javascript"></script>
+</#macro>
+
+<#macro bootSwitchCSS>
+<link href="${base}/resources/scripts/bootswitch/css/bootstrap-switch.css" rel="stylesheet" type="text/css">
+</#macro>

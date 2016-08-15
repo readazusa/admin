@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ShopInfo">
+
+    <insert id="save" parameterType="ShopInfo">
+        insert into t_wx_shop(id,name,desc,locationX,locationY,address,phoneNum,telNum,picUrl,parentId,index,createTime,updateTime)
+        VALUES (#{id},#{name},#{desc},#{locationX},#{locationY},#{address},#{phoneNum},#{telNum},#{picUrl},#{parentId},#{index},#{createTime},#{updateTime})
+    </insert>
+
+    <select id="queryTotalCount" parameterType="ShopInfo" resultType="java.lang.Integer">
+        select count(1) from t_wx_shop where 1=1
+    </select>
+
+    <delete id="delete" parameterType="java.lang.String">
+        delete from t_wx_shop where id = #{id}
+    </delete>
+
+    <select id="select" parameterType="java.lang.String" resultType="ShopInfo">
+        select * from t_wx_shop where id = #{id}
+    </select>
+
+    <select id="queryPage" parameterType="BaseSearchPO" resultType="ShopInfo">
+        select * from t_wx_shop
+        limit #{pageIndex},#{pageSize}
+    </select>
+
+    <update id="update" parameterType="ShopInfo">
+        update t_wx_item set name = #{name},locationx= #{locationX}, locationY = #{locationY},address = #{address},
+        phoneNum = #{phoneNum},telNum = #{telNum},index = #{index},updateTime = #{updateTime} where id = #{id}
+    </update>
+
+
+</mapper>

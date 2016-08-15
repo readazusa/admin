@@ -15,15 +15,27 @@ public class ShopInfo extends BasePO {
 
     private String desc;
 
-    private String locationX;
+    private String province;
 
-    private String locationY;
+    private String city;
 
-    private String address;
+    private  String  area;
+
+    private String locationX;   //经度
+
+    private String locationY;   //维度
+
+     private String address;
 
     private String phoneNum;
 
     private String telNum;
+
+    private String picUrl;  //店铺主页的url
+
+    private String parentId;  //
+
+    private String index;   //是否为主店，0：住店  1：分店
 
     public String getName() {
         return name;
@@ -79,5 +91,53 @@ public class ShopInfo extends BasePO {
 
     public void setTelNum(String telNum) {
         this.telNum = telNum;
+    }
+
+    public String getPicUrl() {
+        return picUrl;
+    }
+
+    public void setPicUrl(String picUrl) {
+        this.picUrl = picUrl;
+    }
+
+    public String getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(String parentId) {
+        this.parentId = parentId;
+    }
+
+    public String getIndex() {
+        return index;
+    }
+
+    public void setIndex(String index) {
+        this.index = index;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
     }
 }

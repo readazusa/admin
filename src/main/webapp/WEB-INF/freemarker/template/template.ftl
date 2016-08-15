@@ -298,9 +298,9 @@
                 <i class="fa fa-user-plus"></i> <span>店铺管理</span> <i class="fa fa-angle-left pull-right"></i>
             </a>
             <ul class="treeview-menu">
-                <li class='<#if flag="shop">active</#if>'><a href="${base}/item/index.htm"><i class="fa fa-user"></i>店铺管理</a>
+                <li class='<#if flag="shop">active</#if>'><a href="${base}/shop/index.htm"><i class="fa fa-user"></i>店铺管理</a>
                 </li>
-                <li class='<#if flag="trade">active</#if>'><a href="${base}/item/index.htm"><i class="fa fa-user"></i>订单管理</a>
+                <li class='<#if flag="trade">active</#if>'><a href="${base}/trade/index.htm"><i class="fa fa-user"></i>订单管理</a>
                 </li>
                 <li class='<#if flag="shopcart">active</#if>'><a href="${base}/shopcart/index.htm"><i
                         class="fa fa-user"></i>购物车管理</a>

@@ -11,6 +11,7 @@
         <@common.jquery></@common.jquery>
         <@common.dataTableCSS></@common.dataTableCSS>
         <@common.layerCSS></@common.layerCSS>
+        <@common.allCSS></@common.allCSS>
         <#--<@common.bootDropdownCSS></@common.bootDropdownCSS>-->
         <#--<@common.bootSelectCSS></@common.bootSelectCSS>-->
 </head>
@@ -31,20 +32,41 @@
                             <li class="fa fa-plus"></li>
                             新增店铺</a>
                     </div>
-                    <div class="box-body">
-                        <table id="shopData" class="display" cellspacing="0" width="100%">
-                            <thead>
-                            <tr>
-                                <th>商品编号</th>
-                                <th>商品标题</th>
-                                <th>创建时间</th>
-                                <th>照片</th>
-                                <th>操作</th>
-                            </tr>
-                            </thead>
-                        </table>
+                    <div class="box-body my-item-ul">
+
+                            <#if page.data?? && (page.data?size>0)>
+                            <ul>
+                                <#list page.data as shop>
+                                    <li>
+                                        <div class="box">
+                                            <div class="box-body">
+                                                <img src="${shop.picUrl}">
+                                            </div>
+                                            <div class="box-footer"> ${shop.name}
+                                            </div>
+                                            <div class="box-footer exec">
+                                                <button class="btn btn-box-tool" data-widget="collapse">删除</button>
+                                                <button class="btn btn-box-tool" data-widget="collapse"
+                                                        onclick="edit('${shop.id}');">修改
+                                                </button>
+                                                <button class="btn btn-box-tool" data-widget="collapse"
+                                                        onclick="view('${shop.id}')">查看
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </#list>
+                            </ul>
+                             <#else>
+                                    <span style="    text-align: center;width: 100%;line-height: 40px;display: inline-block;">
+                                    没有数据
+                                     </span>
+                            </#if>
+
                     </div>
-                    <div class="box-footer"></div>
+                    <div class="box-footer">
+                        <ul id="page" class="pagination"></ul>
+                    </div>
                 </div>
             </div>
         </@template.content>
@@ -58,52 +80,17 @@
     <@common.validateJS></@common.validateJS>
     <@common.bootDropdownJS></@common.bootDropdownJS>
     <@common.bootSelectJS></@common.bootSelectJS>
+    <@common.bootPageJS></@common.bootPageJS>
+    <@baseJS.pageOption totalPages="${page.totalPage}"></@baseJS.pageOption>
 <script type="application/javascript">
-    var table = null;
     var index = 0;
     $(document).ready(function () {
-        table = $('#shopData').DataTable({
-            "processing": true,
-            "serverSide": true,
-            "ajax": "${base}/shop/list.json",
-            columns: [
-                {data: 'id'},
-                {data: 'name'},
-                {data: 'phoneNum'},
-                {data: 'createTime'},
-                {data: "id"}
-            ],
-            "language": {
-                "lengthMenu": "每页 _MENU_ 条记录",
-                "zeroRecords": "没有找到记录",
-                "info": "第 _PAGE_ 页 ( 总共 _PAGES_ 页 , _TOTAL_ 条 )",
-                "infoEmpty": "无记录",
-                search: "搜索:",
-                "oPaginate": {
-                    "sFirst": "首页",
-                    "sPrevious": "上页",
-                    "sNext": "下页",
-                    "sLast": "末页"
-                }
-            },
-            columnDefs: [
-                {
-                    targets: 4, render: function (data) {
-                    var html = '<span class="button-dropdown" data-buttons="dropdown"><button class="button button-rounded button-small">选择</button>' +
-                            '<ul class="button-dropdown-list is-below">' +
-                            ' <li><a href="javascript:edit(\'' + data + '\');"><i class="fa fa-edit"></i> 修改</a></li>' +
-                            '</ul></span>';
-                    return html;
-                },
-                    orderable: false
-                },
-            ]
-        });
-        $.fn.bootstrapDropdownHover();
+        $('#page').bootstrapPaginator(options);
     });
 
+
     function refresh() {
-        table.ajax.reload();
+//        table.ajax.reload();
         layer.close(index);
     }
 </script>

@@ -168,3 +168,18 @@ table.gridtable td input:hover{
     width: 33.33%;
     float: left;
 }
+
+.my-item-input select{
+    /*position: absolute!important;*/
+    height: 30px;
+    width: 220px;
+    color: #333;
+    background-color: #e6e6e6;
+    border-color: #adadad;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.my-item-input select option{
+    overflow: hidden;
+}

@@ -12,7 +12,8 @@
         <@common.laydateCSS></@common.laydateCSS>
         <@common.allCSS></@common.allCSS>
         <@common.icheckCSS></@common.icheckCSS>
-
+  <@common.bootSelectCSS></@common.bootSelectCSS>
+    <@common.bootSwitchCSS></@common.bootSwitchCSS>
 </head>
 <body>
 <div class="container">
@@ -21,14 +22,53 @@
             <h3 class="box-title">新增店铺</h3>
         </div>
         <div class="box-body">
-            <form>
+            <form id="shopForm" method="post">
                 <div class="my-from-group">
-                    <div class="my-item-input-name">店铺地址</div>
+                    <div class="my-item-input-name">是否为主店</div>
                     <div class="my-item-input-div">
-                        <div id="bdMap" style="width: 100%;height: 400px;">
-
-
+                        <div class="my-item-input" style="border: none">
+                            <div style="float: left;margin-top: 5px;">
+                                <#--<input type="radio" name="index" id="male" value="0" checked>是 &nbsp;&nbsp;&nbsp;-->
+                                <#--<input type="radio" name="index" id="female" value="1">否-->
+                                    <input type="checkbox" name="my-checkbox" checked>
+                            </div>
+                            <div id="index" style="float: right;margin-right:50%;margin-top:5px;">
+                                <span>选择主店:</span>
+                                <select class="selectpicker" id="selectpicker" name="cid">
+                                    <option value="1">水</option>
+                                    <option value="2">霜</option>
+                                    <option value="3">乳</option>
+                                </select>
+                            </div>
                         </div>
+                    </div>
+                </div>
+                <div class="my-from-group">
+                    <div class="my-item-input-name">省市区</div>
+                    <div class="my-item-input-div">
+                        <div class="my-item-input" style="border: none">
+                            <select id="province"  onchange="queryArea(this,'#city','#provinceName')">
+                                <option>全部省</option>
+                            </select>
+                            <select id="city"  onchange="queryArea(this,'#area','#cityName')">
+                                <option>城市</option>
+                            </select>
+                            <select id="area" onchange="insertArea(this,'#areaName');">
+                                <option>县</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="my-from-group">
+                    <div class="my-item-input-name">地址</div>
+                    <div class="my-item-input-div">
+                            <input type="text" name="address" placeholder="输入地址" class="my-item-input">
+                    </div>
+                </div>
+                <div class="my-from-group">
+                    <div class="my-item-input-name">商品名称</div>
+                    <div class="my-item-input-div">
+                        <input type="text" name="name" placeholder="商品名称" class="my-item-input">
                     </div>
                 </div>
             </form>
@@ -48,12 +88,61 @@
     <@common.layerJS></@common.layerJS>
     <@common.laydateJS></@common.laydateJS>
     <@common.icheckJS></@common.icheckJS>
-    <@common.bdMapJS></@common.bdMapJS>
+    <@common.bootSelectJS></@common.bootSelectJS>
+<@common.bootSwitchJS></@common.bootSwitchJS>
 <script type="application/javascript">
-    var setItme = null;
     $(function () {
-        loadMap();
+//        $('input').iCheck({
+//            checkboxClass: 'icheckbox_flat-green',
+//            radioClass: 'iradio_flat-green'
+//        });
+        $("[name='my-checkbox']").bootstrapSwitch();
+        $.ajax({
+            url:"${base}/area/get/1.json",
+            success:function(resp){
+                if(resp.code = "ok"){
+                    var result = resp.data;
+                    var option = "";
+                    $.each(result,function(index,obj){
+                        option +="<option value='"+obj.id+"'>"+obj.name+"</option>";
+                    });
+
+                    $("#province").append(option);
+                }
+            },
+            error:function(resp){
+
+            }
+        });
     });
+
+    function queryArea(obj,area,name){
+        var value = $(obj).val();
+        var areaName = $(obj).find("option:selected").text();
+        $(name).val(areaName);
+        $.ajax({
+            url:"${base}/area/get/"+value+".json",
+            success:function(resp){
+                if(resp.code = 'ok'){
+                    var result = resp.data;
+                    var option = "";
+                    $.each(result,function(index,obj){
+                        option +="<option value='"+obj.id+"'>"+obj.name+"</option>";
+                    });
+                    $(area).empty();
+                    $(area).append(option);
+                }
+            },
+            error:function(resp){
+
+            }
+        });
+    }
+
+    function insertArea(obj,name){
+        var areaName = $(obj).find("option:selected").text();
+        $(name).val(areaName);
+    }
 
     function doSubmit() {
         var validateResultBool = $.validateForm.validate("#userInfo");
@@ -100,59 +189,7 @@
 
     function loadMap() {
 
-        var map = new BMap.Map("bdMap");
 
-        var point = new BMap.Point(116.404, 39.915);
-
-        map.centerAndZoom(point, 30);
-
-        map.enableScrollWheelZoom();
-//        window.setTimeout(function(){
-//            map.panTo(new BMap.Point(116.409, 39.918));
-//        }, 4000);
-
-//        var polyline = new BMap.Polyline([
-//            new BMap.Point(116.399, 39.910), new BMap.Point(116.405, 39.920)], {strokeColor:"blue", strokeWeight:6, strokeOpacity:0.5});
-//
-//        map.addOverlay(polyline);
-        var point1 = new BMap.Point(116.405, 39.920);
-//        var walking = new BMap.WalkingRoute(map);
-//
-//        walking.search(point,point1); //创建步行搜索
-//
-//        map.addEventListener("click", function(){
-//            alert("您点击了地图。");
-//        });
-//        var myPushpin = new BMap.PushpinTool(map);          // 创建标注工具实例
-//        myPushpin.addEventListener("markend", function(e){  // 监听事件，提示标注点坐标信
-//            息
-//            alert("您标注的位置：" +
-//                    e.marker.getPoint().lng + ", " +
-//                    e.marker.getPoint().lat);
-//        });
-//        myPushpin.open();
-//        var transit = new BMap.WalkingRoute(map, {
-//            renderOptions: {map: map, panel: "results"}
-//        });
-////        transit.search("王府井", "西单");
-//        transit.search(point1, point);
-
-//        var map = new BMap.Map("bdMap");
-//        var point = new BMap.Point(116.331398,39.897445);
-//        map.centerAndZoom(point,12);
-
-        var geolocation = new BMap.Geolocation();
-        geolocation.getCurrentPosition(function(r){
-            if(this.getStatus() == BMAP_STATUS_SUCCESS){
-                var mk = new BMap.Marker(r.point);
-                map.addOverlay(mk);
-                map.panTo(r.point);
-                alert('您的位置：'+r.point.lng+','+r.point.lat);
-            }
-            else {
-                alert('failed'+this.getStatus());
-            }
-        },{enableHighAccuracy: true})
     }
 
 </script>
