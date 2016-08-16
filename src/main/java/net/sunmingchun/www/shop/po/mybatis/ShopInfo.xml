@@ -5,8 +5,8 @@
 <mapper namespace="ShopInfo">
 
     <insert id="save" parameterType="ShopInfo">
-        insert into t_wx_shop(id,name,desc,locationX,locationY,address,phoneNum,telNum,picUrl,parentId,index,createTime,updateTime)
-        VALUES (#{id},#{name},#{desc},#{locationX},#{locationY},#{address},#{phoneNum},#{telNum},#{picUrl},#{parentId},#{index},#{createTime},#{updateTime})
+        insert into t_wx_shop(id,name,desc,lng,lat,address,phoneNum,telNum,picUrl,parentId,index,createTime,updateTime,province,city,area)
+        VALUES (#{id},#{name},#{desc},#{lng},#{lat},#{address},#{phoneNum},#{telNum},#{picUrl},#{parentId},#{index},#{createTime},#{updateTime},#{province},#{city},#{area})
     </insert>
 
     <select id="queryTotalCount" parameterType="ShopInfo" resultType="java.lang.Integer">
@@ -31,5 +31,8 @@
         phoneNum = #{phoneNum},telNum = #{telNum},index = #{index},updateTime = #{updateTime} where id = #{id}
     </update>
 
+    <select id="selectListByIndex" parameterType="java.lang.String" resultType="ShopInfo">
+        select * from t_wx_shop where indextype = #{index}
+    </select>
 
 </mapper>

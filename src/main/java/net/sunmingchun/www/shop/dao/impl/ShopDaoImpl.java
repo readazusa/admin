@@ -76,4 +76,9 @@ public class ShopDaoImpl extends SqlSessionDaoSupport implements IShopDao {
     public int queryTotalCount(BaseSearchPO<ShopInfo> baseSearchPO) {
         return 0;
     }
+
+    @Override
+    public List<ShopInfo> queryListByIndex(String index) {
+        return this.getSqlSession().selectList("ShopInfo.selectListByIndex",index);
+    }
 }

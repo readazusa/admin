@@ -92,7 +92,11 @@ public class ShopServiceImpl implements IShopService {
     @Override
     public List<ShopInfo> queryListPO(int pageIndex, int pageSize, ShopInfo shopInfo) {
 
-
         return null;
+    }
+
+    @Override
+    public List<ShopInfo> getListByIndex(String index) {
+        return shopDao.queryListByIndex(index);
     }
 }

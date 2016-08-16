@@ -129,4 +129,20 @@ public class ShopController extends BaseController{
         return null;
     }
 
+
+    @RequestMapping("type/index")
+    @ResponseBody
+    public Object getShopByIndex(String index){
+        Result result = new Result();
+        try{
+            List<ShopInfo> shopInfoList = shopService.getListByIndex(index);
+            result.setData(shopInfoList);
+            result.setCode(Result.SUCCESS);
+        }catch (Exception ex){
+            log.error("按照是否为主从店铺查询失败: ",ex);
+            result.setCode(Result.ERROR);
+            result.setMsg("按照是否为主从店铺查询失败: "+ ex.getMessage());
+        }
+        return result;
+    }
 }

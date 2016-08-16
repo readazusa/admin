@@ -21,9 +21,9 @@ public class ShopInfo extends BasePO {
 
     private  String  area;
 
-    private String locationX;   //经度
+    private String lng;   //经度
 
-    private String locationY;   //维度
+    private String lat;   //维度
 
      private String address;
 
@@ -35,7 +35,7 @@ public class ShopInfo extends BasePO {
 
     private String parentId;  //
 
-    private String index;   //是否为主店，0：住店  1：分店
+    private String indexType;   //是否为主店，0：住店  1：分店
 
     public String getName() {
         return name;
@@ -53,20 +53,20 @@ public class ShopInfo extends BasePO {
         this.desc = desc;
     }
 
-    public String getLocationX() {
-        return locationX;
+    public String getLng() {
+        return lng;
     }
 
-    public void setLocationX(String locationX) {
-        this.locationX = locationX;
+    public void setLng(String lng) {
+        this.lng = lng;
     }
 
-    public String getLocationY() {
-        return locationY;
+    public String getLat() {
+        return lat;
     }
 
-    public void setLocationY(String locationY) {
-        this.locationY = locationY;
+    public void setLat(String lat) {
+        this.lat = lat;
     }
 
     public String getAddress() {
@@ -109,12 +109,12 @@ public class ShopInfo extends BasePO {
         this.parentId = parentId;
     }
 
-    public String getIndex() {
-        return index;
+    public String getIndexType() {
+        return indexType;
     }
 
-    public void setIndex(String index) {
-        this.index = index;
+    public void setIndexType(String indexType) {
+        this.indexType = indexType;
     }
 
     public String getProvince() {
