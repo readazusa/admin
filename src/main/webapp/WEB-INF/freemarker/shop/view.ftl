@@ -4,7 +4,7 @@
 <!DOCTYPE HTML>
 <html>
 <head lang="en">
-    <@template.head title="店铺新增"></@template.head>
+    <@template.head title="店铺更新"></@template.head>
         <@common.jquery></@common.jquery>
         <@common.bootCSS></@common.bootCSS>
         <@common.adminCSS></@common.adminCSS>
@@ -30,9 +30,9 @@
                         <div class="my-item-input" style="border: none">
                             <div style="float: left;margin-top: 5px;">
                                 <input type="checkbox" name="my-checkbox" data-off-color="warning"
-                                       data-on-color="success" id="mySwitch" value="0" checked>
+                                       data-on-color="success" id="mySwitch" value="0" <#if shop.indexType=='0'>checked</#if>>
                             </div>
-                            <div id="index" class="index_shop">
+                            <div id="index" class="index_shop <#if shop.indexType =='1'>index_shop_show</#if>">
                                 <span>选择主店:</span>
                                 <select id="selectpicker" name="parentId">
                                 </select>
@@ -43,19 +43,19 @@
                 <div class="my-from-group">
                     <div class="my-item-input-name">店铺名称</div>
                     <div class="my-item-input-div">
-                        <input type="text" name="name" placeholder="店铺名称" class="my-item-input">
+                        <input type="text" name="name" placeholder="店铺名称" class="my-item-input" value="${shop.name}">
                     </div>
                 </div>
                 <div class="my-from-group">
                     <div class="my-item-input-name">店铺手机号</div>
                     <div class="my-item-input-div">
-                        <input type="text" name="telNum" placeholder="店铺手机号" class="my-item-input">
+                        <input type="text" name="telNum" placeholder="店铺手机号" class="my-item-input" value="${shop.telNum}">
                     </div>
                 </div>
                 <div class="my-from-group">
                     <div class="my-item-input-name">店铺电话号码</div>
                     <div class="my-item-input-div">
-                        <input type="text" name="phoneNum" placeholder="店铺电话号码" class="my-item-input">
+                        <input type="text" name="phoneNum" placeholder="店铺电话号码" class="my-item-input" value="${shop.phoneNum}">
                     </div>
                 </div>
                 <div class="my-from-group">
@@ -63,7 +63,7 @@
                     <div class="my-item-input-div my-item-media">
                         <ul>
                             <li class="choice-image" onclick="doClickPic();">
-                                <img src="http://120.26.208.194:8888/yd/add_pp.png" id="shopIndexPic">
+                                <img src="${shop.picUrl}" id="shopIndexPic">
                             <#--<span class="choice-image-span">删除</span>-->
                             </li>
                         </ul>
@@ -72,7 +72,7 @@
                 <div class="my-from-group">
                     <div class="my-item-input-name">店铺介绍</div>
                     <div class="my-item-input-div">
-                        <textarea name="descr" id="textarea" rows="5" cols="60"></textarea>
+                        <textarea name="descr" id="textarea" rows="5" cols="60">${shop.descr}</textarea>
                     </div>
                 </div>
                 <div class="my-from-group">
@@ -96,7 +96,7 @@
                     <div class="my-item-input-name">地址</div>
                     <div class="my-item-input-div">
                         <input type="text" name="address" placeholder="输入地址" class="my-item-input"
-                               onblur="doSetAddress(this);">
+                               onblur="doSetAddress(this);" value="${shop.address}">
                     </div>
                 </div>
                 <div class="my-from-group">
@@ -106,14 +106,15 @@
                         </div>
                     </div>
                 </div>
-                <input type="hidden" name="lng" id="lng">
-                <input type="hidden" name="lat" id="lat">
-                <input type="hidden" name="picUrl" id="picUrl">
-                <input type="hidden" name="indexType" value="0" id="indexType">
+                <input type="hidden" name="lng" id="lng" value="${shop.lng}">
+                <input type="hidden" name="lat" id="lat" value="${shop.lat}">
+                <input type="hidden" name="picUrl" id="picUrl" value="${shop.picUrl}">
+                <input type="hidden" name="indexType" value="${shop.indexType}" id="indexType">
+                <input type="hidden" name="id" value="${shop.id}">
             </form>
         </div>
         <div class="box-footer">
-            <button class="btn btn-info pull-right" onclick="doSubmit();">保存</button>
+            <#--<button class="btn btn-info pull-right" onclick="doSubmit();">保存</button>-->
             <input type="hidden" id="adddressMap">
             <form method="post" enctype="multipart/form-data" id="picFileForm" action="${base}/upload/ftp.json">
                 <input type="file" name="file" id="picFileId" onchange="doUpload();" style="display: none">
@@ -135,7 +136,7 @@
     <@common.myJS></@common.myJS>
 <script type="application/javascript">
     var map = new AMap.Map('container');
-    var marker = new AMap.Marker(MyObj.Map.marker);
+    var marker = new AMap.Marker();
     var placeSearch = null;
     var placeSearchRender = null;
     var default_loading_pic = "http://120.26.208.194:8888/yd/loading.gif";
@@ -152,36 +153,91 @@
                 }
             }
         });
-        $.ajax({
-            url: "${base}/area/get/1.json",
-            success: function (resp) {
-                if (resp.code = "ok") {
-                    var result = resp.data;
-                    var option = "";
-                    $.each(result, function (index, obj) {
-                        option += "<option value='" + obj.id + "'>" + obj.name + "</option>";
-                    });
-                    $("#province").append(option);
-                }
-            },
-            error: function (resp) {
 
-            }
-        });
+        var city = "${shop.city}";
+
+        var area = "${shop.area}";
+
+        var province ="${shop.province}";
+
+        MyObj.submit("${base}/area/get/1.json", loadProvice);
+
+        MyObj.submit("${base}/area/get/" + province + ".json", loadCity);
+
+        MyObj.submit("${base}/area/get/" + city + ".json", loadArea);
+
         MyObj.submit("${base}/shop/type/index.json", loadIndexShop, {"index": 0});
+
         loadMap();
+
     });
 
+    function loadProvice(resp){
+        var province ="${shop.province}";
+        if (resp.code = "ok") {
+            var result = resp.data;
+            var option = "";
+            $.each(result, function (index, obj) {
+                if(province == obj.id){
+                    option += "<option value='" + obj.id + "' selected>" + obj.name + "</option>";
+                }else{
+                    option += "<option value='" + obj.id + "'>" + obj.name + "</option>";
+                }
+            });
+            $("#province").append(option);
+        }
+    }
+
+    function loadCity(resp){
+        var city = "${shop.city}";
+        if (resp.code = "ok") {
+            var result = resp.data;
+            var option = "";
+            $.each(result, function (index, obj) {
+                if(city == obj.id){
+                    option += "<option value='" + obj.id + "' selected>" + obj.name + "</option>";
+                }else{
+                    option += "<option value='" + obj.id + "'>" + obj.name + "</option>";
+                }
+            });
+            $("#city").append(option);
+        }
+    }
+
+    function loadArea(resp){
+        var area = "${shop.area}";
+        if (resp.code = "ok") {
+            var result = resp.data;
+            var option = "";
+            $.each(result, function (index, obj) {
+                if(area == obj.id){
+                    option += "<option value='" + obj.id + "' selected>" + obj.name + "</option>";
+                }else{
+                    option += "<option value='" + obj.id + "'>" + obj.name + "</option>";
+                }
+            });
+            $("#area").append(option);
+        }
+    }
+
     function loadIndexShop(resp) {
+        var parentId = "${shop.parentId}";
         if (resp.code = 'SUCCESS') {
             var result = resp.data;
             var option = "";
             $.each(result, function (index, obj) {
-                option += "<option value='" + obj.id + "'>" + obj.name + "</option>";
+                if(parentId == obj.id){
+                    option += "<option value='" + obj.id + "' selected>" + obj.name + "</option>";
+                }else{
+                    option += "<option value='" + obj.id + "'>" + obj.name + "</option>";
+                }
             });
             $("#selectpicker").append(option);
         }
     }
+
+
+
 
     function queryArea(obj, area, name) {
         var value = $(obj).val();
@@ -236,7 +292,7 @@
 
     function doSubmit() {
         $("#shopForm").ajaxSubmit({
-            url: "${base}/shop/save.json",
+            url: "${base}/shop/update.json",
             success: function (resp) {
                 if (resp.code == 'SUCCESS') {
                     layer.alert(resp.msg);
@@ -264,7 +320,6 @@
             console.info(JSON.stringify(result));
             var lng = result.poiList.pois[0].location.lng;
             var lat = result.poiList.pois[0].location.lat;
-//            console.info("经度: " + lng + " ,维度: " + lat);
             $("#lng").val(lng);
             $("#lat").val(lat);
             placeSearchRender.autoRender({
@@ -304,14 +359,8 @@
     }
     //zoom,地图显示的缩放级别范围，在PC上，默认为[3,18]，取值范围[3-18]；在移动设备上，默认为[3-19],取值范围[3-19]
     function loadMap() {
-        map.plugin('AMap.Geolocation', function () {
-            geolocation = new AMap.Geolocation({
-                zoomToAccuracy: true,      //定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
-                buttonPosition: 'RB'
-            });
-            map.addControl(geolocation);
-            geolocation.getCurrentPosition();
-        });
+        map.setZoom(18);
+        map.setCenter([${shop.lng},${shop.lat}]);
         marker.setMap(map);
     }
 

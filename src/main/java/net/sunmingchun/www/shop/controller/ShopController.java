@@ -68,7 +68,7 @@ public class ShopController extends BaseController{
             result.setCode(Result.SUCCESS);
             result.setMsg("保存店铺成功");
         }catch (Exception ex){
-            log.error("保存店铺失败,失败信息如下:");
+            log.error("保存店铺失败,失败信息如下:",ex);
             result.setCode(Result.ERROR);
             result.setMsg("保存店铺失败,失败信息: "+ ex.getMessage());
         }
@@ -81,7 +81,6 @@ public class ShopController extends BaseController{
         model.put("shop",shopInfo);
         return "shop/edit";
     }
-
 
     @RequestMapping("update")
     @ResponseBody

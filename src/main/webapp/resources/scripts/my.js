@@ -4,6 +4,7 @@ MyObj={};
  * @type {Object}
  */
 MyObj.Map=new Object();
+
 MyObj.Map.marker={
     offset : new AMap.Pixel(-8,-38)
 }
@@ -12,9 +13,7 @@ MyObj.Map.placeSearchOptions = { //构造地点查询类
     pageIndex: 1
 };
 
-MyObj.page=function(url){
-
-}
+MyObj.Page=new Object();  //页面级别
 
 
 
@@ -35,6 +34,8 @@ MyObj.submit= function(url,callback,data,method,dataType){
         }
     })
 }
+
+
 
 
 

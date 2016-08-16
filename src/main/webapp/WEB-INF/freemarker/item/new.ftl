@@ -139,6 +139,7 @@
     var setItme = null;
     var um =null;
     var default_add_pic="http://120.26.208.194:8888/yd/add_pp.png";
+    var default_loading_pic="http://120.26.208.194:8888/yd/loading.gif";
     var map = new Map();
     $(function () {
         um = UM.getEditor('myEditor');

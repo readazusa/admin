@@ -5,10 +5,12 @@ import net.sunmingchun.www.base.po.BaseSearchPO;
 import net.sunmingchun.www.shop.dao.IShopDao;
 import net.sunmingchun.www.shop.po.ShopInfo;
 import net.sunmingchun.www.shop.service.IShopService;
+import net.sunmingchun.www.util.UuidUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -52,6 +54,12 @@ public class ShopServiceImpl implements IShopService {
 
     @Override
     public void save(ShopInfo obj) {
+        obj.setId(UuidUtils.getUpperUuid());
+        obj.setCreateTime(new Date());
+        obj.setUpdateTime(new Date());
+        if("0".equals(obj.getIndexType())){
+            obj.setParentId(obj.getId());
+        }
         shopDao.save(obj);
     }
 
@@ -67,6 +75,7 @@ public class ShopServiceImpl implements IShopService {
 
     @Override
     public void update(ShopInfo shopInfo) {
+        shopInfo.setUpdateTime(new Date());
         shopDao.update(shopInfo);
     }
 

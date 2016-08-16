@@ -13,7 +13,7 @@ public class ShopInfo extends BasePO {
 
     private String name;
 
-    private String desc;
+    private String descr;
 
     private String province;
 
@@ -45,12 +45,12 @@ public class ShopInfo extends BasePO {
         this.name = name;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescr() {
+        return descr;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDescr(String descr) {
+        this.descr = descr;
     }
 
     public String getLng() {

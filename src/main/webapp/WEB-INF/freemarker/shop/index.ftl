@@ -34,7 +34,7 @@
                     </div>
                     <div class="box-body my-item-ul">
 
-                            <#if page.data?? && (page.data?size>0)>
+                        <#if page.data?? && (page.data?size>0)>
                             <ul>
                                 <#list page.data as shop>
                                     <li>
@@ -57,11 +57,11 @@
                                     </li>
                                 </#list>
                             </ul>
-                             <#else>
-                                    <span style="    text-align: center;width: 100%;line-height: 40px;display: inline-block;">
+                        <#else>
+                            <span style="    text-align: center;width: 100%;line-height: 40px;display: inline-block;">
                                     没有数据
                                      </span>
-                            </#if>
+                        </#if>
 
                     </div>
                     <div class="box-footer">
@@ -81,6 +81,7 @@
     <@common.bootDropdownJS></@common.bootDropdownJS>
     <@common.bootSelectJS></@common.bootSelectJS>
     <@common.bootPageJS></@common.bootPageJS>
+    <@common.myJS></@common.myJS>
     <@baseJS.pageOption totalPages="${page.totalPage}"></@baseJS.pageOption>
 <script type="application/javascript">
     var index = 0;
@@ -91,10 +92,15 @@
 
     function refresh() {
 //        table.ajax.reload();
+        location.reload();
         layer.close(index);
     }
 </script>
     <@baseJS.adminAddJS url="${base}/shop/new.htm" title="新增店铺" width="100%" height="100%"></@baseJS.adminAddJS>
+    <@baseJS.adminEditJS url="${base}/shop/edit.htm" title="修改店铺" width="100%" height="100%"></@baseJS.adminEditJS>
+
+    <@baseJS.adminViewJS url="${base}/shop/view.htm" title="修改店铺" width="100%" height="100%"></@baseJS.adminViewJS>
+    <@baseJS.adminDeleteJS url="${base}/shop/delete.json"></@baseJS.adminDeleteJS>
 </body>
 </html>
 </#escape>

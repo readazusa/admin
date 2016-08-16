@@ -5,8 +5,8 @@
 <mapper namespace="ShopInfo">
 
     <insert id="save" parameterType="ShopInfo">
-        insert into t_wx_shop(id,name,desc,lng,lat,address,phoneNum,telNum,picUrl,parentId,index,createTime,updateTime,province,city,area)
-        VALUES (#{id},#{name},#{desc},#{lng},#{lat},#{address},#{phoneNum},#{telNum},#{picUrl},#{parentId},#{index},#{createTime},#{updateTime},#{province},#{city},#{area})
+        insert into t_wx_shop(id,name,descr,lng,lat,address,phoneNum,telNum,picUrl,parentId,indexType,createTime,updateTime,province,city,area)
+        VALUES (#{id},#{name},#{descr},#{lng},#{lat},#{address},#{phoneNum},#{telNum},#{picUrl},#{parentId},#{indexType},#{createTime},#{updateTime},#{province},#{city},#{area})
     </insert>
 
     <select id="queryTotalCount" parameterType="ShopInfo" resultType="java.lang.Integer">
@@ -27,8 +27,8 @@
     </select>
 
     <update id="update" parameterType="ShopInfo">
-        update t_wx_item set name = #{name},locationx= #{locationX}, locationY = #{locationY},address = #{address},
-        phoneNum = #{phoneNum},telNum = #{telNum},index = #{index},updateTime = #{updateTime} where id = #{id}
+        update t_wx_shop set name = #{name},lng= #{lng}, lat = #{lat},address = #{address},descr = #{descr},picUrl = #{picUrl},
+        phoneNum = #{phoneNum},telNum = #{telNum},indexType = #{indexType},updateTime = #{updateTime} where id = #{id}
     </update>
 
     <select id="selectListByIndex" parameterType="java.lang.String" resultType="ShopInfo">
