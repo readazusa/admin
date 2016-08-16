@@ -92,7 +92,7 @@
                                     <option>城市</option>
                                 </select>
                                 <select id="area" onchange="insertArea(this,'#areaName');">
-                                    <option>县</option>
+                                    <option>区县</option>
                                 </select>
                             </div>
                         </div>
@@ -185,6 +185,11 @@
 
                     }
                 });
+                if(area=="#city"){
+                    $("#area").empty().append("<option>选择区县</option>");
+                }
+
+
             }
 
             function insertArea(obj,name){
