@@ -37,7 +37,6 @@ public class OrderInfo {
 
     private int count;  //数量
 
-
     public String getUid() {
         return uid;
     }

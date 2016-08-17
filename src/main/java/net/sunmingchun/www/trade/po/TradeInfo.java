@@ -1,5 +1,8 @@
 package net.sunmingchun.www.trade.po;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import net.sunmingchun.www.util.BaseDateSerializer;
+
 import java.util.Date;
 import java.util.List;
 
@@ -15,7 +18,7 @@ public class TradeInfo {
 
     private float payment; //实付金额
 
-    private float postFee;
+    private float postFee;   //邮费
 
     private String receiveName;
 
@@ -50,6 +53,8 @@ public class TradeInfo {
     private Date consignTime;  //发货时间
 
     private List<OrderInfo> orderInfoList;
+
+    private String search;
 
     public String getUid() {
         return uid;
@@ -155,6 +160,7 @@ public class TradeInfo {
         this.status = status;
     }
 
+    @JsonSerialize(using = BaseDateSerializer.class)
     public Date getCreateTime() {
         return createTime;
     }
@@ -209,5 +215,13 @@ public class TradeInfo {
 
     public void setOrderInfoList(List<OrderInfo> orderInfoList) {
         this.orderInfoList = orderInfoList;
+    }
+
+    public String getSearch() {
+        return search;
+    }
+
+    public void setSearch(String search) {
+        this.search = search;
     }
 }

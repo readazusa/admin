@@ -12,9 +12,9 @@
         <@common.laydateCSS></@common.laydateCSS>
         <@common.allCSS></@common.allCSS>
         <@common.icheckCSS></@common.icheckCSS>
-  <@common.bootSelectCSS></@common.bootSelectCSS>
-    <@common.bootSwitchCSS></@common.bootSwitchCSS>
-    <@common.gdMapCSS></@common.gdMapCSS>
+          <@common.bootSelectCSS></@common.bootSelectCSS>
+         <@common.bootSwitchCSS></@common.bootSwitchCSS>
+        <@common.gdMapCSS></@common.gdMapCSS>
 </head>
 <body>
 <div class="container">

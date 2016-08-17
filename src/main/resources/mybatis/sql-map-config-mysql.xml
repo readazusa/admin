@@ -26,6 +26,8 @@
         <typeAlias type="net.sunmingchun.www.file.po.UploadFilePO" alias="UploadFilePO"></typeAlias>
 
         <typeAlias type="net.sunmingchun.www.shop.po.ShopInfo" alias="ShopInfo"></typeAlias>
+        <typeAlias type="net.sunmingchun.www.trade.po.TradeInfo" alias="TradeInfo"></typeAlias>
+        <typeAlias type="net.sunmingchun.www.trade.po.OrderInfo" alias="OrderInfo"></typeAlias>
 
     </typeAliases>
     <mappers>
@@ -42,6 +44,7 @@
         <mapper resource="net/sunmingchun/www/item/po/mybatis/ItemVsFilePO.xml"></mapper>
         <mapper resource="net/sunmingchun/www/file/po/mybatis/UploadFilePO.xml"></mapper>
         <mapper resource="net/sunmingchun/www/shop/po/mybatis/ShopInfo.xml"></mapper>
+        <mapper resource="net/sunmingchun/www/trade/po/mybatis/TradeInfo.xml"></mapper>
 
     </mappers>
 
