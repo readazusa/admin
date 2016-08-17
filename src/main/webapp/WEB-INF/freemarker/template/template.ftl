@@ -293,7 +293,7 @@
             </ul>
         </li>
 
-        <li class='treeview  <#if flag=="shop" || flag == "shopcart" || flag=="trade">active</#if>'>
+        <li class='treeview  <#if flag=="shop" || flag == "shopcart" || flag=="trade" || flag=="indexheader" || flag =="indexmiddlepic" || flag=="indexmiddlets">active</#if>'>
             <a href="#">
                 <i class="fa fa-user-plus"></i> <span>店铺管理</span> <i class="fa fa-angle-left pull-right"></i>
             </a>
@@ -305,6 +305,19 @@
                 <li class='<#if flag="shopcart">active</#if>'><a href="${base}/shopcart/index.htm"><i
                         class="fa fa-user"></i>购物车管理</a>
                 </li>
+                <li class='<#if flag="indexheader">active</#if>'><a href="${base}/index/header.htm"><i
+                        class="fa fa-user"></i>首页头部</a>
+                </li>
+                <li class='<#if flag="indexmiddlepic">active</#if>'><a href="${base}/index/middlepic.htm"><i
+                        class="fa fa-user"></i>首页中部图片</a>
+                </li>
+                <li class='<#if flag="indexmiddlets">active</#if>'><a href="${base}/index/middlets.htm"><i
+                        class="fa fa-user"></i>首页中部提示</a>
+                </li>
+
+
+
+
             </ul>
         </li>
         <li class='treeview  <#if flag=="tradefx" || flag=="shopfx">active</#if>'>

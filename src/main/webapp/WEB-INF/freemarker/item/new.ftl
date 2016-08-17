@@ -4,7 +4,7 @@
 <!DOCTYPE HTML>
 <html>
 <head lang="en">
-    <@template.head title="用户新增"></@template.head>
+    <@template.head title="商品新增"></@template.head>
         <@common.jquery></@common.jquery>
         <@common.bootCSS></@common.bootCSS>
         <@common.adminCSS></@common.adminCSS>
