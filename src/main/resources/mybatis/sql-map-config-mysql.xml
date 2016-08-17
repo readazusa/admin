@@ -29,6 +29,7 @@
         <typeAlias type="net.sunmingchun.www.trade.po.TradeInfo" alias="TradeInfo"></typeAlias>
         <typeAlias type="net.sunmingchun.www.trade.po.OrderInfo" alias="OrderInfo"></typeAlias>
 
+        <typeAlias type="net.sunmingchun.www.index.po.IndexPageInfo" alias="IndexPageInfo"></typeAlias>
     </typeAliases>
     <mappers>
 
@@ -46,6 +47,7 @@
         <mapper resource="net/sunmingchun/www/shop/po/mybatis/ShopInfo.xml"></mapper>
         <mapper resource="net/sunmingchun/www/trade/po/mybatis/TradeInfo.xml"></mapper>
 
+        <mapper resource="net/sunmingchun/www/index/po/mybatis/IndexPageInfo.xml"></mapper>
     </mappers>
 
 
