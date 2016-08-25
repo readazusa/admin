@@ -18,9 +18,10 @@ import javax.jms.MessageListener;
 public class OneListener implements MessageListener {
 
     private static final Logger log = LoggerFactory.getLogger(OneListener.class);
+
+
     @Override
     public void onMessage(Message message) {
-
         try {
             log.error("jms获取:  {}",message);
             Thread.sleep(2000L);

@@ -2,9 +2,11 @@ package net.sunmingchun.www.shop.service.impl;
 
 import net.sunmingchun.www.base.po.BasePagePO;
 import net.sunmingchun.www.base.po.BaseSearchPO;
+import net.sunmingchun.www.item.dao.IItemDao;
 import net.sunmingchun.www.shop.dao.IShopDao;
 import net.sunmingchun.www.shop.po.ShopInfo;
 import net.sunmingchun.www.shop.service.IShopService;
+import net.sunmingchun.www.shopcart.po.ShopCartInfo;
 import net.sunmingchun.www.util.UuidUtils;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +27,9 @@ public class ShopServiceImpl implements IShopService {
 
     @Resource
     private IShopDao shopDao;
+
+    @Resource
+    private IItemDao itemDao;
 
     @Override
     public BasePagePO<ShopInfo> getBasePagePO(int pageIndex, int pageSize, String searchValue, String orderColumn, String orderValue, int draw) {
@@ -107,5 +112,14 @@ public class ShopServiceImpl implements IShopService {
     @Override
     public List<ShopInfo> getListByIndex(String index) {
         return shopDao.queryListByIndex(index);
+    }
+
+
+
+    @Override
+    public void addShopCart(String itemId) {
+//        ShopCartInfo shopCartInfo = this.queryObjectById()
+
+
     }
 }

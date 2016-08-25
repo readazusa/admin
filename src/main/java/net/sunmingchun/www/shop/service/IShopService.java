@@ -26,4 +26,7 @@ public interface IShopService extends IService<ShopInfo> {
      * @return
      */
     public List<ShopInfo> getListByIndex(String index);
+
+
+    public void addShopCart(String itemId);
 }

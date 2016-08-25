@@ -35,4 +35,10 @@
         select * from t_wx_shop where indextype = #{index}
     </select>
 
+
+
+
+
+
+
 </mapper>

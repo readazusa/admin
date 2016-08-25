@@ -4,5 +4,10 @@
 
 <mapper namespace="ShopCartInfo">
 
-
+    <select id="queryShopCartByItemId" parameterType="ShopCartInfo" resultType="ShopCartInfo">
+        select * from t_wx_shopcart where itemid = #{itemId} and openid = #{openId}
+    </select>
+    <update id="addShopCartNumByItemId" parameterType="ShopCartInfo">
+        update t_wx_shopcart set num = num +1  where itemid = #{itemId} and openid = #{openId}
+    </update>
 </mapper>

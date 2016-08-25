@@ -22,4 +22,7 @@ public interface IShopDao extends IDao<ShopInfo> {
      */
     public List<ShopInfo> queryListByIndex(String index);
 
+
+
+
 }

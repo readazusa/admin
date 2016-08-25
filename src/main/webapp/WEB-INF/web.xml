@@ -13,7 +13,7 @@
             classpath:spring/shiro/applicationContext_shiro.xml,
             classpath:spring/applicationContext_mvc.xml,
             classpath:spring/applicationContext_base.xml,
-            <!--classpath:spring/mq/applicationContext_mq.xml,-->
+            classpath:spring/mq/applicationContext_mq.xml,
             classpath:spring/redis/applicationContext_redis.xml
         </param-value>
     </context-param>
