@@ -1,12 +1,18 @@
 package net.sunmingchun.www.shopcart.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import net.sunmingchun.www.base.po.BasePagePO;
+import net.sunmingchun.www.item.dao.IItemDao;
+import net.sunmingchun.www.item.po.ItemInfo;
 import net.sunmingchun.www.shopcart.dao.IShopCartDao;
 import net.sunmingchun.www.shopcart.po.ShopCartInfo;
 import net.sunmingchun.www.shopcart.service.IShopCartService;
+import net.sunmingchun.www.util.UuidUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,6 +27,9 @@ public class ShopCartServiceImpl implements IShopCartService {
 
     @Resource
     private IShopCartDao shopCartDao;
+
+    @Resource
+    private IItemDao itemDao;
 
     @Override
     public ShopCartInfo queryObjectById(String id) {
@@ -39,7 +48,11 @@ public class ShopCartServiceImpl implements IShopCartService {
 
     @Override
     public void save(ShopCartInfo obj) {
-
+        Assert.notNull(obj,"保存的购物车不能为null");
+        obj.setId(UuidUtils.getUpperUuid());
+        obj.setCreateTime(new Date());
+        obj.setUpdateTime(new Date());
+        shopCartDao.save(obj);
     }
 
     @Override
@@ -70,5 +83,21 @@ public class ShopCartServiceImpl implements IShopCartService {
     @Override
     public List<ShopCartInfo> queryListPO(int pageIndex, int pageSize, ShopCartInfo shopCartInfo) {
         return null;
+    }
+
+    @Override
+    public void receiveMqShopCart(String shopCartJson) {
+        ShopCartInfo shopCartInfo = JSONObject.parseObject(shopCartJson,ShopCartInfo.class);
+        ShopCartInfo shopCartInfoDb = shopCartDao.queryShopCartByItemId(shopCartInfo);
+        //如果购车中已经包含改商品，则进行数据的增加，如果不存在插入购物车表
+        if(null == shopCartInfoDb){
+            ItemInfo itemInfo = itemDao.queryObjectById(shopCartInfo.getItemId());
+            shopCartInfo.setTitle(itemInfo.getTitle());
+            shopCartInfo.setPicUrl(itemInfo.getPhonePicUrl());
+            shopCartInfo.setNum(1);
+            this.save(shopCartInfo);
+        }else{
+            shopCartDao.addShopCartNumByItemId(shopCartInfo);
+        }
     }
 }

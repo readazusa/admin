@@ -28,7 +28,7 @@ public class ShopCartDaoImpl extends SqlSessionDaoSupport implements IShopCartDa
 
     @Override
     public void save(ShopCartInfo obj) {
-
+        this.getSqlSession().insert("ShopCartInfo.save",obj);
     }
 
     @Override
@@ -78,12 +78,13 @@ public class ShopCartDaoImpl extends SqlSessionDaoSupport implements IShopCartDa
 
     @Override
     public ShopCartInfo queryShopCartByItemId(ShopCartInfo shopCartInfo) {
-        return null;
+        List<ShopCartInfo> shopCartInfos = this.getSqlSession().selectList("ShopCartInfo.queryShopCartByItemId",shopCartInfo);
+        return shopCartInfos.size()>0?shopCartInfos.get(0):null;
     }
 
     @Override
     public int addShopCartNumByItemId(ShopCartInfo shopCartInfo) {
-        return 0;
+        return this.getSqlSession().insert("ShopCartInfo.addShopCartNumByItemId",shopCartInfo);
     }
 
 

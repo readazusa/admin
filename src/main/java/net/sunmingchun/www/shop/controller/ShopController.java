@@ -3,7 +3,6 @@ package net.sunmingchun.www.shop.controller;
 import net.sunmingchun.www.base.controller.BaseController;
 import net.sunmingchun.www.base.po.BasePagePO;
 import net.sunmingchun.www.common.Result;
-import net.sunmingchun.www.item.po.ItemInfo;
 import net.sunmingchun.www.shop.po.ShopInfo;
 import net.sunmingchun.www.shop.service.IShopService;
 import org.slf4j.Logger;

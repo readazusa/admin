@@ -11,4 +11,8 @@ import net.sunmingchun.www.shopcart.po.ShopCartInfo;
  * des:
  */
 public interface IShopCartService extends IService<ShopCartInfo> {
+
+    public void receiveMqShopCart(String shopCartJson);
+
+
 }

@@ -82,13 +82,13 @@ public class ShopDaoImpl extends SqlSessionDaoSupport implements IShopDao {
         return this.getSqlSession().selectList("ShopInfo.selectListByIndex",index);
     }
 
-    @Override
-    public ShopInfo queryShopCartByItemId(String itemId) {
-        return null;
-    }
-
-    @Override
-    public int addShopCartNumByItemId(String itemId) {
-        return 0;
-    }
+//    @Override
+//    public ShopInfo queryShopCartByItemId(String itemId) {
+//        return null;
+//    }
+//
+//    @Override
+//    public int addShopCartNumByItemId(String itemId) {
+//        return 0;
+//    }
 }

@@ -1,10 +1,12 @@
 package net.sunmingchun.www.mq.activemq.listener;
 
+import net.sunmingchun.www.shopcart.service.IShopCartService;
 import org.apache.activemq.command.ActiveMQObjectMessage;
 import org.apache.activemq.command.ActiveMQTextMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.annotation.Resource;
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageListener;
@@ -20,6 +22,9 @@ public class ShopCartListener implements MessageListener {
 
     private static final Logger log = LoggerFactory.getLogger(ShopCartListener.class);
 
+    @Resource
+    private IShopCartService shopCartService;
+
     @Override
     public void onMessage(Message message) {
         try {
@@ -27,13 +32,15 @@ public class ShopCartListener implements MessageListener {
         } catch (JMSException e) {
             e.printStackTrace();
         }
-        ActiveMQTextMessage activeMQObjectMessage = (ActiveMQTextMessage) message;
-        log.debug("jmsType:{} ", activeMQObjectMessage.getJMSType());
+        ActiveMQTextMessage activeMQTextMessage = (ActiveMQTextMessage) message;
+        log.debug("jmsType:{} ", activeMQTextMessage.getJMSType());
         try {
-            String itemId =  activeMQObjectMessage.getText();
-            log.info("itemId: {}",itemId);
+            String ShopCartInfoJson =  activeMQTextMessage.getText();
+            log.info("ShopCartInfoJson: {}",ShopCartInfoJson);
+            shopCartService.receiveMqShopCart(ShopCartInfoJson);
         } catch (JMSException e) {
-            e.printStackTrace();
+            log.error("读取mq中的购物车信息错误: ",e);
+//            e.printStackTrace();
         }
     }
 }

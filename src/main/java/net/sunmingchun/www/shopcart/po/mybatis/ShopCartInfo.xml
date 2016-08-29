@@ -10,4 +10,9 @@
     <update id="addShopCartNumByItemId" parameterType="ShopCartInfo">
         update t_wx_shopcart set num = num +1  where itemid = #{itemId} and openid = #{openId}
     </update>
+
+    <insert id="save" parameterType="ShopCartInfo">
+        insert into t_wx_shopcart(id,openid,nick,itemid,num,picurl,title,createtime,updatetime) VALUES (#{id},#{openId},#{nick},#{itemId},1,#{picUrl},#{title},#{createTime},#{updateTime})
+
+    </insert>
 </mapper>
